@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SolidMaker · Stonward Dynamics</title>
+<meta name="description" content="SolidMaker: manual de usuario, videos y casos paso a paso.">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="img/solidmaker-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<nav class="nav solida" id="nav">
+  <div class="contenedor">
+    <a class="marca" href="index.html">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="6.5" stroke="#ff9d3d"/><path d="M16 3v6.5M16 22.5V29M3 16h6.5" /><circle cx="16" cy="16" r="1.6" fill="#ff9d3d" stroke="none"/></svg>
+      <span>Stonward<small>Dynamics</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#software" class="activo">Software</a>
+      <a href="index.html#maquinas">Máquinas</a>
+      <a href="index.html#investigacion">Investigación</a>
+      <a href="index.html#repositorio">Repositorio</a>
+      <a href="index.html#mia">MIA</a>
+      <a href="index.html#contacto">Contacto</a>
+    </div>
+    <a class="btn chico primario nav-cta" href="#casos">Casos paso a paso</a>
+    <button class="nav-menu" aria-label="Menú" id="nav-menu">☰</button>
+  </div>
+</nav>
+
+<header class="cab-pagina">
+  <div class="contenedor">
+    <div class="migas"><a href="index.html#software">Software</a> / SolidMaker</div>
+    <h1 style="display:flex;align-items:center;gap:16px"><img src="img/solidmaker-logo.png" alt="Logo de SolidMaker" style="width:64px;height:64px;border-radius:14px">SolidMaker</h1>
+    <p>Manual de usuario, videos y proyectos guiados paso a paso. Diseña la pieza, ensámblala, lamínala y llévala a la máquina sin cambiar de programa.</p>
+  </div>
+</header>
+
+<div class="contenedor manual">
+  <nav class="indice">
+    <b>Empezar</b>
+    <a href="#que-es">Qué es SolidMaker</a>
+    <a href="#instalar">Instalación</a>
+    <a href="#interfaz">La interfaz</a>
+    <b>Diseñar</b>
+    <a href="#croquis">Croquis 2D</a>
+    <a href="#cotas">Cotas y relaciones</a>
+    <a href="#editar">Editar trazos</a>
+    <a href="#solidos">Sólidos</a>
+    <a href="#ensambles">Ensambles</a>
+    <b>Fabricar</b>
+    <a href="#machin">MACHIN y máquinas</a>
+    <a href="#atajos">Atajos</a>
+    <b>Aprender</b>
+    <a href="#videos">Videos</a>
+    <a href="#casos">Casos paso a paso</a>
+  </nav>
+
+  <article class="doc">
+    <h2 id="que-es">Qué es SolidMaker</h2>
+    <p>SolidMaker reúne en un solo programa todo el camino de una pieza: el diseño en CAD, el ensamble, la prueba en banco, el laminado y el envío a la máquina. Cada etapa es un motor que se elige en la barra lateral izquierda.</p>
+    <table>
+      <tr><th>Motor</th><th>Para qué sirve</th></tr>
+      <tr><td>CAD</td><td>Croquis 2D, sólidos exactos, ensambles, biblioteca de piezas y materiales.</td></tr>
+      <tr><td>Banco</td><td>Banco de pruebas: PLC con diagrama ladder y simulación de componentes.</td></tr>
+      <tr><td>Maquinado (MACHIN)</td><td>Gemelo 3D de cada máquina, simulación de G-code y conexión con la máquina real.</td></tr>
+      <tr><td>Sistemas</td><td>Integración de sistemas y control.</td></tr>
+      <tr><td>Laminador polar</td><td>Prepara las piezas para imprimir, incluida la impresión polar de PolarONE.</td></tr>
+      <tr><td>Análisis</td><td>Revisión y análisis de las piezas.</td></tr>
+    </table>
+    <p><img src="img/solidmaker.jpg" alt="Engranes helicoidales modelados en SolidMaker" style="border-radius:12px;border:1px solid var(--borde)" loading="lazy"></p>
+
+    <h2 id="instalar">Instalación</h2>
+    <div class="aviso">SolidMaker está en beta. El instalador para Windows se publicará en esta página; mientras tanto, la beta se entrega directamente a quienes participan en las pruebas.</div>
+    <p>SolidMaker funciona como una aplicación de escritorio: un servidor local abre su propia ventana. Los proyectos se guardan en la carpeta de datos que elijas en la configuración.</p>
+
+    <h2 id="interfaz">La interfaz</h2>
+    <ul>
+      <li><b>Barra superior:</b> menús desplegables por tema (Documento, Ensamble, Material, Operaciones, Corte, Anotación, Editar, Transformaciones, Patrones, Chapa, Mecanizado…). La barra nunca pasa de dos filas.</li>
+      <li><b>Visor 3D:</b> vistas Iso 3D, Superior, Perfil y Frontal, y el cubo de vistas para girar. Doble clic sobre una pieza la encuadra; doble clic en el vacío vuelve a la vista clásica.</li>
+      <li><b>Panel derecho:</b> cambia entre Sketches, Gestor y Asistente con botones pequeños. Abrir un panel lateral cierra el del otro lado.</li>
+      <li><b>Barra de estado:</b> plano activo, posición del cursor, selección y mensajes de cada herramienta.</li>
+    </ul>
+
+    <h2 id="croquis">Croquis 2D</h2>
+    <p>Activa un plano (Superior, Frontal o Perfil, o clic derecho sobre una cara en la vista Iso 3D) y elige una herramienta: Línea, Círculo, Arco, Rectángulo, Polígono o Spline. Cada una tiene variantes en su flecha ▾.</p>
+    <h3>Escribir medidas mientras dibujas</h3>
+    <p>Con una herramienta activa, empieza a teclear y aparece una casilla junto al cursor. Enter coloca el punto.</p>
+    <table>
+      <tr><th>Escribes</th><th>Resultado</th></tr>
+      <tr><td><code>50</code></td><td>Punto a 50 mm en la dirección del cursor.</td></tr>
+      <tr><td><code>50&lt;30</code></td><td>50 mm a 30 grados desde el punto anterior.</td></tr>
+      <tr><td><code>@20,10</code></td><td>20 mm en X y 10 en Y desde el punto anterior.</td></tr>
+      <tr><td><code>40,20</code></td><td>Coordenada absoluta X 40, Y 20.</td></tr>
+    </table>
+    <p>Los números aceptan expresiones, como <code>20*2</code> o <code>3/4*10</code>.</p>
+    <h3>Snaps y rastreo</h3>
+    <p>El cursor se pega a extremos, puntos medios, centros, cuadrantes, cruces, tangentes y perpendiculares, cada uno con su marca. Con el <b>rastreo</b> (<kbd>F11</kbd>) dejas el cursor quieto un momento sobre un punto para adquirirlo y salen guías punteadas desde él; el cruce de dos guías también es un snap. <kbd>F8</kbd> activa ORTHO y <kbd>F10</kbd> POLAR.</p>
+
+    <h2 id="cotas">Cotas y relaciones</h2>
+    <p><b>Anotación ▾ → Cota.</b> Haz clic en una línea, en dos puntos, en dos líneas (ángulo) o en un círculo o arco (diámetro o radio). Escribe el valor y la geometría se ajusta. Las cotas aceptan ecuaciones que usan otras cotas por su nombre (<code>d1*2</code>). Doble clic sobre una cota la edita.</p>
+    <p><b>Anotación ▾ → Relaciones.</b> Horizontal, Vertical, Paralela, Perpendicular, Igual, Coincidente, Tangente, Concéntrica y Fija. Eliges la relación, haces clic en cada trazo y el croquis se resuelve al instante. Cada relación deja una marca junto al trazo; doble clic sobre la marca la borra.</p>
+    <p><img src="img/croquis-relaciones.jpg" alt="Relaciones tangente, igual y perpendicular en un croquis" style="border-radius:12px;border:1px solid var(--borde)" loading="lazy"></p>
+    <p><b>Ver grados de libertad</b> pinta de azul lo que todavía se puede mover y de blanco lo que ya está totalmente definido. Si una cota o relación choca con otras, SolidMaker dice cuáles son.</p>
+
+    <h2 id="editar">Editar trazos</h2>
+    <ul>
+      <li><b>Editar ▾:</b> Trim, Extend y Split funcionan con líneas, arcos y círculos. Estirar mueve solo los puntos dentro de una ventana. Unir trazos encadena trazos que se tocan; Descomponer parte polilíneas en tramos.</li>
+      <li><b>Transformaciones ▾:</b> Mover, Copiar, Rotar, Escalar y Simetría con punto base, usando snaps y medidas tecleadas.</li>
+      <li><b>Acabado ▾:</b> empalme y chaflán entre rectas y arcos.</li>
+      <li>Con la herramienta Seleccionar: arrastra una figura seleccionada para moverla; <kbd>Supr</kbd> la borra; <kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd> la copia a cualquier plano.</li>
+    </ul>
+
+    <h2 id="solidos">Sólidos</h2>
+    <p>Desde un croquis cerrado, <b>Operaciones ▾</b> crea Extrusión, Revolución y Barrido; <b>Corte ▾</b> los resta de forma exacta. <b>Patrones ▾</b> repite en línea, en círculo o por simetría; <b>Chapa ▾</b> hace bridas y dobleces; <b>Mecanizado ▾</b> agrega taladros, roscados, avellanados y abocardados. La <b>biblioteca</b> trae piezas normalizadas: tornillería, rodamientos, perfiles, motores NEMA y más. <kbd>Ctrl</kbd>+<kbd>D</kbd> duplica la pieza seleccionada.</p>
+
+    <h2 id="ensambles">Ensambles</h2>
+    <p><b>Ensamble ▾</b> une piezas con mates y juntas (bisagra y deslizante) que puedes mover. La acción <b>Unir</b> entiende la intención: un tornillo con su arandela y su tuerca, o dos engranes que engranan. Con «Evitar choques» las piezas no se atraviesan al arrastrarlas.</p>
+    <p><img src="img/ensamble-juntas.jpg" alt="Tornillo y tuerca unidos con una junta de rosca" style="border-radius:12px;border:1px solid var(--borde)" loading="lazy"></p>
+
+    <h2 id="machin">MACHIN y máquinas</h2>
+    <p>MACHIN muestra el gemelo 3D de la máquina y simula el G-code antes de imprimir o maquinar. Las máquinas por defecto vienen instaladas; las nuevas se descargan desde la sección <a class="enlace" href="index.html#maquinas">Máquinas</a>.</p>
+    <ol class="pasos">
+      <li>Descarga el paquete .zip de la máquina.</li>
+      <li>En MACHIN abre <b>Máquina → Adquirir nueva máquina</b> y elige el .zip.</li>
+      <li>Reinicia SolidMaker: la máquina aparece en el menú Máquina con sus piezas, su cinemática y su driver.</li>
+    </ol>
+
+    <h2 id="atajos">Atajos</h2>
+    <table>
+      <tr><th>Tecla</th><th>Acción</th></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Cancela la herramienta o vacía la selección.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Deshacer.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Copiar y pegar trazos o piezas.</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Duplicar la pieza seleccionada.</td></tr>
+      <tr><td><kbd>Supr</kbd></td><td>Borrar la selección.</td></tr>
+      <tr><td><kbd>F8</kbd> / <kbd>F10</kbd> / <kbd>F11</kbd></td><td>ORTHO / POLAR / rastreo.</td></tr>
+      <tr><td><kbd>Enter</kbd> o doble clic</td><td>Cerrar polilíneas y splines.</td></tr>
+    </table>
+
+    <h2 id="videos">Videos</h2>
+    <p>Videos cortos de cada herramienta. Se irán publicando aquí.</p>
+    <div class="videos">
+      <div class="video"><div><div class="play">▶</div>Primer croquis totalmente definido</div></div>
+      <div class="video"><div><div class="play">▶</div>De croquis a sólido</div></div>
+      <div class="video"><div><div class="play">▶</div>Ensamble con tornillería</div></div>
+      <div class="video"><div><div class="play">▶</div>Instalar una máquina en MACHIN</div></div>
+    </div>
+
+    <h2 id="casos">Casos paso a paso</h2>
+    <h3 id="caso-1">1. Una placa totalmente definida</h3>
+    <ol class="pasos">
+      <li>Activa el plano Superior y elige Rectángulo. Teclea <code>0,0</code> y Enter, luego <code>80,50</code> y Enter.</li>
+      <li>Elige Círculo y coloca uno dentro de la placa.</li>
+      <li>En <b>Anotación ▾ → Cota</b>, acota el lado inferior (80), el lado izquierdo (50) y el diámetro del círculo (8).</li>
+      <li>Acota la distancia del centro del círculo a dos lados.</li>
+      <li>Abre <b>Anotación ▾ → Ver grados de libertad</b>: cuando todo está blanco, la placa está totalmente definida.</li>
+      <li>Con <b>Operaciones ▾ → Extruir</b>, dale 6 mm de espesor.</li>
+    </ol>
+    <h3 id="caso-2">2. Una ranura con relaciones</h3>
+    <ol class="pasos">
+      <li>Dibuja dos líneas casi paralelas y dos arcos en sus extremos.</li>
+      <li>En <b>Anotación ▾ → Relaciones</b> aplica Paralela a las dos líneas.</li>
+      <li>Aplica Tangente entre cada arco y cada línea, e Igual entre los dos arcos.</li>
+      <li>Acota el radio de un arco: el otro lo sigue por la relación Igual.</li>
+    </ol>
+    <h3 id="caso-3">3. Instalar SD-C1 y simular una impresión</h3>
+    <ol class="pasos">
+      <li>Descarga el paquete de <a class="enlace" href="maquina.html?m=sd-c1">SD-C1</a>.</li>
+      <li>En MACHIN, <b>Máquina → Adquirir nueva máquina</b>, elige el .zip y reinicia.</li>
+      <li>Elige SD-C1 en el menú Máquina y abre la puerta con su control para ver dentro.</li>
+      <li>Ejecuta la demo: la pantalla táctil de la consola muestra el avance de la impresión.</li>
+    </ol>
+  </article>
+</div>
+
+<footer>
+  <div class="contenedor">
+    <div class="pie-abajo" style="margin-top:0;border-top:0;padding-top:0"><span>© <span id="anio">2026</span> Stonward Dynamics</span><a class="enlace" href="index.html">Volver al inicio</a></div>
+  </div>
+</footer>
+<script src="js/sitio.js"></script>
+</body>
+</html>

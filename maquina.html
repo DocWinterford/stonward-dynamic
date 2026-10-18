@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Máquina · Stonward Dynamics</title>
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="img/icono.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
+</head>
+<body>
+<nav class="nav solida" id="nav">
+  <div class="contenedor">
+    <a class="marca" href="index.html">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="6.5" stroke="#ff9d3d"/><path d="M16 3v6.5M16 22.5V29M3 16h6.5" /><circle cx="16" cy="16" r="1.6" fill="#ff9d3d" stroke="none"/></svg>
+      <span>Stonward<small>Dynamics</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#software">Software</a>
+      <a href="index.html#maquinas" class="activo">Máquinas</a>
+      <a href="index.html#investigacion">Investigación</a>
+      <a href="index.html#repositorio">Repositorio</a>
+      <a href="index.html#mia">MIA</a>
+      <a href="index.html#contacto">Contacto</a>
+    </div>
+    <a class="btn chico primario nav-cta" href="solidmaker.html">SolidMaker</a>
+    <button class="nav-menu" aria-label="Menú" id="nav-menu">☰</button>
+  </div>
+</nav>
+
+<main class="visor-pagina">
+  <div class="visor" id="visor">
+    <div class="carga" id="carga"><div><div id="estado">Preparando el visor…</div><div class="barra"><i id="barra"></i></div></div></div>
+    <div class="ayuda">Arrastra para girar · rueda para acercar · clic derecho para mover</div>
+    <div class="herramientas">
+      <button class="btn chico primario" id="b-girar">Girar</button>
+      <button class="btn chico" id="b-explotar">Explosionar</button>
+      <button class="btn chico" id="b-vista">Encuadrar</button>
+    </div>
+  </div>
+  <aside class="ficha">
+    <div class="migas"><a href="index.html#maquinas">Máquinas</a> / <span id="f-miga">Stonward</span></div>
+    <h1 id="f-nombre">Máquina</h1>
+    <p class="modelo" id="f-modelo"></p>
+    <p style="color:var(--texto-2);margin:0 0 18px" id="f-resumen"></p>
+    <div class="acciones"><a class="btn primario" id="f-descargar" download>Descargar paquete</a></div>
+    <h4>Ficha</h4>
+    <dl class="datos" id="f-datos"></dl>
+    <h4>Driver</h4>
+    <p style="color:var(--texto-2);margin:0;font-size:14px" id="f-driver"></p>
+    <h4>Cómo instalarla</h4>
+    <ol style="color:var(--texto-2);font-size:14px;padding-left:18px;margin:0;display:grid;gap:4px">
+      <li>Descarga el paquete .zip.</li>
+      <li>En SolidMaker abre MACHIN → Máquina → Adquirir nueva máquina.</li>
+      <li>Elige el .zip y reinicia SolidMaker.</li>
+    </ol>
+    <h4>Lista de materiales</h4>
+    <table class="bom"><tbody id="f-bom"><tr><td>Se arma al cargar el modelo…</td><td></td></tr></tbody></table>
+    <p class="mono" style="color:var(--texto-3);font-size:11px;margin:10px 0 0" id="f-bom-total"></p>
+    <h4>Otras máquinas</h4>
+    <div class="acciones" id="f-otras"></div>
+  </aside>
+</main>
+
+<script src="data/maquinas.js"></script>
+<script src="vendor/jszip.min.js"></script>
+<script src="js/sitio.js"></script>
+<script type="module" src="js/visor.js"></script>
+</body>
+</html>
