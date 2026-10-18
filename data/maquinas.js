@@ -5,101 +5,109 @@ window.STONWARD_MAQUINAS = [
   {
     id: "polarone",
     nombre: "PolarONE",
-    modelo: "Impresora polar θ-R-Z, plato Ø400",
+    modelo: "Sistema de fabricación aditiva de coordenadas polares",
     estado: "disponible",
     porDefecto: true,
     imagen: "img/polarone.jpg",
     paquete: "descargas/maquinas/PolarONE.zip",
-    resumen: "Nuestra primera máquina real. El plato gira sin detenerse y el cabezal se mueve en radio y altura: imprime piezas redondas sin los vaivenes de una cartesiana.",
+    resumen: "Impresora 3D por extrusión de material (FFF) cuya cinemática opera en coordenadas cilíndricas: un plato de Ø400 mm gira de forma continua (eje θ) mientras el cabezal se desplaza en radio (R) y en altura (Z).",
+    uso: "Fabricación de piezas de revolución y geometrías axisimétricas, como carcasas, toberas, rodetes y recipientes. Sus trayectorias continuas eliminan las inversiones de movimiento de una cinemática cartesiana, lo que reduce vibración y tiempo de ciclo.",
     datos: [
-      ["Cinemática", "Polar (θ continuo, R, Z)"],
+      ["Proceso", "Extrusión de material (FFF)"],
+      ["Cinemática", "θ continuo · R · Z"],
       ["Volumen", "Ø400 × 300 mm"],
-      ["Control", "ESP32, θ en lazo abierto"],
-      ["Paquete", "calibracion.json + piezas STL"]
+      ["Accionamiento θ", "Paso a paso 3 A, 3200 micropasos, rampa en S"],
+      ["Control", "ESP32, lazo abierto; lazo cerrado con encoder magnético en desarrollo"]
     ],
     driver: "Firmware ESP32 «Theta continuo v3». El paquete del driver se publicará aquí."
   },
   {
     id: "sd-c1",
     nombre: "SD-C1",
-    modelo: "Impresora 3D CoreXY cerrada 250 × 250 × 250",
+    modelo: "Impresora 3D cartesiana CoreXY de cámara cerrada",
     estado: "disponible",
     imagen: "img/sd-c1.jpg",
     paquete: "descargas/maquinas/SD-C1.zip",
-    resumen: "CoreXY con correas GT2 y rieles MGN12, eje Z con tres husillos Tr8, cámara cerrada con vidrio y pantalla táctil en la consola.",
+    resumen: "Plataforma FFF de cinemática CoreXY con transmisión por correas GT2 y guías lineales MGN12. El eje Z se sostiene sobre tres husillos trapezoidales Tr8 que nivelan la cama en tres puntos.",
+    uso: "Producción de piezas técnicas en polímeros de ingeniería (ABS, ASA, PC, nylon) que exigen una cámara térmicamente estable y precisión dimensional repetible.",
     datos: [
-      ["Cinemática", "CoreXY + Z triple"],
+      ["Proceso", "Extrusión de material (FFF)"],
+      ["Cinemática", "CoreXY + Z triple independiente"],
       ["Volumen", "250 × 250 × 250 mm"],
-      ["Cabezal", "Directo, estilo Neptune 4"],
-      ["Paquete", "pms-maquina-2 (maquina.json + STL)"]
+      ["Guías", "Lineales MGN12"],
+      ["Cerramiento", "Vidrio templado, puerta abatible superior, pantalla táctil"]
     ],
     driver: "Usa el driver cartesiano incluido en SolidMaker."
   },
   {
     id: "sd-d1",
     nombre: "SD-D1",
-    modelo: "Impresora 3D delta cerrada Ø300 × 410",
+    modelo: "Impresora 3D de cinemática paralela delta",
     estado: "disponible",
     imagen: "img/sd-d1.jpg",
     paquete: "descargas/maquinas/SD-D1.zip",
-    resumen: "Tres torres con varillas Ø10 y rodamientos LM10UU, correas GT2 movidas por NEMA 17 y seis brazos de carbono con rótulas magnéticas. Extrusor de doble engrane, hotend V6, electrónica a la vista tras acrílico ahumado y cámara cerrada con puerta de vidrio.",
+    resumen: "Tres carros verticales sobre varillas Ø10 accionan, mediante seis brazos de fibra de carbono de 400 mm con rótulas magnéticas, una plataforma efectora de muy baja masa.",
+    uso: "Impresión de alta velocidad y alta aceleración de piezas altas y cilíndricas. La baja inercia del efector permite trayectorias rápidas sin sacrificar la calidad superficial.",
     datos: [
-      ["Cinemática", "Delta (3 torres, brazos de 400 mm)"],
+      ["Proceso", "Extrusión de material (FFF)"],
+      ["Cinemática", "Paralela delta, 3 torres"],
       ["Volumen", "Ø300 × 410 mm"],
-      ["Guías", "2 varillas Ø10 + 4 LM10UU por torre"],
-      ["Transmisión", "Correas GT2 cerradas + NEMA 17 en la base"],
-      ["Paquete", "pms-maquina-2 + driver.js delta"]
+      ["Transmisión", "Correas GT2 + NEMA 17 en la base"],
+      ["Efector", "Extrusor de doble engrane, hotend V6"]
     ],
     driver: "Driver delta incluido en el paquete (driver.js): calcula la altura de cada carro desde X, Y, Z."
   },
   {
     id: "sd-r7",
     nombre: "SD-R7",
-    modelo: "Brazo de 6 ejes para impresión 3D + mesa polar Ø300",
+    modelo: "Robot articulado de 6 GDL con mesa rotativa sincronizada",
     estado: "disponible",
     imagen: "img/sd-r7.jpg",
     paquete: "descargas/maquinas/SD-R7.zip",
-    resumen: "Brazo robótico de seis ejes con reductores cicloidales en cada articulación, muñeca esférica y extrusor de doble engrane con hotend V6 en la brida. Trabaja junto a su propia mesa giratoria (7.º eje) para impresión polar, con gabinete de control y pantalla táctil de 7 pulgadas.",
+    resumen: "Manipulador serie de seis ejes rotativos con reductores cicloidales en cada articulación y muñeca esférica, coordinado con una mesa giratoria que actúa como séptimo eje.",
+    uso: "Fabricación aditiva multieje: depósito no planar, impresión sobre superficies curvas y piezas sin soportes. Cambiando el efector, sirve para manipulación y procesos de celda robótica.",
     datos: [
-      ["Cinemática", "6 ejes rotativos + mesa giratoria C"],
-      ["Alcance", "Brazo 350 + 330 mm, muñeca esférica"],
-      ["Reductores", "Cicloidales con pernos de acero y rodillos de bronce"],
-      ["Motores", "NEMA 23 en J1-J2, NEMA 17 en J3-J6"],
-      ["Paquete", "pms-maquina-2 + driver.js de brazo"]
+      ["Grados de libertad", "6 + 1 (mesa C)"],
+      ["Alcance", "Brazo 350 mm + antebrazo 330 mm"],
+      ["Reductores", "Cicloidales, pernos de acero y rodillos de bronce"],
+      ["Motores", "NEMA 23 en J1–J2, NEMA 17 en J3–J6"],
+      ["Control", "Cinemática inversa analítica, gabinete con pantalla de 7\""]
     ],
     driver: "Driver de brazo incluido en el paquete (driver.js): cinemática inversa analítica desde X, Y, Z de la punta y el giro C de la mesa."
   },
   {
     id: "sd-m5",
     nombre: "SD-M5",
-    modelo: "Centro de mecanizado de 5 ejes, puente móvil y muñón A/C",
+    modelo: "Centro de mecanizado CNC de 5 ejes simultáneos",
     estado: "disponible",
     imagen: "img/sd-m5.jpg",
     paquete: "descargas/maquinas/SD-M5.zip",
-    resumen: "Bancada de fundición con puente móvil sobre cuatro guías lineales, carro X y carnero Z con husillos de bolas y servomotores en cada eje. Cuna basculante A con motor de par directo y mesa giratoria C ranurada en T con plato de 3 garras para torneado; electrohusillo orientable con herramienta de torneado.",
+    resumen: "Arquitectura de puente móvil sobre bancada de fundición, con ejes lineales X, Y y Z sobre guías tamaño 25 y husillos de bolas, y una cuna basculante A con mesa giratoria C en configuración de muñón.",
+    uso: "Mecanizado de geometrías complejas en una sola sujeción, como álabes, impulsores, moldes y piezas aeroespaciales o médicas, con control RTCP. El husillo orientable y el plato de garras en C permiten además operaciones de torneado (mill-turn).",
     datos: [
-      ["Cinemática", "X, Y, Z lineales + cuna A ±110° + mesa C continua"],
-      ["Guías", "Guías lineales tamaño 25 con patines de bolas"],
-      ["Transmisión", "Husillos de bolas Ø25 + servos AC (2 en Y)"],
-      ["Husillo", "Electrohusillo con M19 y herramienta de torneado"],
-      ["Paquete", "pms-maquina-2 + driver.js RTCP A/C"]
+      ["Ejes", "X · Y · Z + A ±110° + C continuo"],
+      ["Guías", "Lineales tamaño 25 con patines de bolas"],
+      ["Transmisión", "Husillos de bolas Ø25 + servos AC (Y doble)"],
+      ["Husillo", "Electrohusillo con orientación M19"],
+      ["Control", "RTCP de 5 ejes"]
     ],
     driver: "Driver RTCP incluido en el paquete (driver.js): X, Y, Z del programa están en el marco de la mesa y se transforman con A y C."
   },
   {
     id: "sd-t2",
     nombre: "SD-T2",
-    modelo: "Torno CNC de bancada inclinada, torreta de 12 estaciones",
+    modelo: "Torno CNC de bancada inclinada",
     estado: "disponible",
     imagen: "img/sd-t2.jpg",
     paquete: "descargas/maquinas/SD-T2.zip",
-    resumen: "Bancada inclinada a 45° de fundición con guías de rodillos, carros Z y X con husillos de bolas y servos, torreta servo de 12 estaciones con cuchillas de exteriores y barras de interiores. Cabezal con plato hidráulico de 3 garras, cilindro trasero y motor de 11 kW con correa; contrapunto hidráulico, cabina con puerta corrediza, transportador de virutas y grupo hidráulico.",
+    resumen: "Bancada de fundición inclinada a 45° con guías de rodillos, carros X y Z con husillos de bolas y servomotores, torreta servo de 12 estaciones y contrapunto hidráulico.",
+    uso: "Producción de piezas de revolución de precisión, como ejes, bujes, bridas y roscas, en series cortas y medianas. La bancada inclinada facilita la evacuación de viruta y da rigidez frente a cortes pesados.",
     datos: [
-      ["Cinemática", "X (diámetro) y Z + husillo C"],
+      ["Ejes", "X (diámetro) · Z + husillo C"],
       ["Bancada", "Inclinada 45°, guías de rodillos tamaño 35"],
       ["Torreta", "Servo, 12 estaciones BMT"],
       ["Husillo", "A2-6, plato hidráulico 8\", motor 11 kW"],
-      ["Paquete", "pms-maquina-2 + driver.js de torno"]
+      ["Periféricos", "Contrapunto hidráulico, transportador de viruta"]
     ],
     driver: "Driver de torno incluido en el paquete (driver.js): X en diámetro, Z desde la cara de la pieza y C para el giro del husillo."
   }
