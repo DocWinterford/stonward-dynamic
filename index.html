@@ -36,10 +36,8 @@
 <div class="regla" id="regla" aria-hidden="true"></div>
 <div class="etiquetas-r" id="etiquetas-r"></div>
 
-<main class="lienzo">
-
 <!-- PORTADA: aquí va la secuencia de apertura (video/stonward-apertura.mp4). Mientras no exista, se ve la animación de respaldo. -->
-<header class="portada" id="inicio" data-regla="Stonward">
+<header class="portada" id="inicio">
   <div class="respaldo"></div>
   <canvas id="lienzo-apertura"></canvas>
   <video id="video-apertura" autoplay muted loop playsinline preload="auto" poster="">
@@ -50,29 +48,34 @@
   <div class="esquina izq">Stonward Dynamics · Laboratorio 01</div>
   <div class="esquina der"><span class="punto-vivo"></span>Secuencia de apertura</div>
   <div class="texto">
-    <div class="rotulo" style="color:rgba(255,255,255,.7)">Firmes hacia adelante</div>
-    <h1 class="titular" style="margin-top:14px">Construimos las máquinas que construirán el futuro.</h1>
-    <p class="parrafo">Diseñamos el software, fabricamos el hardware y escribimos el control. Una sola casa de ingeniería, de la primera línea de código al último tornillo.</p>
+    <div class="rotulo" style="color:rgba(255,255,255,.7)">Fabricantes · Software de manufactura · Tecnologías de frontera</div>
+    <h1 class="marca-gigante">Stonward<br>Dynamics</h1>
+    <p class="parrafo">Somos fabricantes mexicanos especializados en software de manufactura y tecnologías de frontera. Desarrollamos nuestras herramientas de diseño, construimos nuestras máquinas y escribimos su control.</p>
     <div class="acciones">
       <a class="btn claro" style="background:#fff;color:#121314" href="#software">Conocer SolidMaker</a>
       <a class="btn claro" href="#maquinas">Ver las máquinas</a>
+      <span class="rotulo" style="color:rgba(255,255,255,.55);align-self:center;margin-left:12px">Firmes hacia adelante</span>
     </div>
   </div>
 </header>
 
+<main class="lienzo">
+
+
+
 <!-- 00 MANIFIESTO -->
-<section class="franja" id="manifiesto" data-regla="Manifiesto">
-  <div class="franja-cab"><span class="rotulo">00 / Manifiesto</span><span class="rotulo tenue">Quiénes somos</span></div>
+<section class="franja" id="manifiesto" data-regla="Empresa">
+  <div class="franja-cab"><span class="rotulo">00 / Empresa</span><span class="rotulo tenue">Quiénes somos</span></div>
   <div class="celdas c2">
-    <div class="relleno-celda aparece"><h2 class="titulo">La ingeniería que importa no se terceriza.</h2></div>
+    <div class="relleno-celda aparece"><h2 class="titulo">Fabricamos en México. Diseñamos el software con el que se fabrica.</h2></div>
     <div class="relleno-celda aparece d1">
-      <p class="parrafo grande" style="margin-top:0">En Stonward Dynamics creemos que la innovación real ocurre cuando un mismo equipo domina el ciclo completo: el modelo, la simulación, la máquina y el material.</p>
-      <p class="parrafo">Por eso desarrollamos nuestras propias herramientas de diseño, construimos nuestros propios equipos de manufactura y llevamos cada prototipo del plano a la pieza física sin intermediarios. Trabajamos en la frontera donde la mecánica de precisión, los sistemas vivos y la inteligencia artificial empiezan a hablar el mismo idioma.</p>
+      <p class="parrafo grande" style="margin-top:0">Stonward Dynamics desarrolla software de diseño y manufactura, y fabrica las plataformas que ese software controla.</p>
+      <p class="parrafo">Nuestra línea incluye impresoras 3D de cinemática polar, delta y CoreXY, un robot articulado de seis ejes, un centro de mecanizado de cinco ejes y un torno CNC. Cada equipo se diseña, se simula y se valida con nuestras propias herramientas antes de construirse. En paralelo investigamos en robótica, biónica, instrumentación para ciencias de la vida e inteligencia artificial aplicada a la ingeniería.</p>
     </div>
   </div>
   <div class="celdas c4" style="border-top:1px solid var(--linea)">
     <div class="cifra aparece"><b>6</b><span class="rotulo tenue">Plataformas de manufactura propias</span></div>
-    <div class="cifra aparece d1"><b>4</b><span class="rotulo tenue">Módulos integrados en SolidMaker</span></div>
+    <div class="cifra aparece d1"><b>5</b><span class="rotulo tenue">Módulos integrados en SolidMaker</span></div>
     <div class="cifra aparece d2"><b>1 535</b><span class="rotulo tenue">Componentes normalizados en biblioteca</span></div>
     <div class="cifra aparece d3"><b>7</b><span class="rotulo tenue">Idiomas en la interfaz</span></div>
   </div>
@@ -84,7 +87,7 @@
   <div class="celdas c2">
     <div class="relleno-celda aparece">
       <img src="img/solidmaker-logo.png" alt="Logo de SolidMaker" style="width:72px;height:72px;border-radius:16px;margin-bottom:26px">
-      <h2 class="titulo">SolidMaker. Del boceto a la máquina, en un solo entorno.</h2>
+      <h2 class="titulo">SolidMaker. Diseño, simulación y manufactura en un solo entorno.</h2>
     </div>
     <div class="relleno-celda aparece d1">
       <p class="parrafo grande" style="margin-top:0">Una plataforma abierta de ingeniería para estudiantes, makers y equipos que tienen ideas grandes y quieren fabricarlas.</p>
@@ -99,11 +102,12 @@
     <img src="img/solidmaker.jpg" alt="Engranes helicoidales modelados en SolidMaker" loading="lazy">
     <div class="pie-captura"><span class="rotulo">Engranes helicoidales en PolarCAD</span><span class="rotulo tenue">Captura</span></div>
   </div>
-  <div class="celdas c4" style="border-top:1px solid var(--linea)">
-    <a class="modulo aparece" href="solidmaker.html#cad"><span class="rotulo tenue">Módulo 01</span><h3>PolarCAD</h3><p>Croquis con cotas y relaciones, sólidos exactos, historial editable y ensambles con uniones mecánicas reales.</p></a>
-    <a class="modulo aparece d1" href="solidmaker.html#laboratorio"><span class="rotulo tenue">Módulo 02</span><h3>Laboratorio</h3><p>Banco de pruebas virtual: electrónica, PLC, lógica de control e interferencias antes de cortar material.</p></a>
-    <a class="modulo aparece d2" href="solidmaker.html#machin"><span class="rotulo tenue">Módulo 03</span><h3>MACHIN</h3><p>El gemelo digital de cada máquina: simulación de G-code, cinemáticas complejas y control en tiempo real.</p></a>
-    <a class="modulo aparece d3" href="solidmaker.html#laminador"><span class="rotulo tenue">Módulo 04</span><h3>Laminador</h3><p>Trayectorias para fabricación aditiva, incluida la impresión en coordenadas polares.</p></a>
+  <div class="celdas c5" style="border-top:1px solid var(--linea)">
+    <a class="modulo aparece d0" href="solidmaker.html#polarcad"><span class="rotulo tenue">Módulo 01</span><h3>PolarCAD</h3><p>Croquis con cotas y relaciones, sólidos exactos, historial editable y ensambles con uniones mecánicas.</p></a>
+    <a class="modulo aparece d1" href="solidmaker.html#machin"><span class="rotulo tenue">Módulo 02</span><h3>Machin</h3><p>Gemelo digital de cada máquina: simulación de G-code, cinemáticas complejas y control en tiempo real.</p></a>
+    <a class="modulo aparece d2" href="solidmaker.html#polarslicer"><span class="rotulo tenue">Módulo 03</span><h3>PolarSlicer</h3><p>Generación de trayectorias para fabricación aditiva, cartesiana y en coordenadas polares.</p></a>
+    <a class="modulo aparece d3" href="solidmaker.html#laboratory"><span class="rotulo tenue">Módulo 04</span><h3>Laboratory</h3><p>Banco de pruebas virtual: electrónica, PLC, lógica de control e interferencias.</p></a>
+    <a class="modulo aparece d3" href="solidmaker.html#analizer"><span class="rotulo tenue">Módulo 05</span><h3>Analizer</h3><p>Análisis de ingeniería: simulación de fluidos (CFD) y validación de diseños.</p></a>
   </div>
   <div class="celdas c2" style="border-top:1px solid var(--linea)">
     <div class="relleno-celda aparece"><span class="rotulo tenue">Próximamente</span><h3 class="subtitulo" style="margin-top:12px">SolidEngine</h3></div>
@@ -116,7 +120,7 @@
   <div class="franja-cab"><span class="rotulo">02 / Máquinas</span><span class="rotulo tenue">Diseñadas y construidas en casa</span></div>
   <div class="celdas c2" style="border-bottom:1px solid var(--linea)">
     <div class="relleno-celda aparece"><h2 class="titulo">Plataformas de manufactura Stonward.</h2></div>
-    <div class="relleno-celda aparece d1"><p class="parrafo grande" style="margin:0">Aditiva, sustractiva y robótica. Cada plataforma resuelve un problema de manufactura distinto y comparte la misma filosofía: estructura rígida, cinemática bien resuelta y control abierto.</p></div>
+    <div class="relleno-celda aparece d1"><p class="parrafo grande" style="margin:0">Fabricación aditiva, sustractiva y robótica. Todas se diseñan en PolarCAD y se controlan desde Machin.</p></div>
   </div>
   <div id="fichas"></div>
 </section>
@@ -174,8 +178,8 @@
   <div class="franja-cab"><span class="rotulo">05 / Contacto</span><span class="rotulo tenue">Respondemos personalmente</span></div>
   <div class="celdas c2">
     <div class="relleno-celda aparece">
-      <h2 class="titulo">Hablemos de lo que viene.</h2>
-      <p class="parrafo">Universidades, laboratorios, empresas o personas con una idea que merece fabricarse. Si quieres usar SolidMaker, una plataforma Stonward o colaborar con nosotros, escríbenos.</p>
+      <h2 class="titulo">Hablemos de su proyecto.</h2>
+      <p class="parrafo">Atendemos a universidades, laboratorios y empresas interesadas en SolidMaker, en nuestras plataformas de manufactura o en desarrollos conjuntos.</p>
     </div>
     <div class="relleno-celda datos-contacto aparece d1">
       <a href="mailto:mr.winterford@gmail.com"><small>Correo</small>mr.winterford@gmail.com</a>

@@ -45,13 +45,15 @@
     const enlaces = secciones.map((s) => { const a = document.createElement("a"); a.href = "#" + s.id; a.textContent = s.dataset.regla; etiquetas.appendChild(a); return a; });
 
     let H = 0, raton = null;
-    const recorrido = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const portada = $(".portada");
+    const inicio = () => (portada ? portada.offsetTop + portada.offsetHeight - 64 : 0);   // la regla mide solo lo que va después de la portada
+    const recorrido = () => Math.max(1, document.documentElement.scrollHeight - innerHeight - inicio());
     const colocar = () => {
       H = regla.clientHeight;
       const pad = 10, util = H - pad * 2;
       marcas.forEach((m, i) => { m.style.top = pad + (i / N) * util + "px"; });
       regla.querySelectorAll(".num-r").forEach((n) => { n.style.top = pad + (n.dataset.i / N) * util + "px"; });
-      secciones.forEach((s, k) => { enlaces[k].style.top = pad + Math.min(1, s.offsetTop / recorrido()) * util + "px"; });
+      secciones.forEach((s, k) => { enlaces[k].style.top = pad + Math.min(1, Math.max(0, s.offsetTop - inicio()) / recorrido()) * util + "px"; });
       estirar(); mover();
     };
     const estirar = () => {
@@ -63,13 +65,14 @@
       });
     };
     const mover = () => {
-      const p = Math.min(1, scrollY / recorrido());
+      const p = Math.min(1, Math.max(0, scrollY - inicio()) / recorrido());
+      const fuera = scrollY < inicio() - innerHeight * 0.3; regla.classList.toggle("oculta", fuera); etiquetas.classList.toggle("oculta", fuera);
       aguja.style.top = 10 + p * (H - 20) + "px";
       aguja.firstChild.textContent = String(Math.round(p * 100)).padStart(3, "0") + "%";
       let act = 0; secciones.forEach((s, k) => { if (s.offsetTop <= scrollY + innerHeight * 0.35) act = k; });
       enlaces.forEach((a, k) => a.classList.toggle("activo", k === act));
     };
-    const ir = (y) => { const f = Math.min(1, Math.max(0, (y - 10) / (H - 20))); scrollTo({ top: f * recorrido(), behavior: arrastrando ? "auto" : "smooth" }); };
+    const ir = (y) => { const f = Math.min(1, Math.max(0, (y - 10) / (H - 20))); scrollTo({ top: inicio() + f * recorrido(), behavior: arrastrando ? "auto" : "smooth" }); };
     let arrastrando = false;
     regla.addEventListener("pointermove", (e) => { raton = e.clientY - regla.getBoundingClientRect().top; estirar(); if (arrastrando) ir(raton); });
     regla.addEventListener("pointerleave", () => { raton = null; estirar(); });
