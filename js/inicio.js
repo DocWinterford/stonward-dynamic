@@ -93,30 +93,35 @@
     if (fuente) fuente.addEventListener("error", () => video.remove());
   }
   if (cv) {
-    const cx = cv.getContext("2d"); let W, H, dpr, t = 0;
-    const tam = () => { dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    // espacio exterior: estrellas que derivan, la Tierra asomando abajo y el sol saliendo por su borde
+    const cx = cv.getContext("2d"); let W, H, dpr, t = 0, estrellas = [];
+    const tam = () => {
+      dpr = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      estrellas = Array.from({ length: Math.round((W * H) / 2600) }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.2 + 0.2, b: Math.random(), v: Math.random() * 0.06 + 0.01 }));
+    };
     addEventListener("resize", tam); tam();
     const cuadro = () => {
-      t += 0.005; cx.clearRect(0, 0, W, H);
-      const hz = H * 0.42, cxp = W * 0.5;
-      // piso en perspectiva
-      cx.strokeStyle = "rgba(255,255,255,.07)"; cx.lineWidth = 1;
-      for (let k = -14; k <= 14; k++) { cx.beginPath(); cx.moveTo(cxp + k * 12, hz); cx.lineTo(cxp + k * W * 0.16, H); cx.stroke(); }
-      for (let k = 1; k < 14; k++) { const y = hz + (H - hz) * Math.pow(k / 14, 2.2); cx.beginPath(); cx.moveTo(0, y); cx.lineTo(W, y); cx.stroke(); }
-      // plato polar al centro
-      const oy = H * 0.7, rx = Math.min(W, H) * 0.34, ry = rx * 0.28;
-      for (let k = 1; k <= 6; k++) { cx.strokeStyle = `rgba(255,255,255,${0.05 + k * 0.025})`; cx.beginPath(); cx.ellipse(cxp, oy, (rx * k) / 6, (ry * k) / 6, 0, 0, Math.PI * 2); cx.stroke(); }
-      for (let k = 0; k < 24; k++) { const a = t + (k * Math.PI) / 12; cx.strokeStyle = "rgba(255,255,255,.08)"; cx.beginPath(); cx.moveTo(cxp, oy); cx.lineTo(cxp + Math.cos(a) * rx, oy + Math.sin(a) * ry); cx.stroke(); }
-      // columna y cabezal
-      const r = rx * (0.55 + 0.3 * Math.sin(t * 1.3)), a = t * 4;
-      const px = cxp + Math.cos(a) * r * 0.2, alto = H * 0.36;
-      cx.strokeStyle = "rgba(255,255,255,.35)"; cx.beginPath(); cx.moveTo(cxp + rx * 1.05, oy); cx.lineTo(cxp + rx * 1.05, oy - alto); cx.lineTo(px, oy - alto); cx.lineTo(px, oy - alto * 0.55); cx.stroke();
-      cx.fillStyle = "#fff"; cx.beginPath(); cx.arc(px, oy - alto * 0.55, 3, 0, Math.PI * 2); cx.fill();
-      // trazo depositado
-      cx.strokeStyle = "rgba(120,170,255,.75)"; cx.lineWidth = 2; cx.beginPath(); cx.ellipse(cxp, oy, r * 0.5, r * 0.5 * 0.28, 0, a - 1.6, a); cx.stroke(); cx.lineWidth = 1;
-      // barrido
-      const sx = ((t * 120) % (W + 200)) - 100; const g = cx.createLinearGradient(sx - 80, 0, sx, 0); g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(255,255,255,.05)");
-      cx.fillStyle = g; cx.fillRect(sx - 80, 0, 80, H);
+      t += 0.01; cx.clearRect(0, 0, W, H);
+      for (const e of estrellas) {
+        if (!quieto) { e.x -= e.v; if (e.x < 0) e.x += W; }
+        cx.globalAlpha = 0.35 + 0.65 * Math.abs(Math.sin(t * 0.7 + e.b * 9)) * e.b; cx.fillStyle = "#dfe8ff";
+        cx.beginPath(); cx.arc(e.x, e.y, e.r, 0, Math.PI * 2); cx.fill();
+      }
+      cx.globalAlpha = 1;
+      // planeta: gran disco con el borde iluminado
+      const R = Math.max(W, H) * 1.15, px = W * 0.62, py = H * 0.78 + R * 0.92;
+      const cuerpo = cx.createRadialGradient(px - R * 0.1, py - R, R * 0.05, px, py, R);
+      cuerpo.addColorStop(0, "#1d3a66"); cuerpo.addColorStop(0.55, "#0c1d38"); cuerpo.addColorStop(1, "#030812");
+      cx.fillStyle = cuerpo; cx.beginPath(); cx.arc(px, py, R, 0, Math.PI * 2); cx.fill();
+      // atmósfera
+      const atm = cx.createRadialGradient(px, py, R * 0.985, px, py, R * 1.035);
+      atm.addColorStop(0, "rgba(120,180,255,.0)"); atm.addColorStop(0.35, "rgba(120,180,255,.55)"); atm.addColorStop(1, "rgba(60,110,200,0)");
+      cx.fillStyle = atm; cx.beginPath(); cx.arc(px, py, R * 1.035, 0, Math.PI * 2); cx.fill();
+      // amanecer en el borde, respirando lento
+      const sx = W * 0.8, sy = py - Math.sqrt(Math.max(0, R * R - (sx - px) ** 2)) - 2, f = 0.85 + 0.15 * Math.sin(t * 0.4);
+      const sol = cx.createRadialGradient(sx, sy, 0, sx, sy, W * 0.35);
+      sol.addColorStop(0, `rgba(255,250,240,${0.95 * f})`); sol.addColorStop(0.05, `rgba(255,220,180,${0.5 * f})`); sol.addColorStop(0.3, "rgba(120,170,255,.12)"); sol.addColorStop(1, "rgba(0,0,0,0)");
+      cx.fillStyle = sol; cx.fillRect(0, 0, W, H);
       if (!quieto && cv.style.display !== "none") requestAnimationFrame(cuadro);
     };
     cuadro();

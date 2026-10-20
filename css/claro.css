@@ -3,17 +3,19 @@
   --papel: #f2f1ed;
   --papel-2: #e9e8e3;
   --blanco: #fbfbf9;
-  --tinta: #121314;
+  --tinta: #0b1626;
   --tinta-2: #4a4d52;
   --tinta-3: #8a8d92;
   --linea: rgba(18, 19, 20, .14);
   --linea-2: rgba(18, 19, 20, .28);
-  --acento: #2f5bff;
-  --oscuro: #15171b;
+  --acento: #b57a4f;
+  --marino: #0b1626;
+  --pizarra: #3d5372;
+  --oscuro: #0b1626;
   --margen: 160px;          /* columna izquierda vacía, como en un plano */
   --regla: 190px;           /* columna derecha: etiquetas + regla */
   --nav: 64px;
-  --fuente: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --fuente: "Montserrat", "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
 }
 * { box-sizing: border-box; }
@@ -30,14 +32,14 @@ img { max-width: 100%; display: block; }
 .barra { position: fixed; inset: 0 0 auto 0; height: var(--nav); z-index: 60; display: flex; background: var(--papel); border-bottom: 1px solid var(--linea); }
 .barra > * { display: flex; align-items: center; border-right: 1px solid var(--linea); }
 .barra .logo { width: 88px; justify-content: center; }
-.barra .logo svg { width: 30px; height: 30px; }
+.barra .logo svg { width: 30px; height: 32px; color: var(--marino); }
 .barra .menu { gap: 0; padding: 0 12px; }
 .barra .menu a { font-family: var(--mono); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; padding: 8px 18px; color: var(--tinta-2); transition: color .2s; }
 .barra .menu a:hover, .barra .menu a.activo { color: var(--tinta); }
 .barra .marca-txt { padding: 0 22px; font-family: var(--mono); font-size: 13px; letter-spacing: .2em; font-weight: 500; }
 .barra .relleno { flex: 1; border-right: 1px solid var(--linea); }
 .barra .contacto-mini { padding: 0 22px; font-family: var(--mono); font-size: 13px; letter-spacing: .18em; color: var(--tinta-2); }
-.barra .cta { background: var(--tinta); color: var(--papel); padding: 0 28px; font-family: var(--mono); font-size: 13px; letter-spacing: .2em; font-weight: 600; border-right: 0; transition: background .2s; }
+.barra .cta { background: var(--marino); color: var(--papel); padding: 0 28px; font-family: var(--mono); font-size: 13px; letter-spacing: .2em; font-weight: 600; border-right: 0; transition: background .2s; }
 .barra .cta:hover { background: #2a2c30; }
 .barra .hamb { display: none; background: none; border: 0; border-left: 1px solid var(--linea); width: 60px; font-size: 20px; cursor: pointer; color: var(--tinta); }
 
@@ -55,7 +57,7 @@ img { max-width: 100%; display: block; }
 .relleno-celda { padding: 40px 48px; }
 
 /* ---------- tipografía de marketing ---------- */
-h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -.02em; line-height: 1.08; }
+h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -.01em; line-height: 1.08; }
 .titular { font-size: clamp(40px, 6vw, 88px); letter-spacing: -.035em; }
 .titulo { font-size: clamp(30px, 3.6vw, 52px); }
 .subtitulo { font-size: clamp(20px, 1.8vw, 26px); letter-spacing: -.01em; }
@@ -75,12 +77,15 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -.02em; line-heigh
 /* ---------- portada con video ---------- */
 .portada { position: relative; margin-top: var(--nav); width: 100%; height: calc(100vh - var(--nav)); min-height: 560px; overflow: hidden; background: var(--oscuro); color: #fff; border-bottom: 1px solid var(--linea); }
 .portada video, .portada .respaldo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.portada .respaldo { background: radial-gradient(ellipse at 50% 60%, #2a2e36 0%, #111317 70%); }
+.portada .respaldo { background: #03060d; }
 .portada canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .portada .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,.15) 0%, rgba(10,11,13,.05) 45%, rgba(10,11,13,.75) 100%); }
 .portada .rejilla-fina { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 25% 25%; pointer-events: none; }
 .portada .texto { position: absolute; left: 48px; right: 48px; bottom: 56px; }
-.marca-gigante { font-size: clamp(56px, 10.5vw, 180px); line-height: .9; letter-spacing: -.045em; text-transform: uppercase; font-weight: 700; margin: 18px 0 0; }
+.marca-portada { display: flex; align-items: center; gap: clamp(18px, 3vw, 44px); margin: 22px 0 0; }
+.marca-portada svg { width: clamp(64px, 9vw, 150px); height: auto; flex: none; color: #e9ecf1; filter: drop-shadow(0 6px 30px rgba(120,160,220,.25)); }
+.marca-gigante { font-size: clamp(44px, 8vw, 132px); line-height: 1; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; margin: 0; }
+.marca-gigante small { display: block; font-size: .32em; font-weight: 300; letter-spacing: .62em; margin-top: .5em; color: rgba(255,255,255,.82); }
 .portada .parrafo { color: rgba(255,255,255,.78); margin: 22px 0 30px; }
 .portada .esquina { position: absolute; top: 22px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .22em; color: rgba(255,255,255,.62); text-transform: uppercase; }
 .portada .esquina.izq { left: 48px; } .portada .esquina.der { right: 48px; text-align: right; }
