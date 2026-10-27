@@ -86,7 +86,8 @@ for bloque in re.split(r"\n### ", LISTA)[1:]:
     secciones.append({"titulo": titulo, "id": slug(titulo), "nota": " ".join(limpio(t) for t in texto), "items": tabla(filas) if filas else []})
 
 def captura(nombre, pie):
-    return f'<figure class="cap"><a href="{IMG}{nombre}" class="ampliar"><img src="{IMG}{nombre}" alt="{html.escape(pie)}" loading="lazy"></a><figcaption>{html.escape(pie)}</figcaption></figure>'
+    # se muestra el recorte alrededor del menú (zoom/); el clic abre la pantalla completa
+    return f'<figure class="cap"><a href="{IMG}{nombre}" class="ampliar"><img src="{IMG}zoom/{nombre}" alt="{html.escape(pie)}" loading="lazy"></a><figcaption>{html.escape(pie)} · clic para ver la pantalla completa</figcaption></figure>'
 
 # ---- índice de herramientas (cada una con su hipervínculo) ----
 indice = []
@@ -109,7 +110,7 @@ for s in secciones:
 PLANTILLA = (RAIZ / "herramientas/manual-plantilla.html").read_text(encoding="utf-8")
 INDEX = (RAIZ / "index.html").read_text(encoding="utf-8")
 nav = re.search(r'<nav class="barra".*?</nav>', INDEX, re.S).group(0)
-nav = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', nav).replace('<a href="index.html#contacto">Contacto</a>', '<a href="manual.html" class="activo">Manual</a>\n    <a href="index.html#contacto">Contacto</a>')
+nav = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', nav).replace('<a href="manual.html">', '<a href="manual.html" class="activo">')
 salida = PLANTILLA.replace("<!--NAV-->", nav).replace("<!--INDICE-->", "\n".join(indice)).replace("<!--SECCIONES-->", "\n".join(cuerpo))
 (RAIZ / "manual.html").write_text(salida, encoding="utf-8")
 print("manual.html:", len(secciones), "secciones,", sum(len(s["items"]) for s in secciones), "herramientas")
