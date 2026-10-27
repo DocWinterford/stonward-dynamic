@@ -92,6 +92,27 @@
     const fuente = video.querySelector("source");
     if (fuente) fuente.addEventListener("error", () => video.remove());
   }
+  // video de YouTube de fondo: solo el tramo elegido, sin sonido y en bucle
+  const yt = $("#yt-apertura");
+  if (yt && !quieto) {
+    const id = yt.dataset.video, ini = +yt.dataset.inicio, fin = +yt.dataset.fin;
+    const caja = document.createElement("div"); yt.appendChild(caja);
+    window.onYouTubeIframeAPIReady = () => {
+      const pl = new YT.Player(caja, {
+        videoId: id,
+        playerVars: { autoplay: 1, mute: 1, controls: 0, start: ini, end: fin, playsinline: 1, rel: 0, modestbranding: 1, disablekb: 1, iv_load_policy: 3, fs: 0 },
+        events: {
+          onReady: (e) => { e.target.mute(); e.target.playVideo(); },
+          onStateChange: (e) => {
+            if (e.data === YT.PlayerState.PLAYING) { yt.classList.add("vivo"); if (cv) cv.style.display = "none"; }
+            if (e.data === YT.PlayerState.ENDED) { pl.seekTo(ini, true); pl.playVideo(); }
+          },
+        },
+      });
+      setInterval(() => { try { if (pl.getCurrentTime && pl.getCurrentTime() >= fin - 0.3) pl.seekTo(ini, true); } catch (_) {} }, 500);
+    };
+    const s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(s);
+  }
   if (cv) {
     // espacio exterior: estrellas que derivan, la Tierra asomando abajo y el sol saliendo por su borde
     const cx = cv.getContext("2d"); let W, H, dpr, t = 0, estrellas = [];
