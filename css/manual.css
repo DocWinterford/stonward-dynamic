@@ -1,0 +1,55 @@
+/* Manual de usuario: capturas, fichas de herramienta e índice */
+.cap { margin: 0; background: var(--oscuro); display: flex; flex-direction: column; }
+.cap a { display: block; cursor: zoom-in; }
+.cap img { width: 100%; height: auto; }
+.cap figcaption { background: var(--papel); border-top: 1px solid var(--linea); padding: 12px 24px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-3); margin-top: auto; }
+.cap.ancha figcaption { padding: 14px 48px; }
+.zona { border-top: 1px solid var(--linea); scroll-margin-top: calc(var(--nav) + 10px); }
+.zona .parrafo { font-size: 16px; }
+.zonas { border-top: 1px solid var(--linea); }
+.zonas .modulo .rotulo { margin-bottom: 26px; }
+.zonas .modulo h3 { font-size: 19px; }
+
+.indice-herr { display: grid; grid-template-columns: repeat(3, 1fr); }
+.indice-herr .grupo { padding: 26px 32px; border-right: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+.indice-herr .grupo:nth-child(3n) { border-right: 0; }
+.indice-herr .g { display: block; font-weight: 600; font-size: 17px; margin-bottom: 10px; }
+.indice-herr .g:hover { color: var(--acento); }
+.indice-herr .hs { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.indice-herr .hs a { font-size: 14px; color: var(--tinta-2); border-bottom: 1px solid transparent; }
+.indice-herr .hs a:hover { color: var(--acento); border-color: var(--acento); }
+.indice-herr .hs a.pend { color: var(--tinta-3); }
+.sello { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; border: 1px solid var(--linea-2); padding: 2px 6px; color: var(--tinta-3); vertical-align: middle; font-weight: 500; }
+
+.menu-sec { border-bottom: 1px solid var(--linea); scroll-margin-top: var(--nav); }
+.menu-cuerpo { display: grid; grid-template-columns: 1fr 1.4fr; border-bottom: 1px solid var(--linea); }
+.menu-cuerpo .texto-sec { padding: 40px 48px; border-right: 1px solid var(--linea); }
+.menu-cuerpo .texto-sec h3 { margin-bottom: 14px; }
+.menu-cuerpo .nota { font-size: 14px; color: var(--tinta-2); border-left: 2px solid var(--acento); padding-left: 14px; }
+.menu-cuerpo > .cap { border-bottom: 1px solid var(--linea); }
+.menu-cuerpo > .cap:nth-child(n+3) { grid-column: 2; }
+.herrs { display: grid; grid-template-columns: repeat(2, 1fr); }
+.herr { padding: 24px 48px 26px; border-bottom: 1px solid var(--linea); border-right: 1px solid var(--linea); scroll-margin-top: calc(var(--nav) + 10px); }
+.herr:nth-child(2n) { border-right: 0; }
+.herr h4 { font-size: 17px; margin-bottom: 8px; }
+.herr p { margin: 0; font-size: 14.5px; color: var(--tinta-2); line-height: 1.6; }
+.herr p b { color: var(--tinta); }
+.herr.pend { background: repeating-linear-gradient(-45deg, transparent 0 10px, rgba(11,22,38,.025) 10px 20px); }
+.herr:target, .zona:target { background: #fff6ec; box-shadow: inset 3px 0 0 var(--acento); }
+
+.atajos > div { padding: 22px 28px; border-bottom: 1px solid var(--linea); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.atajos span { flex-basis: 100%; color: var(--tinta-2); font-size: 14px; margin-top: 6px; }
+kbd { font-family: var(--mono); font-size: 12px; border: 1px solid var(--linea-2); border-bottom-width: 2px; padding: 3px 8px; background: var(--blanco); }
+
+.visor-img { position: fixed; inset: 0; z-index: 100; background: rgba(5,9,16,.92); display: grid; place-items: center; padding: 24px; cursor: zoom-out; }
+.visor-img[hidden] { display: none; }
+.visor-img img { max-width: 100%; max-height: calc(100vh - 80px); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.visor-img .rotulo { color: rgba(255,255,255,.6); margin-top: 12px; }
+
+@media (max-width: 1100px) { .indice-herr { grid-template-columns: 1fr 1fr; } .indice-herr .grupo:nth-child(3n) { border-right: 1px solid var(--linea); } .indice-herr .grupo:nth-child(2n) { border-right: 0; } }
+@media (max-width: 900px) {
+  .indice-herr, .menu-cuerpo, .herrs { grid-template-columns: 1fr; }
+  .indice-herr .grupo, .herr { border-right: 0 !important; padding-left: 16px; padding-right: 16px; }
+  .menu-cuerpo .texto-sec { border-right: 0; padding: 28px 16px; }
+  .menu-cuerpo > .cap:nth-child(n+3) { grid-column: auto; }
+}

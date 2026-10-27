@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de usuario · SolidMaker</title>
+<meta name="description" content="Manual de usuario de SolidMaker: módulos, pantalla de PolarCAD y cada herramienta explicada con capturas reales.">
+<meta name="theme-color" content="#0b1626">
+<link rel="icon" href="img/icono.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/claro.css">
+<link rel="stylesheet" href="css/manual.css">
+</head>
+<body class="manual">
+
+<nav class="barra" id="nav">
+  <a class="logo" href="index.html" aria-label="Stonward Dynamics">
+    <svg viewBox="50 30 522 556" fill="currentColor"><path d="M292.844 35.784V356.122L237.139 440.552L133.702 481.219L206.638 304.845L237.139 35.784Z"/><path d="M325.627 35.784H373.69L406.133 304.845L486.64 481.219L385.706 440.552L325.627 356.122Z"/><path d="M56.471 536.252L251.128 464.157L271.555 499.003H338.844L364.078 464.157L565.945 536.252V580.711H385.706L364.078 559.082H251.128L213.273 580.711H56.471Z"/><path d="M306 386.624L349.301 411.624V461.624L306 486.624L262.699 461.624V411.624Z"/></svg>
+  </a>
+  <span class="marca-txt">STONWARD DYNAMICS</span>
+  <div class="menu">
+    <a href="index.html#software">Software</a>
+    <a href="index.html#maquinas">Máquinas</a>
+    <a href="index.html#prototipos">Prototipos</a>
+    <a href="index.html#investigacion">Investigación</a>
+    <a href="manual.html" class="activo">Manual</a>
+    <a href="index.html#contacto">Contacto</a>
+  </div>
+  <span class="relleno"></span>
+  <a class="contacto-mini" href="mailto:mr.winterford@gmail.com">Escríbenos</a>
+  <a class="cta" href="solidmaker.html#descargas">Descargar SolidMaker</a>
+  <button class="hamb" id="nav-menu" aria-label="Menú">≡</button>
+</nav>
+
+<main class="lienzo" style="margin-top:var(--nav)">
+
+<!-- BIENVENIDA -->
+<section class="franja" id="bienvenida">
+  <div class="franja-cab"><span class="rotulo">Manual de usuario</span><span class="rotulo tenue">SolidMaker · Beta</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda">
+      <img src="img/solidmaker-logo.png" alt="Logo de SolidMaker" style="width:64px;height:64px;border-radius:14px;margin-bottom:24px">
+      <h1 class="titulo">Bienvenido a SolidMaker.</h1>
+    </div>
+    <div class="relleno-celda">
+      <p class="parrafo grande" style="margin-top:0">Gracias por elegir SolidMaker. Este manual le acompaña desde la primera vez que abre el programa hasta su primera pieza fabricada.</p>
+      <p class="parrafo">Cada pantalla, cada menú y cada herramienta aparece aquí con una captura real del programa y la explicación de sus campos: qué significa cada uno, en qué unidad se escribe y qué valor trae de fábrica. Si en algún momento no sabe qué hace un botón, búsquelo en el índice de herramientas: todas tienen su propio enlace.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="franja" id="modulos">
+  <div class="franja-cab"><span class="rotulo">01 / Su software</span><span class="rotulo tenue">Cinco módulos, un solo archivo</span></div>
+  <div class="relleno-celda" style="border-bottom:1px solid var(--linea)"><p class="parrafo grande" style="margin:0">Su software cuenta con los siguientes módulos. Todos trabajan sobre el mismo proyecto: la pieza que dibuja en PolarCAD es la misma que prueba en Laboratory, lamina en PolarSlicer y fabrica con Machin. Los módulos se eligen en la columna izquierda de la pantalla.</p></div>
+  <div class="celdas c5">
+    <a class="modulo" href="#polarcad"><span class="rotulo tenue">Módulo 01</span><h3>PolarCAD</h3><p>Diseño de piezas y ensambles. Es el módulo con el que se empieza.</p><span class="rotulo" style="display:block;margin:18px 0 0;color:var(--acento)">Documentado</span></a>
+    <div class="modulo"><span class="rotulo tenue">Módulo 02</span><h3>Machin</h3><p>Control y simulación de máquinas con su gemelo 3D.</p><span class="rotulo tenue" style="display:block;margin:18px 0 0">En preparación</span></div>
+    <div class="modulo"><span class="rotulo tenue">Módulo 03</span><h3>PolarSlicer</h3><p>Trayectorias de impresión cartesiana y polar.</p><span class="rotulo tenue" style="display:block;margin:18px 0 0">En preparación</span></div>
+    <div class="modulo"><span class="rotulo tenue">Módulo 04</span><h3>Laboratory</h3><p>Banco de pruebas: electrónica, PLC e interferencias.</p><span class="rotulo tenue" style="display:block;margin:18px 0 0">En preparación</span></div>
+    <div class="modulo"><span class="rotulo tenue">Módulo 05</span><h3>Analizer</h3><p>Análisis de ingeniería y simulación de fluidos.</p><span class="rotulo tenue" style="display:block;margin:18px 0 0">En preparación</span></div>
+  </div>
+</section>
+
+<!-- POLARCAD: LA PANTALLA -->
+<section class="franja" id="polarcad">
+  <div class="franja-cab"><span class="rotulo">02 / PolarCAD</span><span class="rotulo tenue">Conozca su pantalla</span></div>
+  <div class="relleno-celda" style="border-bottom:1px solid var(--linea)">
+    <h2 class="titulo">La pantalla de PolarCAD.</h2>
+    <p class="parrafo grande">Al entrar a PolarCAD verá esta pantalla. Tiene cinco zonas, y conviene conocerlas antes de dibujar la primera línea.</p>
+  </div>
+  <figure class="cap ancha"><a href="img/manual/polarcad/01-pantalla-completa.jpg" class="ampliar"><img src="img/manual/polarcad/01-pantalla-completa.jpg" alt="Pantalla completa de PolarCAD"></a><figcaption>PolarCAD recién abierto, sin ninguna pieza.</figcaption></figure>
+  <div class="celdas c5 zonas">
+    <a class="modulo" href="#barra"><span class="rotulo tenue">Zona 1</span><h3>Barra de herramientas</h3><p>Las dos filas de arriba. Aquí están todas las herramientas de dibujo y de operación.</p></a>
+    <a class="modulo" href="#lateral"><span class="rotulo tenue">Zona 2</span><h3>Columna de módulos y consola</h3><p>A la izquierda. Cambia de módulo y abre la configuración de cada herramienta y del objeto.</p></a>
+    <a class="modulo" href="#visor"><span class="rotulo tenue">Zona 3</span><h3>Visor 3D</h3><p>El centro. Vistas, cubo de orientación y la grilla de trabajo.</p></a>
+    <a class="modulo" href="#gestor"><span class="rotulo tenue">Zona 4</span><h3>Gestor de proyectos</h3><p>A la derecha. Sus proyectos, archivos y la biblioteca de piezas.</p></a>
+    <a class="modulo" href="#estado"><span class="rotulo tenue">Zona 5</span><h3>Barra de estado</h3><p>Abajo. Plano activo, posición del cursor, selección y archivo abierto.</p></a>
+  </div>
+
+  <div class="celdas c2 zona" id="barra">
+    <div class="relleno-celda"><span class="rotulo tenue">Zona 1</span><h3 class="subtitulo" style="margin:10px 0 14px">La barra de herramientas</h3>
+      <p class="parrafo">Observe en su pantalla la barra resaltada: corresponde a las herramientas. Está ordenada de izquierda a derecha en el mismo orden en que normalmente se trabaja.</p>
+      <p class="parrafo"><b>Fila 1:</b> el documento, el ensamble y el material; deshacer y rehacer; las herramientas de dibujo del croquis; curvas, anotación y edición.</p>
+      <p class="parrafo"><b>Fila 2:</b> las operaciones que convierten el croquis en sólido, los cortes, acabados, referencias, transformaciones, patrones, chapa, mecanizado y, al final, la vista y los ajustes.</p>
+      <p class="parrafo">Los botones con una flecha ▾ abren un menú. Debajo encontrará el índice completo: cada nombre lleva a la explicación de esa herramienta.</p></div>
+    <figure class="cap"><a href="img/manual/polarcad/02-barra-herramientas-resaltada.jpg" class="ampliar"><img src="img/manual/polarcad/02-barra-herramientas-resaltada.jpg" alt="Barra de herramientas resaltada" loading="lazy"></a><figcaption>Zona 1 resaltada: la barra de herramientas.</figcaption></figure>
+  </div>
+
+  <div class="celdas c2 zona" id="lateral">
+    <div class="relleno-celda"><span class="rotulo tenue">Zona 2</span><h3 class="subtitulo" style="margin:10px 0 14px">Columna de módulos y consola de herramientas</h3>
+      <p class="parrafo">La columna vertical del borde izquierdo cambia de módulo: CAD, Laboratorio, Maquinado, Sistemas, Laminador polar y Análisis.</p>
+      <p class="parrafo">A su lado se despliega la <b>Consola de herramientas</b>. Desde ella encontrará la configuración de cada herramienta, así como la configuración del objeto seleccionado. Sus apartados son: Propiedades, Uniones, Interferencias, Relaciones, Material, Variables, Referencias, Medición y Plano 2D.</p>
+      <p class="parrafo">Cuando elige una operación de la barra, sus campos aparecen aquí con los botones <b>Aplicar</b> y <b>Cancelar</b>.</p></div>
+    <figure class="cap"><a href="img/manual/polarcad/03b-menu-lateral-resaltado.jpg" class="ampliar"><img src="img/manual/polarcad/03b-menu-lateral-resaltado.jpg" alt="Consola de herramientas abierta" loading="lazy"></a><figcaption>Zona 2: columna de módulos y Consola de herramientas abierta.</figcaption></figure>
+  </div>
+
+  <div class="celdas c2 zona" id="visor">
+    <div class="relleno-celda"><span class="rotulo tenue">Zona 3</span><h3 class="subtitulo" style="margin:10px 0 14px">El visor 3D</h3>
+      <p class="parrafo">Arriba a la izquierda están las vistas <b>Iso 3D</b>, <b>Superior</b>, <b>Perfil</b> y <b>Frontal</b>; el ojo muestra u oculta elementos y <b>P</b> cambia la proyección. Debajo, tres botones: seleccionar, bloquear y capas.</p>
+      <p class="parrafo">El cubo de la esquina superior derecha indica la orientación y permite girar la vista con un clic en sus caras. La grilla del fondo mide 5 mm por cuadro (se cambia en Vista y ajustes).</p></div>
+    <figure class="cap"><a href="img/manual/polarcad/01-pantalla-completa.jpg" class="ampliar"><img src="img/manual/polarcad/01-pantalla-completa.jpg" alt="Visor 3D" loading="lazy"></a><figcaption>Zona 3: el visor con sus vistas y el cubo de orientación.</figcaption></figure>
+  </div>
+
+  <div class="celdas c2 zona" id="gestor">
+    <div class="relleno-celda"><span class="rotulo tenue">Zona 4</span><h3 class="subtitulo" style="margin:10px 0 14px">El Gestor y la pestaña Proyecto</h3>
+      <p class="parrafo">El panel derecho se abre con la pestaña vertical <b>Proyecto</b>. Tiene tres pestañas: <b>Archivos</b>, <b>Proyecto</b> y <b>Biblioteca</b>.</p>
+      <p class="parrafo">Por su parte, la pestaña Proyecto cuenta con todos sus proyectos en forma de árbol, como el Explorador de Windows: cada carpeta se abre con [+] y guarda sus piezas, ensambles, exportaciones y versiones. Con <b>+ importar</b> trae archivos de su equipo y con <b>+ proyecto</b> crea uno nuevo. Al pasar el cursor sobre un proyecto aparecen los botones para crear carpeta, renombrar y eliminar.</p>
+      <p class="parrafo">La pestaña <b>Biblioteca</b> reúne 1 535 piezas normalizadas en 81 familias (tornillos, tuercas, rodamientos, perfiles, motores) listas para insertar.</p></div>
+    <figure class="cap"><a href="img/manual/polarcad/04-pestana-proyectos.jpg" class="ampliar"><img src="img/manual/polarcad/04-pestana-proyectos.jpg" alt="Gestor con la pestaña Proyecto" loading="lazy"></a><figcaption>Zona 4: el Gestor con la pestaña Proyecto abierta.</figcaption></figure>
+  </div>
+
+  <div class="relleno-celda zona" id="estado" style="border-bottom:1px solid var(--linea)"><span class="rotulo tenue">Zona 5</span><h3 class="subtitulo" style="margin:10px 0 14px">La barra de estado</h3>
+    <p class="parrafo">La línea inferior del visor le dice en todo momento dónde está: <b>Plano</b> activo, <b>Pos</b> (coordenadas X, Y, Z del cursor en mm), <b>Sel</b> (lo seleccionado), <b>Archivo</b> abierto, estado del <b>Kernel</b> de geometría exacta y el tamaño de la <b>Grilla</b>. Debajo, el modo de trabajo (Diseño) y la sección actual.</p></div>
+</section>
+
+<!-- ÍNDICE DE HERRAMIENTAS -->
+<section class="franja" id="indice-herr">
+  <div class="franja-cab"><span class="rotulo">03 / Índice de herramientas</span><span class="rotulo tenue">Cada nombre lleva a su explicación</span></div>
+  <div class="indice-herr">
+<div class="grupo"><a class="g" href="#documento">Documento</a><div class="hs"><a href="#documento--guardar">Guardar</a><a href="#documento--guardar-como">Guardar como…</a><a href="#documento--abrir-archivo">Abrir archivo…</a><a href="#documento--nuevo">Nuevo</a><a href="#documento--exportar-pieza">Exportar pieza…</a><a href="#documento--plano-2d">Plano 2D…</a><a href="#documento--importar-stl">Importar STL</a><a href="#documento--descargar-copia-json">Descargar copia (.json)</a><a href="#documento--recuperar-trabajo-sin-guardar">Recuperar trabajo sin guardar</a></div></div>
+<div class="grupo"><a class="g" href="#ensamble">Ensamble</a><div class="hs"><a href="#ensamble--nuevo-ensamble">Nuevo ensamble</a><a href="#ensamble--insertar-pieza">Insertar pieza…</a><a href="#ensamble--fijar-liberar">Fijar / liberar</a><a href="#ensamble--actuadores-motores">Actuadores (motores)…</a><a href="#ensamble--guardar-ensamble">Guardar ensamble</a></div></div>
+<div class="grupo"><a class="g" href="#material">Material</a><div class="hs"><a href="#material--apariencia">Apariencia…</a><a href="#material--propiedades">Propiedades…</a><a href="#material--copiar-apariencia">Copiar apariencia</a><a href="#material--pegar-apariencia">Pegar apariencia</a><a href="#material--restablecer">Restablecer</a><a href="#material--cargar-mapas-pbr">Cargar mapas PBR…</a><a href="#material--masa-total">Masa total</a></div></div>
+<div class="grupo"><a class="g" href="#deshacer-rehacer">Deshacer / Rehacer</a><div class="hs"><a href="#deshacer-rehacer--deshacer">Deshacer</a><a href="#deshacer-rehacer--rehacer">Rehacer</a></div></div>
+<div class="grupo"><a class="g" href="#herramientas-de-dibujo-croquis">Herramientas de dibujo (croquis)</a><div class="hs"><a href="#herramientas-de-dibujo-croquis--seleccionar">Seleccionar</a><a href="#herramientas-de-dibujo-croquis--linea">Línea</a><a href="#herramientas-de-dibujo-croquis--circulo">Círculo</a><a href="#herramientas-de-dibujo-croquis--arco">Arco</a><a href="#herramientas-de-dibujo-croquis--rectangulo">Rectángulo</a><a href="#herramientas-de-dibujo-croquis--poligono">Polígono</a><a href="#herramientas-de-dibujo-croquis--spline">Spline</a><a href="#herramientas-de-dibujo-croquis--linea-variantes">Línea ▾</a><a href="#herramientas-de-dibujo-croquis--circulo-variantes">Círculo ▾</a><a href="#herramientas-de-dibujo-croquis--arco-variantes">Arco ▾</a><a href="#herramientas-de-dibujo-croquis--rectangulo-variantes">Rectángulo ▾</a><a href="#herramientas-de-dibujo-croquis--spline-variantes">Spline ▾</a></div></div>
+<div class="grupo"><a class="g" href="#curvas">Curvas</a><div class="hs"><a href="#curvas--logaritmica">Logarítmica</a><a href="#curvas--offset">Offset</a><a href="#curvas--polypolar">PolyPolar</a><a href="#curvas--division">División</a></div></div>
+<div class="grupo"><a class="g" href="#anotacion">Anotación</a><div class="hs"><a href="#anotacion--cota">Cota</a><a href="#anotacion--medir">Medir</a><a href="#anotacion--medir-en-3d">Medir en 3D</a><a href="#anotacion--propiedades-fisicas">Propiedades físicas</a><a href="#anotacion--texto">Texto</a><a href="#anotacion--caja-de-informacion">Caja de información</a><a href="#anotacion--armado-de-plano" class=pend>Armado de plano</a><a href="#anotacion--relaciones">Relaciones</a><a href="#anotacion--ver-grados-de-libertad">Ver grados de libertad</a></div></div>
+<div class="grupo"><a class="g" href="#editar">Editar</a><div class="hs"><a href="#editar--recortar">Recortar</a><a href="#editar--extender">Extender</a><a href="#editar--dividir">Dividir</a><a href="#editar--estirar">Estirar</a><a href="#editar--unir-trazos">Unir trazos</a><a href="#editar--descomponer">Descomponer</a></div></div>
+<div class="grupo"><a class="g" href="#operaciones">Operaciones</a><div class="hs"><a href="#operaciones--extruir-contorno-recto">Extruir Contorno (recto)</a><a href="#operaciones--revolucion-usa-el-perfil">Revolución (usa el Perfil)</a><a href="#operaciones--combinar-en-un-solo-stl">Combinar en un solo STL</a><a href="#operaciones--barrido">Barrido</a><a href="#operaciones--malla-recubierta">Malla recubierta</a><a href="#operaciones--quitar-operacion-solo-croquis">Quitar operación (solo croquis)</a><a href="#operaciones--editar-ultima-operacion-de-la-pieza">Editar última operación de la pieza</a></div></div>
+<div class="grupo"><a class="g" href="#corte">Corte</a><div class="hs"><a href="#corte--corte-extruido">Corte extruido</a><a href="#corte--corte-por-revolucion">Corte por revolución</a><a href="#corte--corte-barrido">Corte barrido</a><a href="#corte--vaciado">Vaciado</a></div></div>
+<div class="grupo"><a class="g" href="#acabado">Acabado</a><div class="hs"><a href="#acabado--esquina-esferica" class=pend>Esquina esférica</a><a href="#acabado--fillet-concavo">Fillet cóncavo</a><a href="#acabado--fillet-convexo">Fillet convexo</a><a href="#acabado--chaflan">Chaflán</a></div></div>
+<div class="grupo"><a class="g" href="#referencia">Referencia</a><div class="hs"><a href="#referencia--plano-de-referencia">Plano de referencia</a><a href="#referencia--eje-de-referencia">Eje de referencia</a><a href="#referencia--punto-de-referencia">Punto de referencia</a><a href="#referencia--mostrar-u-ocultar-todas">Mostrar u ocultar todas</a></div></div>
+<div class="grupo"><a class="g" href="#transformaciones">Transformaciones</a><div class="hs"><a href="#transformaciones--mover-punto-base">Mover (punto base)</a><a href="#transformaciones--copiar-punto-base">Copiar (punto base)</a><a href="#transformaciones--rotar">Rotar</a><a href="#transformaciones--escalar">Escalar</a><a href="#transformaciones--simetria-de-trazos">Simetría de trazos</a></div></div>
+<div class="grupo"><a class="g" href="#patrones">Patrones</a><div class="hs"><a href="#patrones--matriz-lineal">Matriz lineal</a><a href="#patrones--matriz-circular">Matriz circular</a><a href="#patrones--matriz-por-croquis">Matriz por croquis</a><a href="#patrones--simetria">Simetría</a></div></div>
+<div class="grupo"><a class="g" href="#chapa">Chapa</a><div class="hs"><a href="#chapa--brida-base">Brida base</a><a href="#chapa--brida-de-arista" class=pend>Brida de arista</a><a href="#chapa--doblar">Doblar</a><a href="#chapa--desplegar">Desplegar</a><a href="#chapa--pliegues-recogidos" class=pend>Pliegues recogidos</a><a href="#chapa--nervio" class=pend>Nervio</a></div></div>
+<div class="grupo"><a class="g" href="#mecanizado">Mecanizado</a><div class="hs"><a href="#mecanizado--taladro">Taladro</a><a href="#mecanizado--taladro-roscado">Taladro roscado</a><a href="#mecanizado--rosca-de-tornillo">Rosca de tornillo</a><a href="#mecanizado--avellanado">Avellanado</a><a href="#mecanizado--abocardado">Abocardado</a></div></div>
+<div class="grupo"><a class="g" href="#vista-y-ajustes-final-de-la-fila-2">Vista y ajustes (final de la fila 2)</a><div class="hs"><a href="#vista-y-ajustes-final-de-la-fila-2--ajustar">Ajustar</a><a href="#vista-y-ajustes-final-de-la-fila-2--1-1">1:1</a><a href="#vista-y-ajustes-final-de-la-fila-2--arista">Arista</a><a href="#vista-y-ajustes-final-de-la-fila-2--configuracion-icono-de-barras">Configuración (icono de barras ≡)</a><a href="#vista-y-ajustes-final-de-la-fila-2--configuracion-de-grilla-engranaje">Configuración de grilla (engranaje)</a></div></div>
+  </div>
+  <p class="relleno-celda tenue" style="margin:0;font-size:14px;border-top:1px solid var(--linea)">Las herramientas marcadas como <span class="sello">Próximamente</span> ya aparecen en la barra pero todavía no están activas en esta versión.</p>
+</section>
+
+<!-- CADA MENÚ -->
+<section class="menu-sec" id="documento">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Documento</h3><p class="parrafo">Todo lo que tiene que ver con el archivo de la pieza: guardarla en su proyecto, abrirla, exportarla a otros formatos y recuperar trabajo que no alcanzó a guardarse.</p></div><figure class="cap"><a href="img/manual/polarcad/10-menu-documento.jpg" class="ampliar"><img src="img/manual/polarcad/10-menu-documento.jpg" alt="Menú Documento abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Documento abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="documento--guardar"><h4>Guardar</h4><p>Sin panel. Guarda la pieza (.pms.json) en su proyecto. Atajo Ctrl+S</p></article><article class="herr" id="documento--guardar-como"><h4>Guardar como…</h4><p>Diálogo: proyecto, carpeta y nombre</p></article><article class="herr" id="documento--abrir-archivo"><h4>Abrir archivo…</h4><p>Selector de archivo .json del equipo</p></article><article class="herr" id="documento--nuevo"><h4>Nuevo</h4><p>Sin panel</p></article><article class="herr" id="documento--exportar-pieza"><h4>Exportar pieza…</h4><p>Diálogo de formato: STL, OBJ, STEP o IGES</p></article><article class="herr" id="documento--plano-2d"><h4>Plano 2D…</h4><p>Dibujo técnico (SVG, DXF, PDF)</p></article><article class="herr" id="documento--importar-stl"><h4>Importar STL</h4><p>Selector de archivo</p></article><article class="herr" id="documento--descargar-copia-json"><h4>Descargar copia (.json)</h4><p>Sin panel</p></article><article class="herr" id="documento--recuperar-trabajo-sin-guardar"><h4>Recuperar trabajo sin guardar</h4><p>Lista de copias automáticas (cada 30 s)</p></article></div>
+</section>
+<section class="menu-sec" id="ensamble">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Ensamble</h3><p class="parrafo">Para juntar varias piezas en un mismo conjunto. La primera pieza que inserte queda fija y sirve de base para las demás.</p></div><figure class="cap"><a href="img/manual/polarcad/11-menu-ensamble.jpg" class="ampliar"><img src="img/manual/polarcad/11-menu-ensamble.jpg" alt="Menú Ensamble abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Ensamble abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="ensamble--nuevo-ensamble"><h4>Nuevo ensamble</h4><p>Sin campos (.ens.json vacío)</p></article><article class="herr" id="ensamble--insertar-pieza"><h4>Insertar pieza…</h4><p>Elegir piezas del proyecto. La primera queda fija</p></article><article class="herr" id="ensamble--fijar-liberar"><h4>Fijar / liberar</h4><p>Sin campos</p></article><article class="herr" id="ensamble--actuadores-motores"><h4>Actuadores (motores)…</h4><p>Sección Actuadores</p></article><article class="herr" id="ensamble--guardar-ensamble"><h4>Guardar ensamble</h4><p>Sin campos. Atajo Ctrl+S</p></article></div>
+</section>
+<section class="menu-sec" id="material">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Material</h3><p class="parrafo">Define de qué está hecha la pieza y cómo se ve. El material asignado también sirve para calcular la masa.</p></div><figure class="cap"><a href="img/manual/polarcad/12-menu-material.jpg" class="ampliar"><img src="img/manual/polarcad/12-menu-material.jpg" alt="Menú Material abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Material abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="material--apariencia"><h4>Apariencia…</h4><p>Biblioteca, color, acabado y mapas PBR</p></article><article class="herr" id="material--propiedades"><h4>Propiedades…</h4><p>Material asignado, propiedades mecánicas y masa</p></article><article class="herr" id="material--copiar-apariencia"><h4>Copiar apariencia</h4><p>Sin campos</p></article><article class="herr" id="material--pegar-apariencia"><h4>Pegar apariencia</h4><p>Sin campos</p></article><article class="herr" id="material--restablecer"><h4>Restablecer</h4><p>Sin campos (vuelve a plástico mate)</p></article><article class="herr" id="material--cargar-mapas-pbr"><h4>Cargar mapas PBR…</h4><p>Albedo, normal, rugosidad, metalicidad, AO</p></article><article class="herr" id="material--masa-total"><h4>Masa total</h4><p>Sin campos</p></article></div>
+</section>
+<section class="menu-sec" id="deshacer-rehacer">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Deshacer / Rehacer</h3><p class="parrafo"></p></div></div>
+  <div class="herrs"><article class="herr" id="deshacer-rehacer--deshacer"><h4>Deshacer</h4><p>Ctrl+Z</p></article><article class="herr" id="deshacer-rehacer--rehacer"><h4>Rehacer</h4><p>Ctrl+Y</p></article></div>
+</section>
+<section class="menu-sec" id="herramientas-de-dibujo-croquis">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Herramientas de dibujo (croquis)</h3><p class="parrafo"></p><p class="nota">Al hacer clic: el botón activa la herramienta en el plano activo. No tienen panel de campos. Se termina con Esc; los splines se cierran con Enter o doble clic. Clics: lo que pide en . <b>Polígono, campo en la barra:</b> Lados —, número entero, mín. 3, máx. 64. Por defecto: <b>6</b>. Variantes (▾ al lado de cada botón):</p></div></div>
+  <div class="herrs"><article class="herr" id="herramientas-de-dibujo-croquis--seleccionar"><h4>Seleccionar</h4><p>—</p></article><article class="herr" id="herramientas-de-dibujo-croquis--linea"><h4>Línea</h4><p>2</p></article><article class="herr" id="herramientas-de-dibujo-croquis--circulo"><h4>Círculo</h4><p>2</p></article><article class="herr" id="herramientas-de-dibujo-croquis--arco"><h4>Arco</h4><p>3</p></article><article class="herr" id="herramientas-de-dibujo-croquis--rectangulo"><h4>Rectángulo</h4><p>2</p></article><article class="herr" id="herramientas-de-dibujo-croquis--poligono"><h4>Polígono</h4><p>2</p></article><article class="herr" id="herramientas-de-dibujo-croquis--spline"><h4>Spline</h4><p>varios</p></article><article class="herr" id="herramientas-de-dibujo-croquis--linea-variantes"><h4>Línea ▾</h4><p>Línea · Línea constructiva · Polilínea (se cierra con doble clic) · Línea encadenada (se corta con Esc) · Línea de punto medio</p></article><article class="herr" id="herramientas-de-dibujo-croquis--circulo-variantes"><h4>Círculo ▾</h4><p>Círculo · Elipse · Círculo de 3 puntos</p></article><article class="herr" id="herramientas-de-dibujo-croquis--arco-variantes"><h4>Arco ▾</h4><p>Arco de centro · Arco de 3 puntos · Arco tangente</p></article><article class="herr" id="herramientas-de-dibujo-croquis--rectangulo-variantes"><h4>Rectángulo ▾</h4><p>De esquina · De centro · De 3 puntos</p></article><article class="herr" id="herramientas-de-dibujo-croquis--spline-variantes"><h4>Spline ▾</h4><p>Spline · Spline de estilo (cerrada)</p></article></div>
+</section>
+<section class="menu-sec" id="curvas">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Curvas</h3><p class="parrafo">Curvas especiales para geometría polar y para copiar un contorno a cierta distancia.</p></div><figure class="cap"><a href="img/manual/polarcad/18-menu-curvas.jpg" class="ampliar"><img src="img/manual/polarcad/18-menu-curvas.jpg" alt="Menú Curvas abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Curvas abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="curvas--logaritmica"><h4>Logarítmica</h4><p>Herramienta polarLog, 2 clics. Sin campos</p></article><article class="herr" id="curvas--offset"><h4>Offset</h4><p>Panel <b>Offset</b> : Distancia (mm), negativo = hacia adentro — <b>5</b> (paso 0,5) · Unión de esquinas, opciones: Recta / Redondeada — <b>Recta</b> · Motor, opciones: Local / Backend — <b>Backend</b></p></article><article class="herr" id="curvas--polypolar"><h4>PolyPolar</h4><p>Herramienta polyPolar (tramos logarítmicos, 2 o más clics). Sin campos</p></article><article class="herr" id="curvas--division"><h4>División</h4><p>Herramienta div (radios desde el centro). Usa los Lados de (<b>6</b>)</p></article></div>
+</section>
+<section class="menu-sec" id="anotacion">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Anotación</h3><p class="parrafo">Cotas, mediciones, texto y las relaciones geométricas que dejan el croquis totalmente definido.</p></div><figure class="cap"><a href="img/manual/polarcad/19-menu-anotacion.jpg" class="ampliar"><img src="img/manual/polarcad/19-menu-anotacion.jpg" alt="Menú Anotación abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Anotación abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="anotacion--cota"><h4>Cota</h4><p>Herramienta dimension, 2 clics</p></article><article class="herr" id="anotacion--medir"><h4>Medir</h4><p>Herramienta measure</p></article><article class="herr" id="anotacion--medir-en-3d"><h4>Medir en 3D</h4><p>Se ejecuta con un clic, sin ventana de opciones.</p></article><article class="herr" id="anotacion--propiedades-fisicas"><h4>Propiedades físicas</h4><p>Se ejecuta con un clic, sin ventana de opciones.</p></article><article class="herr" id="anotacion--texto"><h4>Texto</h4><p>Herramienta text</p></article><article class="herr" id="anotacion--caja-de-informacion"><h4>Caja de información</h4><p>Herramienta infobox</p></article><article class="herr pend" id="anotacion--armado-de-plano"><h4>Armado de plano <span class=sello>Próximamente</span></h4><p>Todavía no está conectado (próximamente)</p></article><article class="herr" id="anotacion--relaciones"><h4>Relaciones</h4><p>Sin campos. Aplica la relación a los trazos que selecciones (Horizontal, Vertical, Paralela, Perpendicular, Igual, Coincidente, Tangente, Concéntrica, Fija)</p></article><article class="herr" id="anotacion--ver-grados-de-libertad"><h4>Ver grados de libertad</h4><p>Sin campos. Pinta en azul lo que todavía se mueve y en blanco lo que está totalmente definido</p></article></div>
+</section>
+<section class="menu-sec" id="editar">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Editar</h3><p class="parrafo">Herramientas para limpiar el croquis: recortar, extender, dividir y unir trazos.</p></div><figure class="cap"><a href="img/manual/polarcad/20-menu-editar.jpg" class="ampliar"><img src="img/manual/polarcad/20-menu-editar.jpg" alt="Menú Editar abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Editar abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="editar--recortar"><h4>Recortar</h4><p>Panel &quot;Trim&quot;. Sin campos: cada clic quita un trozo. Se termina con «Terminar»</p></article><article class="herr" id="editar--extender"><h4>Extender</h4><p>Panel &quot;Extend&quot;. Sin campos</p></article><article class="herr" id="editar--dividir"><h4>Dividir</h4><p>Panel &quot;Split&quot;. Sin campos</p></article><article class="herr" id="editar--estirar"><h4>Estirar</h4><p>Sin panel</p></article><article class="herr" id="editar--unir-trazos"><h4>Unir trazos</h4><p>Sin panel</p></article><article class="herr" id="editar--descomponer"><h4>Descomponer</h4><p>Sin panel</p></article></div>
+</section>
+<section class="menu-sec" id="operaciones">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Operaciones</h3><p class="parrafo">Convierten el croquis en un sólido 3D: extruir, revolucionar, barrer o recubrir.</p></div><figure class="cap"><a href="img/manual/polarcad/21-menu-operaciones.jpg" class="ampliar"><img src="img/manual/polarcad/21-menu-operaciones.jpg" alt="Menú Operaciones abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Operaciones abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="operaciones--extruir-contorno-recto"><h4>Extruir Contorno (recto)</h4><p><b>Extruir</b>: Altura (mm) — <b>20</b> (mín. 0,1) · Dirección, opciones: Arriba / Abajo — <b>Arriba</b> · Ángulo de salida (°) — <b>0</b> (paso 0,5)</p></article><article class="herr" id="operaciones--revolucion-usa-el-perfil"><h4>Revolución (usa el Perfil)</h4><p><b>Revolución</b>: Eje, opciones: Auto / Línea… / X / Y / Z — <b>Auto</b> · Línea del eje, lista con las líneas del croquis (solo si Eje = Línea) · Ángulo (°) — <b>360</b> (de 1 a 360) · Dirección, opciones: Normal / Invertida / Simétrica — <b>Normal</b> (solo si el ángulo es menor de 360)</p></article><article class="herr" id="operaciones--combinar-en-un-solo-stl"><h4>Combinar en un solo STL</h4><p>Sin panel. Hay que tener 2 o más piezas seleccionadas</p></article><article class="herr" id="operaciones--barrido"><h4>Barrido</h4><p><b>Barrido</b>: Ruta, se elige en el visor — sin valor · Esquinas de la ruta, opciones: Inglete / Redondeadas — <b>Inglete</b> · Radio de esquina (mm) — <b>5</b> (solo si Redondeadas) · Giro a lo largo (°) — <b>0</b> · Extremos, opciones: Pegar a las caras / Tal cual — <b>Pegar a las caras</b></p></article><article class="herr" id="operaciones--malla-recubierta"><h4>Malla recubierta</h4><p><b>Malla recubierta</b>: trazos del borde, se eligen con clic · Densidad, opciones: Low (16/5) / Medium (32/10) / High (64/20) / Personalizado — <b>Medium</b> · con Personalizado: Muestreo del borde — <b>32</b> (mín. 8) y Anillos — <b>10</b> (mín. 2)</p></article><article class="herr" id="operaciones--quitar-operacion-solo-croquis"><h4>Quitar operación (solo croquis)</h4><p>Sin panel</p></article><article class="herr" id="operaciones--editar-ultima-operacion-de-la-pieza"><h4>Editar última operación de la pieza</h4><p>Vuelve a abrir la última operación con sus valores</p></article></div>
+</section>
+<section class="menu-sec" id="corte">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Corte</h3><p class="parrafo">Quitan material de un sólido existente usando un croquis.</p></div><figure class="cap"><a href="img/manual/polarcad/22-menu-corte.jpg" class="ampliar"><img src="img/manual/polarcad/22-menu-corte.jpg" alt="Menú Corte abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Corte abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="corte--corte-extruido"><h4>Corte extruido</h4><p><b>Corte extruido</b>: Profundidad, opciones: Medida / Pasante — <b>Medida</b> · Profundidad (mm) — <b>10</b> (solo si Medida) · Dirección, opciones: Abajo / Arriba / Ambos — <b>Ambos</b> (<b>Abajo</b> si el plano activo es una cara) · Figura inversa, opciones: Quitar figura / Conservar solo figura — <b>Quitar figura</b></p></article><article class="herr" id="corte--corte-por-revolucion"><h4>Corte por revolución</h4><p><b>Corte por revolución</b>: los mismos campos de Revolución (Eje <b>Auto</b>, Ángulo <b>360</b>, Dirección <b>Normal</b>)</p></article><article class="herr" id="corte--corte-barrido"><h4>Corte barrido</h4><p><b>Corte por barrido</b>: los mismos de Barrido sin «Extremos» (Ruta, Esquinas <b>Inglete</b>, Radio <b>5</b>, Giro <b>0</b>)</p></article><article class="herr" id="corte--vaciado"><h4>Vaciado</h4><p><b>Vaciado</b>: Grosor de pared (mm) — <b>2</b> (mín. 0,1) · Caras abiertas, se eligen en el visor — ninguna</p></article></div>
+</section>
+<section class="menu-sec" id="acabado">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Acabado</h3><p class="parrafo">Redondeos y chaflanes en las esquinas del croquis.</p></div><figure class="cap"><a href="img/manual/polarcad/23-menu-acabado.jpg" class="ampliar"><img src="img/manual/polarcad/23-menu-acabado.jpg" alt="Menú Acabado abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Acabado abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr pend" id="acabado--esquina-esferica"><h4>Esquina esférica <span class=sello>Próximamente</span></h4><p>Todavía no está conectado (solo muestra un aviso)</p></article><article class="herr" id="acabado--fillet-concavo"><h4>Fillet cóncavo</h4><p><b>Fillet 2D</b>: Radio (mm) — <b>5</b> (mín. 0,1, paso 0,5). Cada clic en una esquina aplica</p></article><article class="herr" id="acabado--fillet-convexo"><h4>Fillet convexo</h4><p><b>Fillet 2D</b>: el mismo campo</p></article><article class="herr" id="acabado--chaflan"><h4>Chaflán</h4><p><b>Chaflán 2D</b>: Distancia (mm) — <b>5</b></p></article></div>
+</section>
+<section class="menu-sec" id="referencia">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Referencia</h3><p class="parrafo">Planos, ejes y puntos auxiliares para dibujar y operar donde no hay una cara a la mano.</p></div><figure class="cap"><a href="img/manual/polarcad/24-menu-referencia.jpg" class="ampliar"><img src="img/manual/polarcad/24-menu-referencia.jpg" alt="Menú Referencia abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Referencia abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="referencia--plano-de-referencia"><h4>Plano de referencia</h4><p>Cómo: Desfase / ángulo (<b>por defecto</b>), 3 puntos, Normal a eje. <b>Desfase/ángulo</b>: Plano de base — <b>Superior</b> (o «Cara elegida» si hay una cara activa) · Distancia (mm), negativa = al otro lado — <b>10</b> · Ángulo (°) — <b>0</b> · Girar alrededor del — <b>eje X del plano de base</b>. <b>3 puntos</b>: Primer, Segundo y Tercer punto (X, Y, Z en mm o fórmula, botón «Elegir»). <b>Normal a eje</b>: Eje — X/Y/Z u otro eje · Distancia a lo largo del eje (mm). Siempre: Nombre (vacío = automático)</p></article><article class="herr" id="referencia--eje-de-referencia"><h4>Eje de referencia</h4><p>Cómo: 2 puntos (<b>por defecto</b>) → Desde y Hasta (X, Y, Z) · Cruce de 2 planos → Primer plano y Segundo plano · Centro de figura → Figura cerrada del croquis. Además: Nombre</p></article><article class="herr" id="referencia--punto-de-referencia"><h4>Punto de referencia</h4><p>Coordenadas: Posición X, Y, Z — <b>0, 0, 0</b> · Nombre</p></article><article class="herr" id="referencia--mostrar-u-ocultar-todas"><h4>Mostrar u ocultar todas</h4><p>Sin campos</p></article></div>
+</section>
+<section class="menu-sec" id="transformaciones">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Transformaciones</h3><p class="parrafo">Mueven, copian, giran, escalan o reflejan los trazos seleccionados, siempre desde un punto base.</p><p class="nota">Se aplican a los trazos seleccionados . No tienen panel de campos.</p></div><figure class="cap"><a href="img/manual/polarcad/25-menu-transformaciones.jpg" class="ampliar"><img src="img/manual/polarcad/25-menu-transformaciones.jpg" alt="Menú Transformaciones abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Transformaciones abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="transformaciones--mover-punto-base"><h4>Mover (punto base)</h4><p>Se ejecuta con un clic, sin ventana de opciones.</p></article><article class="herr" id="transformaciones--copiar-punto-base"><h4>Copiar (punto base)</h4><p>Se ejecuta con un clic, sin ventana de opciones.</p></article><article class="herr" id="transformaciones--rotar"><h4>Rotar</h4><p>Se ejecuta con un clic, sin ventana de opciones.</p></article><article class="herr" id="transformaciones--escalar"><h4>Escalar</h4><p>Se ejecuta con un clic, sin ventana de opciones.</p></article><article class="herr" id="transformaciones--simetria-de-trazos"><h4>Simetría de trazos</h4><p>Se ejecuta con un clic, sin ventana de opciones.</p></article></div>
+</section>
+<section class="menu-sec" id="patrones">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Patrones</h3><p class="parrafo">Repiten una pieza en línea, en círculo, siguiendo un croquis o por simetría.</p></div><figure class="cap"><a href="img/manual/polarcad/26-menu-patrones.jpg" class="ampliar"><img src="img/manual/polarcad/26-menu-patrones.jpg" alt="Menú Patrones abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Patrones abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="patrones--matriz-lineal"><h4>Matriz lineal</h4><p><b>Matriz lineal</b>: Dirección, opciones: X / Y / Z — <b>X</b> · Cantidad, contando la original — <b>3</b> (de 2 a 200) · Separación (mm), negativa = sentido contrario — <b>tamaño de la pieza en ese eje + 5</b> (20 si no hay pieza) · Resultado, opciones: Piezas separadas / Unir en una — <b>Piezas separadas</b></p></article><article class="herr" id="patrones--matriz-circular"><h4>Matriz circular</h4><p><b>Matriz circular</b>: Eje, opciones: X / Y / Z — <b>Z</b> · Cantidad, contando la original — <b>6</b> (de 2 a 200) · Ángulo total (°), 360 = vuelta completa — <b>360</b> · Centro X / Y / Z (mm) — <b>0 / 0 / 0</b> · Orientación de las copias, opciones: Girar / Mantener — <b>Girar</b> · Resultado — <b>Piezas separadas</b></p></article><article class="herr" id="patrones--matriz-por-croquis"><h4>Matriz por croquis</h4><p><b>Matriz por croquis</b>: Resultado — <b>Piezas separadas</b></p></article><article class="herr" id="patrones--simetria"><h4>Simetría</h4><p><b>Simetría</b>: Plano de simetría, opciones: YZ / XZ / XY / Plano activo — <b>YZ</b> · Distancia al origen (mm) — <b>0</b> (no aparece con Plano activo) · Resultado — <b>Unir en una</b></p></article></div>
+</section>
+<section class="menu-sec" id="chapa">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Chapa</h3><p class="parrafo">Diseño de piezas de lámina: espesor, dobleces y el desarrollo plano para cortarlas.</p></div><figure class="cap"><a href="img/manual/polarcad/27-menu-chapa.jpg" class="ampliar"><img src="img/manual/polarcad/27-menu-chapa.jpg" alt="Menú Chapa abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Chapa abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="chapa--brida-base"><h4>Brida base</h4><p><b>Brida base</b>: Espesor común, lista: Personalizado, 0,5 … 6 mm — <b>1,5 mm</b> · Espesor (mm) — <b>1,5</b> · Radio de doblez interior (mm) — <b>1,5</b> · Factor K (fibra neutra) — <b>0,44</b> (de 0,1 a 0,5) · Dirección, opciones: Arriba / Abajo — <b>Arriba</b></p></article><article class="herr pend" id="chapa--brida-de-arista"><h4>Brida de arista <span class=sello>Próximamente</span></h4><p>Todavía no está conectado</p></article><article class="herr" id="chapa--doblar"><h4>Doblar</h4><p><b>Doblar</b>: Ángulo (°) — <b>90</b> (de 1 a 180) · Radio interior (mm) — <b>el de la chapa</b> (1,5 si no hay chapa) · Factor K — <b>el de la chapa</b> (0,44 si no hay chapa) · Doblar hacia, opciones: Arriba (+normal) / Abajo — <b>Arriba</b> · Lado que se dobla, opciones: Izquierda / Derecha — <b>Izquierda</b></p></article><article class="herr" id="chapa--desplegar"><h4>Desplegar</h4><p><b>Desplegar</b>: sin campos, solo una nota</p></article><article class="herr pend" id="chapa--pliegues-recogidos"><h4>Pliegues recogidos <span class=sello>Próximamente</span></h4><p>Todavía no está conectado</p></article><article class="herr pend" id="chapa--nervio"><h4>Nervio <span class=sello>Próximamente</span></h4><p>Todavía no está conectado</p></article></div>
+</section>
+<section class="menu-sec" id="mecanizado">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Mecanizado</h3><p class="parrafo">Agujeros y roscas normalizados listos para fabricar: taladros, roscas, avellanados y abocardados.</p><p class="nota">Campos que comparten los cinco : Ubicación, se elige con clic en la pieza · Inclinación (°), de 0 a 360 — <b>0</b> · Rotación de la inclinación (°), de 0 a 360 — <b>0</b>.</p></div><figure class="cap"><a href="img/manual/polarcad/28-menu-mecanizado.jpg" class="ampliar"><img src="img/manual/polarcad/28-menu-mecanizado.jpg" alt="Menú Mecanizado abierto en PolarCAD" loading="lazy"></a><figcaption>Menú Mecanizado abierto en PolarCAD</figcaption></figure></div>
+  <div class="herrs"><article class="herr" id="mecanizado--taladro"><h4>Taladro</h4><p><b>Taladro</b>: Caso común, lista (Pasante M3…M10, Piloto M3, Pasador Ø3, Eje NEMA 17, Alojamientos de rodamientos 608/623/624/625) — <b>Personalizado</b> · Serie de brocas, opciones: Métrica / Fracc. / Núm. / Letra / Otra — <b>Métrica</b> · Broca, lista — <b>6</b> (métrica), <b>16</b> (fracc.), <b>7</b> (núm.), <b>F</b> (letra) · Ø (mm) — <b>6</b> (solo con Otra) · Profundidad, opciones: Medida / Pasante — <b>Medida</b> · Profundidad (mm) — <b>10</b> · Punta de broca, opciones: Plana / 118° / 135° — <b>Plana</b> · + los campos comunes</p></article><article class="herr" id="mecanizado--taladro-roscado"><h4>Taladro roscado</h4><p><b>Taladro roscado</b>: Rosca estándar, lista — <b>M6</b> · Ø nominal (mm) — <b>6</b> · Paso (mm) — <b>1</b> · Ø broca de macho (mm) — <b>5</b> · Agujero, opciones: Ciego / Pasante roscado — <b>Ciego</b> · Profundidad de rosca (mm) — <b>12</b> · Profundidad de agujero (mm) — <b>15</b> · Sentido, opciones: Derecha / Izquierda — <b>Derecha</b> · Resolución, opciones: Normal / Fina — <b>Normal</b> · + los campos comunes</p></article><article class="herr" id="mecanizado--rosca-de-tornillo"><h4>Rosca de tornillo</h4><p><b>Rosca de tornillo</b>: Rosca estándar, lista — <b>Automática (según el Ø detectado)</b> · Superficie cilíndrica, se elige en el visor · Paso (mm) — <b>1</b> · Longitud de rosca (mm) — <b>10</b> · Empezar desde, opciones: Extremo clicado / Extremo opuesto — <b>Extremo clicado</b> · Sentido — <b>Derecha</b> · Resolución — <b>Normal</b></p></article><article class="herr" id="mecanizado--avellanado"><h4>Avellanado</h4><p><b>Avellanado</b>: Caso común, lista — <b>M3</b> · Ø tornillo / agujero (mm) — <b>3,4</b> · Ø cabeza (mm) — <b>6,3</b> · Ángulo del cono (°) — <b>90</b> (de 10 a 170) · Agujero, opciones: Solo cono / Medida / Pasante — <b>Pasante</b> · Profundidad (mm) — <b>12</b> (solo con Medida) · + los campos comunes</p></article><article class="herr" id="mecanizado--abocardado"><h4>Abocardado</h4><p><b>Abocardado</b>: Caso común (ISO 4762), lista — <b>M3</b> · Ø agujero (mm) — <b>3,4</b> · Ø abocardado (mm) — <b>6,5</b> · Profundidad abocardado (mm) — <b>3,4</b> · Agujero, opciones: Medida / Pasante — <b>Pasante</b> · Profundidad (mm) — <b>12</b> (solo con Medida) · Punta de broca — <b>Plana</b> (no aparece con Pasante) · + los campos comunes</p></article></div>
+</section>
+<section class="menu-sec" id="vista-y-ajustes-final-de-la-fila-2">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Vista y ajustes (final de la fila 2)</h3><p class="parrafo"></p></div></div>
+  <div class="herrs"><article class="herr" id="vista-y-ajustes-final-de-la-fila-2--ajustar"><h4>Ajustar</h4><p>Zoom para ver todo (atajo F)</p></article><article class="herr" id="vista-y-ajustes-final-de-la-fila-2--1-1"><h4>1:1</h4><p>Zoom 1:1</p></article><article class="herr" id="vista-y-ajustes-final-de-la-fila-2--arista"><h4>Arista</h4><p>Selección de arista (Fillet/Chamfer 3D, todavía en construcción)</p></article><article class="herr" id="vista-y-ajustes-final-de-la-fila-2--configuracion-icono-de-barras"><h4>Configuración (icono de barras ≡)</h4><p>Idioma, lista : Español / Deutsch / English / Français / 日本語 / 中文 — <b>Español</b></p></article><article class="herr" id="vista-y-ajustes-final-de-la-fila-2--configuracion-de-grilla-engranaje"><h4>Configuración de grilla (engranaje)</h4><p>Tamaño de grilla (mm por cuadro) — <b>5</b> (de 1 a 500)</p></article></div>
+</section>
+
+<!-- ATAJOS -->
+<section class="franja" id="atajos">
+  <div class="franja-cab"><span class="rotulo">04 / Atajos de teclado</span><span class="rotulo tenue">PolarCAD</span></div>
+  <div class="celdas c4 atajos">
+    <div><kbd>Ctrl</kbd> + <kbd>S</kbd><span>Guardar pieza o ensamble</span></div>
+    <div><kbd>Ctrl</kbd> + <kbd>Z</kbd><span>Deshacer</span></div>
+    <div><kbd>Ctrl</kbd> + <kbd>Y</kbd><span>Rehacer</span></div>
+    <div><kbd>Esc</kbd><span>Terminar la herramienta actual</span></div>
+    <div><kbd>V</kbd><span>Seleccionar</span></div>
+    <div><kbd>L</kbd><span>Línea</span></div>
+    <div><kbd>C</kbd><span>Círculo</span></div>
+    <div><kbd>F</kbd><span>Ajustar la vista a todo</span></div>
+    <div><kbd>Enter</kbd><span>Cerrar un spline</span></div>
+    <div><kbd>Doble clic</kbd><span>Cerrar spline o polilínea</span></div>
+  </div>
+</section>
+
+<footer class="pie"><span>© <span id="anio">2026</span> Stonward Dynamics · Manual de SolidMaker</span><span>Hacia el futuro, sin mirar atrás</span></footer>
+</main>
+
+<div class="visor-img" id="visor-img" hidden><img alt=""><span class="rotulo">Clic para cerrar</span></div>
+<script src="js/inicio.js"></script>
+<script>
+// ampliar capturas
+(() => {
+  const v = document.getElementById("visor-img"), im = v.querySelector("img");
+  document.querySelectorAll("a.ampliar").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); im.src = a.href; im.alt = a.querySelector("img").alt; v.hidden = false; }));
+  v.addEventListener("click", () => (v.hidden = true));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") v.hidden = true; });
+})();
+</script>
+</body>
+</html>
