@@ -52,7 +52,7 @@ def limpio(t):
     t = re.sub(r"[▶╱⊡⌐]\s*", "", t).replace("seg:", "opciones:")
     t = html.escape(t.strip(" ·"))
     t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
-    return re.sub(r"\s{2,}", " ", t).replace(" ,", ",")
+    return re.sub(r"\s+([,.:;)])", r"\1", re.sub(r"\s{2,}", " ", t))
 
 def tabla(filas):
     """Une todas las tablas de la sección (una sección puede traer varias)."""
@@ -114,3 +114,58 @@ nav = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', nav).replace('<a href="m
 salida = PLANTILLA.replace("<!--NAV-->", nav).replace("<!--INDICE-->", "\n".join(indice)).replace("<!--SECCIONES-->", "\n".join(cuerpo))
 (RAIZ / "manual.html").write_text(salida, encoding="utf-8")
 print("manual.html:", len(secciones), "secciones,", sum(len(s["items"]) for s in secciones), "herramientas")
+
+
+# ---------- módulos 02-05 (listas con «## sección», «Captura:» y tablas de botones y campos) ----------
+MODULOS = [("machin", "Machin", "Módulo 02"), ("polarslicer", "PolarSlicer", "Módulo 03"),
+           ("laboratory", "Laboratory", "Módulo 04"), ("analizer", "Analizer", "Módulo 05")]
+
+def celdas(f):
+    return [c.strip() for c in f.strip().strip("|").split("|")]
+
+def modulo_html(clave, nombre, num):
+    texto = (RAIZ / f"docs/manual/{clave}-lista.md").read_text(encoding="utf-8")
+    cab, *secs = re.split(r"\n## ", texto)
+    intro = [limpio(p) for p in cab.split("\n\n")[1:] if p.strip() and not p.startswith(("Código", "Cada sección", "Fuente", "#"))]
+    partes = [f'''<section class="franja mod-sec" id="{clave}">
+  <div class="franja-cab"><span class="rotulo">{num} / {nombre}</span><a class="rotulo tenue" href="#modulos">Volver a los módulos ↑</a></div>
+  <div class="relleno-celda" style="border-bottom:1px solid var(--linea)"><h2 class="titulo">{nombre}.</h2>{"".join(f'<p class="parrafo{" grande" if i == 0 else ""}">{p}</p>' for i, p in enumerate(intro))}</div>''']
+    indice = []
+    for s in secs:
+        lin = s.split("\n")
+        titulo = re.sub(r"^(Sección|Pestaña|Panel)\s+", "", lin[0].strip()).strip()
+        titulo = titulo[:1].upper() + titulo[1:].lower() if titulo.isupper() else titulo
+        sid = f"{clave}--{slug(titulo)}"
+        indice.append(f'<a href="#{sid}">{html.escape(titulo)}</a>')
+        cap = re.search(r"Captura:\s*`([^`]+)`", s)
+        notas = [limpio(l) for l in lin[1:] if l.strip() and not l.startswith(("|", "Captura"))]
+        campos, botones, sueltos = [], [], []
+        hdr = None
+        for l in lin:
+            if not l.startswith("|"): hdr = None; continue
+            c = celdas(l)
+            if re.fullmatch(r"[-| ]+", l.strip()): continue
+            if c[0] in ("Botón", "Campo"): hdr = c[0]; continue
+            if hdr == "Campo":
+                nom, _, tipo, uni, defe, rango = (c + [""] * 6)[:6]
+                det = " · ".join(x for x in [f"Unidad: {uni}" if uni else "", f"De fábrica: <b>{html.escape(defe)}</b>" if defe else "", f"Rango u opciones: {html.escape(rango)}" if rango else ""] if x)
+                campos.append((limpio(nom), det, "Próximamente" in l))
+            elif hdr == "Botón":
+                nom, _, que = (c + [""] * 3)[:3]
+                if que: botones.append((limpio(nom), limpio(que), "Próximamente" in que))
+                elif nom and nom != "(icono)": sueltos.append(limpio(nom))
+        tarj = "".join(f'<article class="herr{" pend" if p else ""}"><h4>{n}{" <span class=sello>Próximamente</span>" if p else ""}</h4><p>{d or "Sin opciones adicionales."}</p></article>' for n, d, p in campos + botones)
+        otros = f'<p class="otros"><span class="rotulo tenue">Otros botones de esta vista</span> {" · ".join(sueltos)}</p>' if sueltos else ""
+        fig = f'<figure class="cap ancha-mod"><a href="img/manual/{clave}/{cap.group(1)}" class="ampliar"><img src="img/manual/{clave}/{cap.group(1)}" alt="{html.escape(nombre + ": " + titulo)}" loading="lazy"></a><figcaption>{html.escape(nombre)} · {html.escape(titulo)} · clic para ampliar</figcaption></figure>' if cap else ""
+        partes.append(f'''  <div class="vista" id="{sid}">
+    <div class="relleno-celda"><span class="rotulo tenue">{html.escape(nombre)}</span><h3 class="subtitulo" style="margin:10px 0 0">{html.escape(titulo)}</h3>{"".join(f'<p class="nota">{n}</p>' for n in notas)}</div>
+    {fig}
+    {f'<div class="herrs">{tarj}</div>' if tarj else ""}{otros}
+  </div>''')
+    partes.insert(1, f'  <div class="indice-mod">{"".join(indice)}</div>')
+    partes.append("</section>")
+    return "\n".join(partes)
+
+salida = salida.replace("<!--MODULOS-->", "\n".join(modulo_html(*m) for m in MODULOS))
+(RAIZ / "manual.html").write_text(salida, encoding="utf-8")
+print("módulos:", ", ".join(m[1] for m in MODULOS))
