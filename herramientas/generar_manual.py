@@ -85,6 +85,12 @@ for bloque in re.split(r"\n### ", LISTA)[1:]:
     filas = [l for l in lineas if l.startswith("|")]
     secciones.append({"titulo": titulo, "id": slug(titulo), "nota": " ".join(limpio(t) for t in texto), "items": tabla(filas) if filas else []})
 
+def clip(ancla):
+    """Clip real de la herramienta en uso, si ya se grabó (video/manual/polarcad/<ancla>.webm)."""
+    ruta = f"video/manual/polarcad/{ancla}.webm"
+    if not (RAIZ / ruta).exists(): return ""
+    return f'<video class="clip" src="{ruta}" autoplay muted loop playsinline preload="metadata"></video>'
+
 def captura(nombre, pie):
     # se muestra el recorte alrededor del menú (zoom/); el clic abre la pantalla completa
     return f'<figure class="cap"><a href="{IMG}{nombre}" class="ampliar"><img src="{IMG}zoom/{nombre}" alt="{html.escape(pie)}" loading="lazy"></a><figcaption>{html.escape(pie)} · clic para ver la pantalla completa</figcaption></figure>'
@@ -99,7 +105,7 @@ cuerpo = []
 for s in secciones:
     caps = "".join(captura(c, f"Menú {s['titulo']} abierto en PolarCAD") for c in CAPTURAS.get(s["titulo"], []))
     filas = "".join(
-        f'<article class="herr{" pend" if p else ""}" id="{s["id"]}--{slug(n)}"><h4>{n}{" <span class=sello>Próximamente</span>" if p else ""}</h4><p>{r or "Se ejecuta con un clic, sin ventana de opciones."}</p></article>'
+        f'<article class="herr{" pend" if p else ""}" id="{s["id"]}--{slug(n)}"><h4>{n}{" <span class=sello>Próximamente</span>" if p else ""}</h4><p>{r or "Se ejecuta con un clic, sin ventana de opciones."}</p>{clip(s["id"] + "--" + slug(n))}</article>'
         for n, r, p in s["items"])
     cuerpo.append(f'''<section class="menu-sec" id="{s["id"]}">
   <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>

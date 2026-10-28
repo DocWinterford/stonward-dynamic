@@ -4,71 +4,124 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Máquina · Stonward Dynamics</title>
-<meta name="theme-color" content="#0b0b0c">
+<meta name="theme-color" content="#0b1626">
 <link rel="icon" href="img/icono.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilo.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/claro.css">
+<link rel="stylesheet" href="css/maquina.css">
 <script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
 </head>
 <body>
-<nav class="nav solida" id="nav">
-  <div class="contenedor">
-    <a class="marca" href="index.html">
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="6.5" stroke="#ff9d3d"/><path d="M16 3v6.5M16 22.5V29M3 16h6.5" /><circle cx="16" cy="16" r="1.6" fill="#ff9d3d" stroke="none"/></svg>
-      <span>Stonward<small>Dynamics</small></span>
-    </a>
-    <div class="nav-links">
-      <a href="index.html#software">Software</a>
-      <a href="index.html#maquinas" class="activo">Máquinas</a>
-      <a href="index.html#investigacion">Investigación</a>
-      <a href="index.html#repositorio">Repositorio</a>
-      <a href="index.html#mia">MIA</a>
-      <a href="index.html#contacto">Contacto</a>
-    </div>
-    <a class="btn chico primario nav-cta" href="solidmaker.html">SolidMaker</a>
-    <button class="nav-menu" aria-label="Menú" id="nav-menu">☰</button>
+<nav class="barra" id="nav">
+  <a class="logo" href="index.html" aria-label="Stonward Dynamics">
+    <svg viewBox="50 30 522 556" fill="currentColor"><path d="M292.844 35.784V356.122L237.139 440.552L133.702 481.219L206.638 304.845L237.139 35.784Z"/><path d="M325.627 35.784H373.69L406.133 304.845L486.64 481.219L385.706 440.552L325.627 356.122Z"/><path d="M56.471 536.252L251.128 464.157L271.555 499.003H338.844L364.078 464.157L565.945 536.252V580.711H385.706L364.078 559.082H251.128L213.273 580.711H56.471Z"/><path d="M306 386.624L349.301 411.624V461.624L306 486.624L262.699 461.624V411.624Z"/></svg>
+  </a>
+  <span class="marca-txt">STONWARD DYNAMICS</span>
+  <div class="menu">
+    <a href="index.html#software">Software</a>
+    <a href="index.html#maquinas" class="activo">Máquinas</a>
+    <a href="index.html#prototipos">Prototipos</a>
+    <a href="index.html#investigacion">Investigación</a>
+    <a href="manual.html">Manual</a>
+    <a href="index.html#contacto">Contacto</a>
   </div>
+  <span class="relleno"></span>
+  <a class="contacto-mini" href="mailto:mr.winterford@gmail.com">Escríbenos</a>
+  <a class="cta" href="solidmaker.html#descargas">Descargar SolidMaker</a>
+  <button class="hamb" id="nav-menu" aria-label="Menú">≡</button>
 </nav>
 
-<main class="visor-pagina">
+<main class="maq">
   <div class="visor" id="visor">
-    <div class="carga" id="carga"><div><div id="estado">Preparando el visor…</div><div class="barra"><i id="barra"></i></div></div></div>
+    <div class="carga" id="carga"><div><div id="estado">Preparando el visor…</div><div class="progreso"><i id="barra"></i></div></div></div>
+    <div class="aviso" id="aviso"></div>
     <div class="ayuda">Arrastra para girar · rueda para acercar · clic derecho para mover</div>
     <div class="herramientas">
-      <button class="btn chico primario" id="b-girar">Girar</button>
+      <button class="btn chico lleno" id="b-girar">Girar</button>
       <button class="btn chico" id="b-explotar">Explosionar</button>
       <button class="btn chico" id="b-vista">Encuadrar</button>
     </div>
   </div>
-  <aside class="ficha">
-    <div class="migas"><a href="index.html#maquinas">Máquinas</a> / <span id="f-miga">Stonward</span></div>
-    <h1 id="f-nombre">Máquina</h1>
-    <p class="modelo" id="f-modelo"></p>
-    <p style="color:var(--texto-2);margin:0 0 18px" id="f-resumen"></p>
-    <div class="acciones"><a class="btn primario" id="f-descargar" download>Descargar paquete</a></div>
-    <h4>Ficha</h4>
-    <dl class="datos" id="f-datos"></dl>
-    <h4>Driver</h4>
-    <p style="color:var(--texto-2);margin:0;font-size:14px" id="f-driver"></p>
-    <h4>Cómo instalarla</h4>
-    <ol style="color:var(--texto-2);font-size:14px;padding-left:18px;margin:0;display:grid;gap:4px">
-      <li>Descarga el paquete .zip.</li>
-      <li>En SolidMaker abre MACHIN → Máquina → Adquirir nueva máquina.</li>
-      <li>Elige el .zip y reinicia SolidMaker.</li>
-    </ol>
-    <h4>Lista de materiales</h4>
-    <table class="bom"><tbody id="f-bom"><tr><td>Se arma al cargar el modelo…</td><td></td></tr></tbody></table>
-    <p class="mono" style="color:var(--texto-3);font-size:11px;margin:10px 0 0" id="f-bom-total"></p>
-    <h4>Otras máquinas</h4>
-    <div class="acciones" id="f-otras"></div>
-  </aside>
+
+  <div class="columna">
+    <section class="ficha">
+      <div class="migas"><a href="index.html#maquinas">Máquinas</a> / <span id="f-miga">Stonward</span></div>
+      <h1 id="f-nombre">Máquina</h1>
+      <p class="modelo" id="f-modelo"></p>
+      <p class="resumen" id="f-resumen"></p>
+      <p class="resumen" id="f-uso"></p>
+      <div class="acciones"><a class="btn lleno" id="f-descargar" download>Paquete para SolidMaker</a><a class="btn" href="#documentacion">Documentación</a></div>
+      <h4>Ficha técnica</h4>
+      <dl class="datos" id="f-datos"></dl>
+      <h4>Control</h4>
+      <p class="resumen" id="f-driver"></p>
+      <h4>Instalación en SolidMaker</h4>
+      <ol class="pasos-inst">
+        <li>Descarga el paquete .zip.</li>
+        <li>En SolidMaker abre MACHIN → Máquina → Adquirir nueva máquina.</li>
+        <li>Elige el .zip y reinicia SolidMaker.</li>
+      </ol>
+    </section>
+
+    <section class="doc" id="documentacion">
+      <p class="rotulo">Documentación técnica</p>
+      <div class="pestanas" role="tablist">
+        <button class="activa" data-p="bom" role="tab">Lista de materiales</button>
+        <button data-p="montaje" role="tab">Montaje</button>
+        <button data-p="planos" role="tab">Planos y archivos</button>
+      </div>
+
+      <div class="panel activo" id="p-bom">
+        <div class="herr-doc">
+          <input type="search" id="bom-filtro" placeholder="Buscar pieza o material">
+          <button class="btn chico" id="bom-csv">Descargar CSV</button>
+        </div>
+        <p class="nota" id="bom-total">Leyendo el paquete…</p>
+        <table class="bom">
+          <thead><tr><th>N.º</th><th>Pieza</th><th>Cant.</th><th>Medida mayor (mm)</th></tr></thead>
+          <tbody id="bom-filas"></tbody>
+        </table>
+        <p class="nota">Clic en una fila para aislar la pieza en el visor; otro clic la suelta. Cantidades y medidas salen de la geometría del modelo; confirma contra el plano antes de comprar.</p>
+      </div>
+
+      <div class="panel" id="p-montaje">
+        <div class="control-paso">
+          <button class="btn chico" id="m-ant" aria-label="Paso anterior">‹</button>
+          <div><b id="m-num">Paso 0</b><span id="m-titulo">Sin piezas</span></div>
+          <button class="btn chico lleno" id="m-sig" aria-label="Paso siguiente">›</button>
+        </div>
+        <input type="range" id="m-barra" min="0" value="0" aria-label="Paso de montaje">
+        <div class="acciones"><button class="btn chico" id="m-todo">Ver máquina completa</button><button class="btn chico" id="m-reproducir">Reproducir</button></div>
+        <ol class="secuencia" id="m-lista"></ol>
+        <p class="nota">Secuencia generada del modelo: primero la estructura fija, luego cada eje en el orden de su cadena cinemática, y dentro de cada uno de abajo hacia arriba. La pieza que se monta en cada paso se marca en cobre.</p>
+      </div>
+
+      <div class="panel" id="p-planos">
+        <p class="nota">Cada plano se genera aquí con las tres vistas ortogonales (frontal, superior y lateral) y sus medidas generales en milímetros. Los STL son los mismos del paquete.</p>
+        <ul class="archivos" id="pl-lista"></ul>
+      </div>
+    </section>
+
+    <section class="otras">
+      <h4>Otras máquinas</h4>
+      <div class="acciones" id="f-otras"></div>
+    </section>
+  </div>
 </main>
+
+<div class="modal" id="plano" hidden>
+  <div class="hoja">
+    <div class="hoja-barra"><b id="plano-titulo">Plano</b><span class="relleno"></span><button class="btn chico lleno" id="plano-png">Descargar PNG</button><button class="btn chico" id="plano-cerrar">Cerrar</button></div>
+    <canvas id="plano-lienzo" width="2339" height="1654"></canvas>
+  </div>
+</div>
 
 <script src="data/maquinas.js"></script>
 <script src="vendor/jszip.min.js"></script>
 <script src="js/sitio.js"></script>
 <script type="module" src="js/visor.js"></script>
+<script type="module" src="js/doc-maquina.js"></script>
 </body>
 </html>

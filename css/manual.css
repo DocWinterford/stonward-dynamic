@@ -41,6 +41,7 @@
 .herr h4 { font-size: 17px; margin-bottom: 8px; }
 .herr p { margin: 0; font-size: 14.5px; color: var(--tinta-2); line-height: 1.6; }
 .herr p b { color: var(--tinta); }
+.herr .clip { display: block; width: 100%; margin-top: 14px; border: 1px solid var(--linea); background: var(--oscuro); }
 .herr.pend { background: repeating-linear-gradient(-45deg, transparent 0 10px, rgba(11,22,38,.025) 10px 20px); }
 .herr:target, .zona:target { background: #fff6ec; box-shadow: inset 3px 0 0 var(--acento); }
 

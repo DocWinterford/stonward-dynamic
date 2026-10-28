@@ -14,6 +14,7 @@ document.title = `${maq.nombre} · Stonward Dynamics`;
 $("#f-nombre").textContent = maq.nombre; $("#f-miga").textContent = maq.nombre;
 $("#f-modelo").textContent = maq.modelo;
 $("#f-resumen").textContent = maq.resumen;
+$("#f-uso").textContent = maq.uso || "";
 $("#f-datos").innerHTML = maq.datos.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
 $("#f-driver").textContent = maq.driver || "";
 const desc = $("#f-descargar");
@@ -111,8 +112,10 @@ async function cargar() {
     barra.style.width = `${60 + (40 * (i + 1)) / piezas.length}%`; estado.textContent = `Armando ${maq.nombre}… pieza ${i + 1} de ${piezas.length}`;
   }
   tenderCables(json, P);
-  encuadrar(); listaMateriales(piezas.concat((json.cables || []).map((c) => ({ nombre: c.nombre || c.id, color: c.color }))));
+  encuadrar();
   $("#carga").style.display = "none";
+  Object.assign(window.__visor, { zip, json, maquina, mallas, cables, modos, encuadrarA, encuadrar });
+  dispatchEvent(new Event("visor-listo"));
 }
 function encuadrar() {
   maquina.updateMatrixWorld(true);
@@ -123,17 +126,38 @@ function encuadrar() {
   camera.position.copy(c).add(new THREE.Vector3(0.75, 0.42, 0.95).normalize().multiplyScalar(s * 1.55));
   camera.near = s / 100; camera.far = s * 20; camera.updateProjectionMatrix();
 }
-// Lista de materiales: piezas agrupadas por nombre, con su color.
-function listaMateriales(piezas) {
-  const g = new Map();
-  piezas.forEach((p) => { const k = p.nombre; const e = g.get(k) || { n: 0, color: p.color }; e.n++; g.set(k, e); });
-  $("#f-bom").innerHTML = [...g].sort((a, b) => a[0].localeCompare(b[0], "es")).map(([k, e]) => `<tr><td><span class="muestra" style="background:${e.color || "#888"}"></span>${k}</td><td>${e.n} ${e.n > 1 ? "cuerpos" : "cuerpo"}</td></tr>`).join("");
-  $("#f-bom-total").textContent = `${piezas.length} cuerpos en ${g.size} grupos, sacados del paquete.`;
+// Estados de cada pieza para la documentación: normal, foco (cobre), fantasma (casi transparente) u oculto.
+const COBRE = new THREE.Color("#b57a4f"), NEGRO = new THREE.Color(0);
+let docActivo = false;
+function modos(fn) {
+  let algo = false;
+  mallas.forEach((m) => {
+    const e = fn ? fn(m.userData.nombre) : "normal", M = m.material, o = (m.userData.mat0 ||= { op: M.opacity, tr: M.transparent, dw: M.depthWrite });
+    if (e !== "normal") algo = true;
+    m.visible = e !== "oculto";
+    o.color ||= M.color.clone();
+    M.color.copy(e === "foco" ? COBRE : o.color); M.emissive.copy(e === "foco" ? COBRE : NEGRO); M.emissiveIntensity = e === "foco" ? 0.35 : 1;
+    const fant = e === "fantasma";
+    M.transparent = fant || o.tr; M.opacity = fant ? Math.min(o.op, 0.07) : o.op; M.depthWrite = fant ? false : o.dw;
+    M.needsUpdate = true;
+  });
+  docActivo = algo;
+  cables.forEach((c) => { c.visible = !algo && abierta < 0.05; });
+}
+// Acerca la cámara a un conjunto de piezas sin cambiar el ángulo de vista.
+function encuadrarA(nombres) {
+  const b = new THREE.Box3();
+  mallas.forEach((m) => { if (nombres.has(m.userData.nombre) && m.visible) b.expandByObject(m); });
+  if (b.isEmpty()) return;
+  const c = b.getCenter(new THREE.Vector3()), s = Math.max(b.getSize(new THREE.Vector3()).length(), 60);
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  controls.target.copy(c); camera.position.copy(c).addScaledVector(dir, s * 1.9);
+  controls.autoRotate = false; $("#b-girar").classList.remove("lleno");
 }
 cargar().catch((e) => { estado.textContent = "No se pudo abrir el paquete: " + e.message; });
 
 // ---- herramientas ----
-$("#b-girar").addEventListener("click", (e) => { controls.autoRotate = !controls.autoRotate; e.currentTarget.classList.toggle("primario", controls.autoRotate); });
+$("#b-girar").addEventListener("click", (e) => { controls.autoRotate = !controls.autoRotate; e.currentTarget.classList.toggle("lleno", controls.autoRotate); });
 let abierta = 0, anim = null;
 $("#b-explotar").addEventListener("click", (e) => {
   const meta = abierta ? 0 : 1; e.currentTarget.textContent = meta ? "Armar" : "Explosionar";
@@ -142,7 +166,7 @@ $("#b-explotar").addEventListener("click", (e) => {
     const k = Math.min(1, (t - t0) / 900), f = desde + (meta - desde) * (1 - Math.pow(1 - k, 3)); abierta = f;
     const C = maquina.userData.centro;
     mallas.forEach((m) => { const d = m.userData.centro.clone().sub(C); m.position.copy(m.userData.base).addScaledVector(d, 0.6 * f); });
-    cables.forEach((m) => { m.visible = f < 0.05; });
+    cables.forEach((m) => { m.visible = f < 0.05 && !docActivo; });
     if (k < 1) anim = requestAnimationFrame(paso);
   };
   anim = requestAnimationFrame(paso);
