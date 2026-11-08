@@ -53,7 +53,9 @@
   // ---- repositorio de artículos ----
   const listaArt = $("#lista-articulos"), filtros = $("#filtros");
   if (listaArt && window.STONWARD_ARTICULOS) {
-    const NOMBRE = { todos: "Todos", robotica: "Robótica", microbiologia: "Microbiología", bionica: "Biónica", ia: "IA", fabricacion: "Fabricación", software: "Software" };
+    const EN = document.documentElement.lang === "en";
+    const NOMBRE = EN ? { todos: "All", robotica: "Robotics", microbiologia: "Microbiology", bionica: "Bionics", ia: "AI", fabricacion: "Manufacturing", software: "Software" }
+      : { todos: "Todos", robotica: "Robótica", microbiologia: "Microbiología", bionica: "Biónica", ia: "IA", fabricacion: "Fabricación", software: "Software" };
     let area = "todos", texto = "";
     const pintar = () => {
       const q = texto.toLowerCase();
@@ -62,15 +64,15 @@
         <${a.enlace ? `a href="${a.enlace}" target="_blank" rel="noopener"` : "div"} class="articulo">
           <span class="area-tag">${NOMBRE[a.area] || a.area}</span>
           <div><h4>${a.titulo}</h4><p>${a.autores} · ${a.fuente}</p><div class="usa">${a.usa}</div></div>
-          <span class="mono" style="color:var(--texto-3);font-size:12px">${a.enlace ? "Abrir ↗" : ""}</span>
-        </${a.enlace ? "a" : "div"}>`).join("") : `<p style="color:var(--texto-3)">No hay documentos en esta área todavía.</p>`;
+          <span class="mono" style="color:var(--texto-3);font-size:12px">${a.enlace ? (EN ? "Open ↗" : "Abrir ↗") : ""}</span>
+        </${a.enlace ? "a" : "div"}>`).join("") : `<p style="color:var(--texto-3)">${EN ? "No documents in this area yet." : "No hay documentos en esta área todavía."}</p>`;
     };
     Object.keys(NOMBRE).forEach((k) => {
       const b = document.createElement("button"); b.className = "filtro" + (k === "todos" ? " activo" : ""); b.textContent = NOMBRE[k];
       b.addEventListener("click", () => { area = k; filtros.querySelectorAll(".filtro").forEach((x) => x.classList.toggle("activo", x === b)); pintar(); });
       filtros.appendChild(b);
     });
-    const busc = document.createElement("input"); busc.className = "buscador"; busc.placeholder = "Buscar en el repositorio…";
+    const busc = document.createElement("input"); busc.className = "buscador"; busc.placeholder = EN ? "Search the repository…" : "Buscar en el repositorio…";
     busc.addEventListener("input", () => { texto = busc.value; pintar(); });
     filtros.appendChild(busc);
     pintar();

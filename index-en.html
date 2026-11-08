@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stonward Dynamics</title>
+<link rel="alternate" hreflang="es" href="https://docwinterford.github.io/stonward-dynamic/">
+<meta name="description" content="Stonward Dynamics: an engineering house that designs its own software, builds its own machines and researches at the frontier of mechanics, life sciences and artificial intelligence.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Stonward Dynamics">
+<meta property="og:title" content="Stonward Dynamics">
+<meta property="og:description" content="Stonward Dynamics: an engineering house that designs its own software, builds its own machines and researches at the frontier of mechanics, life sciences and artificial intelligence.">
+<meta property="og:image" content="https://docwinterford.github.io/stonward-dynamic/img/sd-r7.jpg">
+<meta property="og:url" content="https://docwinterford.github.io/stonward-dynamic/index-en.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1626">
+<link rel="icon" href="img/icono.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/claro.css">
+</head>
+<body>
+
+<nav class="barra" id="nav">
+  <a class="logo" href="index-en.html" aria-label="Stonward Dynamics">
+    <svg viewBox="50 30 522 556" fill="currentColor"><path d="M292.844 35.784V356.122L237.139 440.552L133.702 481.219L206.638 304.845L237.139 35.784Z"/><path d="M325.627 35.784H373.69L406.133 304.845L486.64 481.219L385.706 440.552L325.627 356.122Z"/><path d="M56.471 536.252L251.128 464.157L271.555 499.003H338.844L364.078 464.157L565.945 536.252V580.711H385.706L364.078 559.082H251.128L213.273 580.711H56.471Z"/><path d="M306 386.624L349.301 411.624V461.624L306 486.624L262.699 461.624V411.624Z"/></svg>
+  </a>
+  <span class="marca-txt">STONWARD DYNAMICS</span>
+  <div class="menu">
+    <a href="#software">Software</a>
+    <a href="#maquinas">Machines</a>
+    <a href="#prototipos">Prototypes</a>
+    <a href="#investigacion">Research</a>
+    <a href="manual.html">Manual</a>
+    <a href="educacion.html">Education</a>
+    <a href="#contacto">Contact</a>
+  </div>
+  <span class="relleno"></span>
+  <a class="idioma" href="index.html" hreflang="es" lang="es">ES</a>
+  <a class="contacto-mini" href="mailto:mr.winterford@gmail.com">Write to us</a>
+  <a class="cta" href="solidmaker-en.html#descargas">Download SolidMaker</a>
+  <button class="hamb" id="nav-menu" aria-label="Menu">≡</button>
+</nav>
+
+<!-- navigation ruler: se dibuja desde js/inicio.js -->
+<div class="regla" id="regla" aria-hidden="true"></div>
+<div class="etiquetas-r" id="etiquetas-r"></div>
+
+<!-- PORTADA: aquí va la secuencia de apertura (video/stonward-apertura.mp4). Mientras no exista, se ve la animación de respaldo. -->
+<header class="portada" id="inicio">
+  <div class="respaldo"></div>
+  <canvas id="lienzo-apertura"></canvas>
+  <video id="video-apertura" autoplay muted loop playsinline preload="auto" poster="">
+    <source src="video/stonward-apertura.mp4" type="video/mp4">
+  </video>
+  <div class="yt-fondo" id="yt-apertura" data-video="74etMeJ0-x4" data-inicio="36" data-fin="127"></div>
+  <div class="velo"></div>
+  <div class="rejilla-fina"></div>
+  <div class="esquina izq">Stonward Dynamics · Low orbit</div>
+  <div class="esquina der"><span class="punto-vivo"></span>Opening sequence</div>
+  <div class="texto">
+    <div class="rotulo" style="color:rgba(255,255,255,.7)">Engineering for the family of the future</div>
+    <div class="marca-portada"><svg viewBox="50 30 522 556" fill="currentColor"><path d="M292.844 35.784V356.122L237.139 440.552L133.702 481.219L206.638 304.845L237.139 35.784Z"/><path d="M325.627 35.784H373.69L406.133 304.845L486.64 481.219L385.706 440.552L325.627 356.122Z"/><path d="M56.471 536.252L251.128 464.157L271.555 499.003H338.844L364.078 464.157L565.945 536.252V580.711H385.706L364.078 559.082H251.128L213.273 580.711H56.471Z"/><path d="M306 386.624L349.301 411.624V461.624L306 486.624L262.699 461.624V411.624Z"/></svg><h1 class="marca-gigante">Stonward<small>Dynamics</small></h1></div>
+    <p class="parrafo">We are a Mexican manufacturer specialised in manufacturing software and frontier technologies. We do not inherit yesterday's industry: we build the tools, the machines and the control systems the next generation will work with.</p>
+    <div class="acciones">
+      <a class="btn claro" style="background:#fff;color:#121314" href="#software">Discover SolidMaker</a>
+      <a class="btn claro" href="#maquinas">See the machines</a>
+      <span class="rotulo" style="color:rgba(255,255,255,.55);align-self:center;margin-left:12px">The past stays behind</span>
+    </div>
+  </div>
+</header>
+
+<main class="lienzo">
+
+
+
+<!-- 00 MANIFIESTO -->
+<section class="franja" id="manifiesto" data-regla="Company">
+  <div class="franja-cab"><span class="rotulo">00 / Company</span><span class="rotulo tenue">Who we are</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda aparece"><h2 class="titulo">We manufacture in Mexico. We design the software that manufacturing runs on.</h2></div>
+    <div class="relleno-celda aparece d1">
+      <p class="parrafo grande" style="margin-top:0">Stonward Dynamics develops design and manufacturing software, and builds the platforms that software controls.</p>
+      <p class="parrafo">Our line includes polar, delta and CoreXY 3D printers, a six-axis articulated robot, a five-axis machining centre and a CNC lathe. Every machine is designed, simulated and validated with our own tools before it is built. In parallel we research robotics, bionics, life-science instrumentation and artificial intelligence applied to engineering.</p>
+    </div>
+  </div>
+  <div class="celdas c4" style="border-top:1px solid var(--linea)">
+    <div class="cifra aparece"><b>6</b><span class="rotulo tenue">In-house manufacturing platforms</span></div>
+    <div class="cifra aparece d1"><b>5</b><span class="rotulo tenue">Integrated modules in SolidMaker</span></div>
+    <div class="cifra aparece d2"><b>1 535</b><span class="rotulo tenue">Standard components in the library</span></div>
+    <div class="cifra aparece d3"><b>7</b><span class="rotulo tenue">Interface languages</span></div>
+  </div>
+</section>
+
+<!-- 01 SOFTWARE -->
+<section class="franja" id="software" data-regla="Software">
+  <div class="franja-cab"><span class="rotulo">01 / Software</span><span class="rotulo tenue">SolidMaker · Open beta</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda aparece">
+      <img src="img/solidmaker-logo.png" alt="SolidMaker logo" style="width:72px;height:72px;border-radius:16px;margin-bottom:26px">
+      <h2 class="titulo">SolidMaker. Design, simulation and manufacturing in one environment.</h2>
+    </div>
+    <div class="relleno-celda aparece d1">
+      <p class="parrafo grande" style="margin-top:0">An open engineering platform for students, makers and teams with big ideas who want to build them.</p>
+      <p class="parrafo">Parametric design, assembly, bench testing and machine control live in the same program and share the same model. What you draw is exactly what gets simulated and what gets made.</p>
+      <div class="acciones" style="margin-top:26px">
+        <a class="btn lleno" href="solidmaker-en.html">Explore SolidMaker</a>
+        <a class="btn" href="solidmaker-en.html#descargas">Versions and downloads</a>
+        <a class="btn" href="educacion.html">Tutorials</a>
+      </div>
+    </div>
+  </div>
+  <div class="captura aparece">
+    <img src="img/solidmaker.jpg" alt="Helical gears modelled in SolidMaker" loading="lazy">
+    <div class="pie-captura"><span class="rotulo">Helical gears in PolarCAD</span><span class="rotulo tenue">Screenshot</span></div>
+  </div>
+  <div class="celdas c5" style="border-top:1px solid var(--linea)">
+    <a class="modulo aparece d0" href="solidmaker-en.html#polarcad"><span class="rotulo tenue">Module 01</span><h3>PolarCAD</h3><p>Sketches with dimensions and constraints, exact solids, editable history and assemblies with mechanical joints.</p></a>
+    <a class="modulo aparece d1" href="solidmaker-en.html#machin"><span class="rotulo tenue">Module 02</span><h3>Machin</h3><p>A digital twin of every machine: G-code simulation, complex kinematics and real-time control.</p></a>
+    <a class="modulo aparece d2" href="solidmaker-en.html#polarslicer"><span class="rotulo tenue">Module 03</span><h3>PolarSlicer</h3><p>Toolpath generation for additive manufacturing, Cartesian and in polar coordinates.</p></a>
+    <a class="modulo aparece d3" href="solidmaker-en.html#laboratory"><span class="rotulo tenue">Module 04</span><h3>Laboratory</h3><p>Virtual test bench: electronics, PLC, control logic and interference.</p></a>
+    <a class="modulo aparece d3" href="solidmaker-en.html#analizer"><span class="rotulo tenue">Module 05</span><h3>Analizer</h3><p>Engineering analysis: fluid simulation (CFD) and design validation.</p></a>
+  </div>
+  <div class="celdas c2" style="border-top:1px solid var(--linea)">
+    <div class="relleno-celda aparece"><span class="rotulo tenue">Coming soon</span><h3 class="subtitulo" style="margin-top:12px">SolidEngine</h3></div>
+    <div class="relleno-celda aparece d1"><p class="parrafo" style="margin:0">An engineering platform for highly demanding, high-precision work. A long-term development whose progress we will keep sharing.</p></div>
+  </div>
+</section>
+
+<!-- 02 MÁQUINAS -->
+<section class="franja" id="maquinas" data-regla="Machines">
+  <div class="franja-cab"><span class="rotulo">02 / Machines</span><span class="rotulo tenue">Designed and built in-house</span></div>
+  <div class="celdas c2" style="border-bottom:1px solid var(--linea)">
+    <div class="relleno-celda aparece"><h2 class="titulo">Stonward manufacturing platforms.</h2></div>
+    <div class="relleno-celda aparece d1"><p class="parrafo grande" style="margin:0">Additive, subtractive and robotic manufacturing. All of them are designed in PolarCAD and controlled from Machin.</p></div>
+  </div>
+  <div id="fichas"></div>
+</section>
+
+<!-- 03 PROTOTIPOS -->
+<section class="franja" id="prototipos" data-regla="Prototypes">
+  <div class="franja-cab"><span class="rotulo">03 / Prototypes</span><span class="rotulo tenue">In active development</span></div>
+  <div class="celdas c3">
+    <article class="proto aparece">
+      <div class="estado"><span>P-01</span><span>Validation</span></div>
+      <h3>Closed-loop continuous theta</h3>
+      <p>Position control for the PolarONE rotary axis with an absolute magnetic encoder, a PID controller and Kalman-filter estimation. The plate never stops; error is corrected on the move.</p>
+      <div class="barra-avance"><i style="width:45%"></i></div>
+    </article>
+    <article class="proto aparece d1">
+      <div class="estado"><span>P-02</span><span>Integration</span></div>
+      <h3>Multimodal command bridge</h3>
+      <p>A layer that turns voice, gestures and motion into design and machine operations inside SolidMaker. It is the technical foundation of MIA.</p>
+      <div class="barra-avance"><i style="width:30%"></i></div>
+    </article>
+    <article class="proto aparece d2">
+      <div class="estado"><span>P-03</span><span>Concept</span></div>
+      <h3>SolidEngine</h3>
+      <p>A high-precision engineering core built to scale beyond the classroom: calculation, validation and manufacturing to industrial standards.</p>
+      <div class="barra-avance"><i style="width:10%"></i></div>
+    </article>
+  </div>
+  <div class="mia" id="mia">
+    <div class="texto aparece">
+      <span class="rotulo">Stonward Dynamics × Hyde.corp</span>
+      <h2 class="titulo">MIA</h2>
+      <p>A multimodal virtual assistant developed together with Hyde.corp. She takes instructions by voice, motion and gestures, controls the software and the machines, and appears as her own hologram.</p>
+      <div class="modos"><span>Voice</span><span>Motion</span><span>Gestures</span><span>Hologram</span><span>SolidMaker control</span></div>
+    </div>
+    <div class="holo"><canvas id="lienzo-mia"></canvas></div>
+  </div>
+</section>
+
+<!-- 04 INVESTIGACIÓN -->
+<section class="franja" id="investigacion" data-regla="Research">
+  <div class="franja-cab"><span class="rotulo">04 / Research</span><span class="rotulo tenue">Four fronts, one workshop</span></div>
+  <div class="celdas c4">
+    <div class="frente aparece"><span class="rotulo tenue">A</span><h3>Robotic systems</h3><p>Unconventional kinematics, precision motion control and multi-axis manufacturing.</p></div>
+    <div class="frente aparece d1"><span class="rotulo tenue">B</span><h3>Engineering for life</h3><p>Instrumentation and automation for environments where biology demands absolute control.</p></div>
+    <div class="frente aparece d2"><span class="rotulo tenue">C</span><h3>Bionics</h3><p>Mechanisms, actuators and sensors that learn from the human body in order to extend it.</p></div>
+    <div class="frente aparece d3"><span class="rotulo tenue">D</span><h3>Applied intelligence</h3><p>Models that understand the designer's intent and turn it into geometry and motion.</p></div>
+  </div>
+  <div class="franja-cab" style="border-top:1px solid var(--linea)"><span class="rotulo">Repository</span><span class="rotulo tenue">The sources we build on</span></div>
+  <div class="filtros" id="filtros"></div>
+  <div class="articulos" id="lista-articulos"></div>
+</section>
+
+<!-- 05 CONTACTO -->
+<section class="franja contacto" id="contacto" data-regla="Contact">
+  <div class="franja-cab"><span class="rotulo">05 / Contact</span><span class="rotulo tenue">We answer personally</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda aparece">
+      <h2 class="titulo">Let's talk about your project.</h2>
+      <p class="parrafo">We work with universities, laboratories and companies interested in SolidMaker, our manufacturing platforms or joint developments.</p>
+    </div>
+    <div class="relleno-celda datos-contacto aparece d1">
+      <a href="mailto:mr.winterford@gmail.com"><small>Email</small>mr.winterford@gmail.com</a>
+      <a href="tel:+527717129585"><small>Phone</small>+52 771 712 9585</a>
+      <a href="https://wa.me/527717129585" target="_blank" rel="noopener"><small>WhatsApp</small>+52 771 712 9585</a>
+    </div>
+  </div>
+</section>
+
+<footer class="pie"><span>© <span id="anio">2026</span> Stonward Dynamics</span><span>Toward the future, never looking back</span></footer>
+
+</main>
+
+<script src="data/maquinas.en.js"></script>
+<script src="data/articulos.en.js"></script>
+<script src="js/sitio.js"></script>
+<script src="js/inicio.js"></script>
+</body>
+</html>

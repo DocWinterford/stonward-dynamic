@@ -1,5 +1,6 @@
 // Stonward Dynamics — portada: fichas de máquinas, regla de navegación y apertura
 (() => {
+  const EN = document.documentElement.lang === "en";
   const $ = (s, r = document) => r.querySelector(s);
   const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -18,9 +19,9 @@
           <span class="clase">${m.modelo}</span>
           <h3>${m.nombre}</h3>
           <p>${m.resumen}</p>
-          <p class="uso"><span class="rotulo tenue" style="display:block;margin-bottom:6px">Aplicación</span>${m.uso || ""}</p>
+          <p class="uso"><span class="rotulo tenue" style="display:block;margin-bottom:6px">${EN ? "Application" : "Aplicación"}</span>${m.uso || ""}</p>
           <dl class="especif">${m.datos.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
-          ${m.estado === "disponible" ? `<div class="acciones"><a class="btn lleno" href="maquina.html?m=${m.id}">Ver en 3D</a><a class="btn" href="${m.paquete}" download>Paquete técnico</a></div>` : ""}
+          ${m.estado === "disponible" ? `<div class="acciones"><a class="btn lleno" href="maquina.html?m=${m.id}">${EN ? "View in 3D" : "Ver en 3D"}</a><a class="btn" href="${m.paquete}" download>${EN ? "Technical package" : "Paquete técnico"}</a></div>` : ""}
         </div>
       </article>`).join("");
     if ("IntersectionObserver" in window && !quieto) {
