@@ -4,185 +4,280 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SolidMaker · Stonward Dynamics</title>
-<meta name="description" content="SolidMaker: manual de usuario, videos y casos paso a paso.">
-<meta name="theme-color" content="#0b0b0c">
-<link rel="icon" href="img/solidmaker-logo.png" type="image/png">
+<meta name="description" content="SolidMaker: software abierto de diseño, simulación y manufactura hecho en México. Cinco módulos, versiones, descargas e instalación.">
+<meta name="theme-color" content="#0b1626">
+<link rel="icon" href="img/icono.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilo.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/claro.css">
+<link rel="stylesheet" href="css/solidmaker.css">
 </head>
 <body>
-<nav class="nav solida" id="nav">
-  <div class="contenedor">
-    <a class="marca" href="index.html">
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="6.5" stroke="#ff9d3d"/><path d="M16 3v6.5M16 22.5V29M3 16h6.5" /><circle cx="16" cy="16" r="1.6" fill="#ff9d3d" stroke="none"/></svg>
-      <span>Stonward<small>Dynamics</small></span>
-    </a>
-    <div class="nav-links">
-      <a href="index.html#software" class="activo">Software</a>
-      <a href="index.html#maquinas">Máquinas</a>
-      <a href="index.html#investigacion">Investigación</a>
-      <a href="index.html#repositorio">Repositorio</a>
-      <a href="index.html#mia">MIA</a>
-      <a href="index.html#contacto">Contacto</a>
-    </div>
-    <a class="btn chico primario nav-cta" href="#casos">Casos paso a paso</a>
-    <button class="nav-menu" aria-label="Menú" id="nav-menu">☰</button>
+<nav class="barra" id="nav">
+  <a class="logo" href="index.html" aria-label="Stonward Dynamics">
+    <svg viewBox="50 30 522 556" fill="currentColor"><path d="M292.844 35.784V356.122L237.139 440.552L133.702 481.219L206.638 304.845L237.139 35.784Z"/><path d="M325.627 35.784H373.69L406.133 304.845L486.64 481.219L385.706 440.552L325.627 356.122Z"/><path d="M56.471 536.252L251.128 464.157L271.555 499.003H338.844L364.078 464.157L565.945 536.252V580.711H385.706L364.078 559.082H251.128L213.273 580.711H56.471Z"/><path d="M306 386.624L349.301 411.624V461.624L306 486.624L262.699 461.624V411.624Z"/></svg>
+  </a>
+  <span class="marca-txt">STONWARD DYNAMICS</span>
+  <div class="menu">
+    <a href="solidmaker.html" class="activo">Software</a>
+    <a href="index.html#maquinas">Máquinas</a>
+    <a href="index.html#prototipos">Prototipos</a>
+    <a href="index.html#investigacion">Investigación</a>
+    <a href="manual.html">Manual</a>
+    <a href="index.html#contacto">Contacto</a>
   </div>
+  <span class="relleno"></span>
+  <a class="contacto-mini" href="mailto:mr.winterford@gmail.com">Escríbenos</a>
+  <a class="cta" href="solidmaker.html#descargas">Descargar SolidMaker</a>
+  <button class="hamb" id="nav-menu" aria-label="Menú">≡</button>
 </nav>
 
-<header class="cab-pagina">
-  <div class="contenedor">
-    <div class="migas"><a href="index.html#software">Software</a> / SolidMaker</div>
-    <h1 style="display:flex;align-items:center;gap:16px"><img src="img/solidmaker-logo.png" alt="Logo de SolidMaker" style="width:64px;height:64px;border-radius:14px">SolidMaker</h1>
-    <p>Manual de usuario, videos y proyectos guiados paso a paso. Diseña la pieza, ensámblala, lamínala y llévala a la máquina sin cambiar de programa.</p>
+<main class="lienzo pagina">
+
+<!-- PORTADA -->
+<header class="franja sm-portada">
+  <div class="franja-cab"><span class="rotulo">Software</span><span class="rotulo tenue">Beta en pruebas · Lanzamiento público en abril de 2027</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda aparece">
+      <img class="sm-logo" src="img/solidmaker-logo.png" alt="Logo de SolidMaker">
+      <h1 class="sm-titulo">SolidMaker</h1>
+      <p class="rotulo" style="margin:14px 0 0">Diseño · Simulación · Manufactura</p>
+    </div>
+    <div class="relleno-celda aparece d1">
+      <p class="parrafo grande" style="margin-top:0">Software abierto de ingeniería, desarrollado en México, que lleva una pieza del primer croquis a la máquina que la fabrica sin cambiar de programa.</p>
+      <p class="parrafo">El mismo modelo se dibuja en PolarCAD, se ensambla, se prueba en Laboratory, se analiza en Analizer, se rebana en PolarSlicer y se fabrica desde Machin. No hay exportaciones intermedias ni archivos que se pierdan en el camino.</p>
+      <div class="acciones" style="margin-top:26px">
+        <a class="btn lleno" href="#descargas">Versiones y descargas</a>
+        <a class="btn" href="manual.html">Manual de usuario</a>
+      </div>
+    </div>
+  </div>
+  <div class="captura aparece">
+    <img src="img/manual/polarcad/01-pantalla-completa.jpg" alt="Pantalla principal de PolarCAD" loading="lazy">
+    <div class="pie-captura"><span class="rotulo">PolarCAD, pantalla principal</span><span class="rotulo tenue">Captura real</span></div>
   </div>
 </header>
 
-<div class="contenedor manual">
-  <nav class="indice">
-    <b>Empezar</b>
-    <a href="#que-es">Qué es SolidMaker</a>
-    <a href="#instalar">Instalación</a>
-    <a href="#interfaz">La interfaz</a>
-    <b>Diseñar</b>
-    <a href="#croquis">Croquis 2D</a>
-    <a href="#cotas">Cotas y relaciones</a>
-    <a href="#editar">Editar trazos</a>
-    <a href="#solidos">Sólidos</a>
-    <a href="#ensambles">Ensambles</a>
-    <b>Fabricar</b>
-    <a href="#machin">MACHIN y máquinas</a>
-    <a href="#atajos">Atajos</a>
-    <b>Aprender</b>
-    <a href="#videos">Videos</a>
-    <a href="#casos">Casos paso a paso</a>
-  </nav>
-
-  <article class="doc">
-    <h2 id="que-es">Qué es SolidMaker</h2>
-    <p>SolidMaker reúne en un solo programa todo el camino de una pieza: el diseño en CAD, el ensamble, la prueba en banco, el laminado y el envío a la máquina. Cada etapa es un motor que se elige en la barra lateral izquierda.</p>
-    <table>
-      <tr><th>Motor</th><th>Para qué sirve</th></tr>
-      <tr><td>CAD</td><td>Croquis 2D, sólidos exactos, ensambles, biblioteca de piezas y materiales.</td></tr>
-      <tr><td>Banco</td><td>Banco de pruebas: PLC con diagrama ladder y simulación de componentes.</td></tr>
-      <tr><td>Maquinado (MACHIN)</td><td>Gemelo 3D de cada máquina, simulación de G-code y conexión con la máquina real.</td></tr>
-      <tr><td>Sistemas</td><td>Integración de sistemas y control.</td></tr>
-      <tr><td>Laminador polar</td><td>Prepara las piezas para imprimir, incluida la impresión polar de PolarONE.</td></tr>
-      <tr><td>Análisis</td><td>Revisión y análisis de las piezas.</td></tr>
-    </table>
-    <p><img src="img/solidmaker.jpg" alt="Engranes helicoidales modelados en SolidMaker" style="border-radius:12px;border:1px solid var(--borde)" loading="lazy"></p>
-
-    <h2 id="instalar">Instalación</h2>
-    <div class="aviso">SolidMaker está en beta. El instalador para Windows se publicará en esta página; mientras tanto, la beta se entrega directamente a quienes participan en las pruebas.</div>
-    <p>SolidMaker funciona como una aplicación de escritorio: un servidor local abre su propia ventana. Los proyectos se guardan en la carpeta de datos que elijas en la configuración.</p>
-
-    <h2 id="interfaz">La interfaz</h2>
-    <ul>
-      <li><b>Barra superior:</b> menús desplegables por tema (Documento, Ensamble, Material, Operaciones, Corte, Anotación, Editar, Transformaciones, Patrones, Chapa, Mecanizado…). La barra nunca pasa de dos filas.</li>
-      <li><b>Visor 3D:</b> vistas Iso 3D, Superior, Perfil y Frontal, y el cubo de vistas para girar. Doble clic sobre una pieza la encuadra; doble clic en el vacío vuelve a la vista clásica.</li>
-      <li><b>Panel derecho:</b> cambia entre Sketches, Gestor y Asistente con botones pequeños. Abrir un panel lateral cierra el del otro lado.</li>
-      <li><b>Barra de estado:</b> plano activo, posición del cursor, selección y mensajes de cada herramienta.</li>
-    </ul>
-
-    <h2 id="croquis">Croquis 2D</h2>
-    <p>Activa un plano (Superior, Frontal o Perfil, o clic derecho sobre una cara en la vista Iso 3D) y elige una herramienta: Línea, Círculo, Arco, Rectángulo, Polígono o Spline. Cada una tiene variantes en su flecha ▾.</p>
-    <h3>Escribir medidas mientras dibujas</h3>
-    <p>Con una herramienta activa, empieza a teclear y aparece una casilla junto al cursor. Enter coloca el punto.</p>
-    <table>
-      <tr><th>Escribes</th><th>Resultado</th></tr>
-      <tr><td><code>50</code></td><td>Punto a 50 mm en la dirección del cursor.</td></tr>
-      <tr><td><code>50&lt;30</code></td><td>50 mm a 30 grados desde el punto anterior.</td></tr>
-      <tr><td><code>@20,10</code></td><td>20 mm en X y 10 en Y desde el punto anterior.</td></tr>
-      <tr><td><code>40,20</code></td><td>Coordenada absoluta X 40, Y 20.</td></tr>
-    </table>
-    <p>Los números aceptan expresiones, como <code>20*2</code> o <code>3/4*10</code>.</p>
-    <h3>Snaps y rastreo</h3>
-    <p>El cursor se pega a extremos, puntos medios, centros, cuadrantes, cruces, tangentes y perpendiculares, cada uno con su marca. Con el <b>rastreo</b> (<kbd>F11</kbd>) dejas el cursor quieto un momento sobre un punto para adquirirlo y salen guías punteadas desde él; el cruce de dos guías también es un snap. <kbd>F8</kbd> activa ORTHO y <kbd>F10</kbd> POLAR.</p>
-
-    <h2 id="cotas">Cotas y relaciones</h2>
-    <p><b>Anotación ▾ → Cota.</b> Haz clic en una línea, en dos puntos, en dos líneas (ángulo) o en un círculo o arco (diámetro o radio). Escribe el valor y la geometría se ajusta. Las cotas aceptan ecuaciones que usan otras cotas por su nombre (<code>d1*2</code>). Doble clic sobre una cota la edita.</p>
-    <p><b>Anotación ▾ → Relaciones.</b> Horizontal, Vertical, Paralela, Perpendicular, Igual, Coincidente, Tangente, Concéntrica y Fija. Eliges la relación, haces clic en cada trazo y el croquis se resuelve al instante. Cada relación deja una marca junto al trazo; doble clic sobre la marca la borra.</p>
-    <p><img src="img/croquis-relaciones.jpg" alt="Relaciones tangente, igual y perpendicular en un croquis" style="border-radius:12px;border:1px solid var(--borde)" loading="lazy"></p>
-    <p><b>Ver grados de libertad</b> pinta de azul lo que todavía se puede mover y de blanco lo que ya está totalmente definido. Si una cota o relación choca con otras, SolidMaker dice cuáles son.</p>
-
-    <h2 id="editar">Editar trazos</h2>
-    <ul>
-      <li><b>Editar ▾:</b> Trim, Extend y Split funcionan con líneas, arcos y círculos. Estirar mueve solo los puntos dentro de una ventana. Unir trazos encadena trazos que se tocan; Descomponer parte polilíneas en tramos.</li>
-      <li><b>Transformaciones ▾:</b> Mover, Copiar, Rotar, Escalar y Simetría con punto base, usando snaps y medidas tecleadas.</li>
-      <li><b>Acabado ▾:</b> empalme y chaflán entre rectas y arcos.</li>
-      <li>Con la herramienta Seleccionar: arrastra una figura seleccionada para moverla; <kbd>Supr</kbd> la borra; <kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd> la copia a cualquier plano.</li>
-    </ul>
-
-    <h2 id="solidos">Sólidos</h2>
-    <p>Desde un croquis cerrado, <b>Operaciones ▾</b> crea Extrusión, Revolución y Barrido; <b>Corte ▾</b> los resta de forma exacta. <b>Patrones ▾</b> repite en línea, en círculo o por simetría; <b>Chapa ▾</b> hace bridas y dobleces; <b>Mecanizado ▾</b> agrega taladros, roscados, avellanados y abocardados. La <b>biblioteca</b> trae piezas normalizadas: tornillería, rodamientos, perfiles, motores NEMA y más. <kbd>Ctrl</kbd>+<kbd>D</kbd> duplica la pieza seleccionada.</p>
-
-    <h2 id="ensambles">Ensambles</h2>
-    <p><b>Ensamble ▾</b> une piezas con mates y juntas (bisagra y deslizante) que puedes mover. La acción <b>Unir</b> entiende la intención: un tornillo con su arandela y su tuerca, o dos engranes que engranan. Con «Evitar choques» las piezas no se atraviesan al arrastrarlas.</p>
-    <p><img src="img/ensamble-juntas.jpg" alt="Tornillo y tuerca unidos con una junta de rosca" style="border-radius:12px;border:1px solid var(--borde)" loading="lazy"></p>
-
-    <h2 id="machin">MACHIN y máquinas</h2>
-    <p>MACHIN muestra el gemelo 3D de la máquina y simula el G-code antes de imprimir o maquinar. Las máquinas por defecto vienen instaladas; las nuevas se descargan desde la sección <a class="enlace" href="index.html#maquinas">Máquinas</a>.</p>
-    <ol class="pasos">
-      <li>Descarga el paquete .zip de la máquina.</li>
-      <li>En MACHIN abre <b>Máquina → Adquirir nueva máquina</b> y elige el .zip.</li>
-      <li>Reinicia SolidMaker: la máquina aparece en el menú Máquina con sus piezas, su cinemática y su driver.</li>
-    </ol>
-
-    <h2 id="atajos">Atajos</h2>
-    <table>
-      <tr><th>Tecla</th><th>Acción</th></tr>
-      <tr><td><kbd>Esc</kbd></td><td>Cancela la herramienta o vacía la selección.</td></tr>
-      <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Deshacer.</td></tr>
-      <tr><td><kbd>Ctrl</kbd>+<kbd>C</kbd> / <kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Copiar y pegar trazos o piezas.</td></tr>
-      <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Duplicar la pieza seleccionada.</td></tr>
-      <tr><td><kbd>Supr</kbd></td><td>Borrar la selección.</td></tr>
-      <tr><td><kbd>F8</kbd> / <kbd>F10</kbd> / <kbd>F11</kbd></td><td>ORTHO / POLAR / rastreo.</td></tr>
-      <tr><td><kbd>Enter</kbd> o doble clic</td><td>Cerrar polilíneas y splines.</td></tr>
-    </table>
-
-    <h2 id="videos">Videos</h2>
-    <p>Videos cortos de cada herramienta. Se irán publicando aquí.</p>
-    <div class="videos">
-      <div class="video"><div><div class="play">▶</div>Primer croquis totalmente definido</div></div>
-      <div class="video"><div><div class="play">▶</div>De croquis a sólido</div></div>
-      <div class="video"><div><div class="play">▶</div>Ensamble con tornillería</div></div>
-      <div class="video"><div><div class="play">▶</div>Instalar una máquina en MACHIN</div></div>
+<!-- 00 POR QUÉ -->
+<section class="franja" id="por-que">
+  <div class="franja-cab"><span class="rotulo">00 / Por qué existe</span><span class="rotulo tenue">Motivación</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda aparece"><h2 class="titulo">Las herramientas de ingeniería no deberían ser un privilegio.</h2></div>
+    <div class="relleno-celda aparece d1">
+      <p class="parrafo grande" style="margin-top:0">En México, un estudiante de ingeniería aprende a diseñar con licencias educativas que caducan el día que egresa. Un taller pequeño rara vez puede pagar por separado el CAD, el CAM y la simulación.</p>
+      <p class="parrafo">SolidMaker nació para cerrar esa brecha. Es un solo programa, abierto, pensado para estudiantes, makers y talleres que quieren fabricar lo que diseñan. Su código se puede leer, estudiar y mejorar, y sus formatos son abiertos para que tus proyectos sigan siendo tuyos.</p>
+      <p class="parrafo">Lo usamos nosotros primero. Cada máquina Stonward se diseña, se prueba y se controla con SolidMaker, así que cada función existe porque la necesitamos en el taller.</p>
     </div>
-
-    <h2 id="casos">Casos paso a paso</h2>
-    <h3 id="caso-1">1. Una placa totalmente definida</h3>
-    <ol class="pasos">
-      <li>Activa el plano Superior y elige Rectángulo. Teclea <code>0,0</code> y Enter, luego <code>80,50</code> y Enter.</li>
-      <li>Elige Círculo y coloca uno dentro de la placa.</li>
-      <li>En <b>Anotación ▾ → Cota</b>, acota el lado inferior (80), el lado izquierdo (50) y el diámetro del círculo (8).</li>
-      <li>Acota la distancia del centro del círculo a dos lados.</li>
-      <li>Abre <b>Anotación ▾ → Ver grados de libertad</b>: cuando todo está blanco, la placa está totalmente definida.</li>
-      <li>Con <b>Operaciones ▾ → Extruir</b>, dale 6 mm de espesor.</li>
-    </ol>
-    <h3 id="caso-2">2. Una ranura con relaciones</h3>
-    <ol class="pasos">
-      <li>Dibuja dos líneas casi paralelas y dos arcos en sus extremos.</li>
-      <li>En <b>Anotación ▾ → Relaciones</b> aplica Paralela a las dos líneas.</li>
-      <li>Aplica Tangente entre cada arco y cada línea, e Igual entre los dos arcos.</li>
-      <li>Acota el radio de un arco: el otro lo sigue por la relación Igual.</li>
-    </ol>
-    <h3 id="caso-3">3. Instalar SD-C1 y simular una impresión</h3>
-    <ol class="pasos">
-      <li>Descarga el paquete de <a class="enlace" href="maquina.html?m=sd-c1">SD-C1</a>.</li>
-      <li>En MACHIN, <b>Máquina → Adquirir nueva máquina</b>, elige el .zip y reinicia.</li>
-      <li>Elige SD-C1 en el menú Máquina y abre la puerta con su control para ver dentro.</li>
-      <li>Ejecuta la demo: la pantalla táctil de la consola muestra el avance de la impresión.</li>
-    </ol>
-  </article>
-</div>
-
-<footer>
-  <div class="contenedor">
-    <div class="pie-abajo" style="margin-top:0;border-top:0;padding-top:0"><span>© <span id="anio">2026</span> Stonward Dynamics</span><a class="enlace" href="index.html">Volver al inicio</a></div>
   </div>
-</footer>
+  <div class="celdas c2" style="border-top:1px solid var(--linea)">
+    <div class="relleno-celda aparece"><span class="rotulo tenue">Visión</span><h3 class="subtitulo" style="margin-top:12px">En cada aula de ingeniería del país.</h3></div>
+    <div class="relleno-celda aparece d1"><p class="parrafo" style="margin:0">Queremos que las universidades de México y de Latinoamérica enseñen con SolidMaker. Así, un alumno diseñaría, probaría y fabricaría con la misma herramienta con la que después va a trabajar o a emprender. Si tu institución quiere participar en las pruebas, <a class="enlace" href="mailto:mr.winterford@gmail.com?subject=SolidMaker%20para%20universidades">escríbenos</a>.</p></div>
+  </div>
+  <div class="celdas c4" style="border-top:1px solid var(--linea)">
+    <div class="cifra aparece"><b>5</b><span class="rotulo tenue">Módulos en un solo programa</span></div>
+    <div class="cifra aparece d1"><b>1 535</b><span class="rotulo tenue">Componentes normalizados en 81 familias</span></div>
+    <div class="cifra aparece d2"><b>7</b><span class="rotulo tenue">Idiomas en la interfaz</span></div>
+    <div class="cifra aparece d3"><b>9</b><span class="rotulo tenue">Temas de color, más uno a tu medida</span></div>
+  </div>
+</section>
+
+<!-- 01 MÓDULOS -->
+<section class="franja" id="modulos">
+  <div class="franja-cab"><span class="rotulo">01 / Módulos</span><span class="rotulo tenue">Un modelo, cinco etapas</span></div>
+
+  <article class="sm-mod" id="polarcad">
+    <div class="sm-mod-texto aparece">
+      <span class="rotulo tenue">Módulo 01</span>
+      <h3>PolarCAD</h3>
+      <p class="parrafo">Diseño paramétrico. Croquis con cotas y relaciones geométricas, sólidos exactos por extrusión, revolución y barrido, cortes, redondeos, patrones, chapa y operaciones de mecanizado como el taladro roscado. Los ensambles usan uniones mecánicas reales: bisagras, deslizantes, roscas, engranes y bandas GT2, que puedes probar con motores y servos.</p>
+      <ul class="sm-lista"><li>Importa y exporta STEP, IGES y STL</li><li>Biblioteca de tornillería, perfiles, rodamientos, poleas y motores NEMA</li><li>Detección de interferencias con mapa de holguras</li></ul>
+      <a class="btn" href="manual.html#polarcad">Ver en el manual</a>
+    </div>
+    <a class="sm-mod-foto aparece d1" href="manual.html#polarcad"><img src="img/manual/polarcad/01-pantalla-completa.jpg" alt="PolarCAD" loading="lazy"></a>
+  </article>
+
+  <article class="sm-mod inverso" id="machin">
+    <div class="sm-mod-texto aparece">
+      <span class="rotulo tenue">Módulo 02</span>
+      <h3>Machin</h3>
+      <p class="parrafo">El gemelo digital de cada máquina. Carga el modelo completo de la impresora, el robot o la CNC, simula el G-code con su cinemática real (cartesiana, polar, delta, brazo de seis ejes, cinco ejes o torno) y se conecta por puerto serie al controlador para operarla.</p>
+      <ul class="sm-lista"><li>Paquetes de máquina instalables (.zip)</li><li>Precálculo de trayectorias con semáforo de alcance</li><li>G-code articular con tiempos idénticos a la simulación</li></ul>
+      <a class="btn" href="manual.html#machin">Ver en el manual</a>
+    </div>
+    <a class="sm-mod-foto aparece d1" href="manual.html#machin"><img src="img/manual/machin/01-pantalla-completa.jpg" alt="Machin" loading="lazy"></a>
+  </article>
+
+  <article class="sm-mod" id="polarslicer">
+    <div class="sm-mod-texto aparece">
+      <span class="rotulo tenue">Módulo 03</span>
+      <h3>PolarSlicer</h3>
+      <p class="parrafo">Genera las trayectorias de fabricación. Rebana en planos, en diagonal o en capas elípticas, y genera soportes en árbol o por capas que ahorran material. Para fresado y torneado produce el desbaste. La salida es G-code para máquinas cartesianas y tornos, y S-code orientado para cinemáticas polares, delta, brazo y cinco ejes.</p>
+      <ul class="sm-lista"><li>Soportes y G-code calculados en C++</li><li>Vista previa capa por capa, incluido el desbaste de la CNC</li><li>Selector de máquina enlazado con Machin</li></ul>
+      <a class="btn" href="manual.html#polarslicer">Ver en el manual</a>
+    </div>
+    <a class="sm-mod-foto aparece d1" href="manual.html#polarslicer"><img src="img/manual/polarslicer/01-pantalla-completa.jpg" alt="PolarSlicer" loading="lazy"></a>
+  </article>
+
+  <article class="sm-mod inverso" id="laboratory">
+    <div class="sm-mod-texto aparece">
+      <span class="rotulo tenue">Módulo 04</span>
+      <h3>Laboratory</h3>
+      <p class="parrafo">El banco de pruebas virtual. Importa el ensamble y su cinemática, resuelve mecanismos de lazo cerrado, simula física y monta la electrónica: fuentes, PLC con escalera, sensores y actuadores cableados, con el circuito resuelto en ngspice para ver voltajes y corrientes reales.</p>
+      <ul class="sm-lista"><li>Editor de escalera con ejecución en vivo</li><li>Cableado ordenado automáticamente con nombres de borne</li><li>Alertas de corto, sobrecarga y cargas sin tensión</li></ul>
+      <a class="btn" href="manual.html#laboratory">Ver en el manual</a>
+    </div>
+    <a class="sm-mod-foto aparece d1" href="manual.html#laboratory"><img src="img/manual/laboratory/01-pantalla-completa.jpg" alt="Laboratory" loading="lazy"></a>
+  </article>
+
+  <article class="sm-mod" id="analizer">
+    <div class="sm-mod-texto aparece">
+      <span class="rotulo tenue">Módulo 05</span>
+      <h3>Analizer</h3>
+      <p class="parrafo">El análisis de ingeniería. Malla la pieza, calcula esfuerzos y deformaciones por elementos finitos, y simula viento y flujo alrededor del diseño. Con eso validas una idea antes de gastar material.</p>
+      <ul class="sm-lista"><li>Mallado con diagnóstico</li><li>FEA estructural</li><li>CFD de viento y de flujo con resultados por campo</li></ul>
+      <a class="btn" href="manual.html#analizer">Ver en el manual</a>
+    </div>
+    <a class="sm-mod-foto aparece d1" href="manual.html#analizer"><img src="img/manual/analizer/01-pantalla-completa.jpg" alt="Analizer" loading="lazy"></a>
+  </article>
+</section>
+
+<!-- 02 BAJO EL CAPÓ -->
+<section class="franja" id="incluye">
+  <div class="franja-cab"><span class="rotulo">02 / Incluido</span><span class="rotulo tenue">Lo que viene en cada instalación</span></div>
+  <div class="celdas c3">
+    <div class="sm-dato aparece"><h4>Biblioteca normalizada</h4><p>1 535 componentes en 81 familias: tornillería ISO, perfiles de aluminio, rodamientos, guías lineales, husillos, poleas GT2, engranes y motores NEMA 17 y 23. Se insertan ya medidos y con su material.</p></div>
+    <div class="sm-dato aparece d1"><h4>Núcleo CadQuery</h4><p>Los sólidos son exactos (B-rep sobre OpenCascade), no mallas. Por eso un taladro queda redondo, un STEP sale limpio y las medidas cuadran con la pieza real.</p></div>
+    <div class="sm-dato aparece d2"><h4>Asistente</h4><p>Una consola integrada recibe órdenes escritas y las ejecuta sobre el modelo, para que el trabajo repetitivo se haga en una línea.</p></div>
+    <div class="sm-dato aparece"><h4>Proyectos</h4><p>Un gestor organiza piezas, ensambles y máquinas en carpetas. El autoguardado permite recuperar el trabajo sin guardar después de un cierre inesperado.</p></div>
+    <div class="sm-dato aparece d1"><h4>Cálculo nativo</h4><p>Los procesos pesados, como los soportes, el G-code, la cinemática y los mecanismos, corren en módulos de C++ compilados, no en el navegador.</p></div>
+    <div class="sm-dato aparece d2"><h4>A tu medida</h4><p>Siete idiomas y nueve temas de color, más un tema propio. El visor 3D y cada módulo siguen el tema elegido.</p></div>
+  </div>
+</section>
+
+<!-- 03 DESCARGAS -->
+<section class="franja" id="descargas">
+  <div class="franja-cab"><span class="rotulo">03 / Versiones y descargas</span><span class="rotulo tenue">Windows · Linux · Android</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda aparece">
+      <h2 class="titulo">Versión 1.0 pública</h2>
+      <p class="parrafo">La beta está en pruebas con un grupo cerrado. Las descargas se abren al terminar el conteo.</p>
+    </div>
+    <div class="relleno-celda aparece d1">
+      <div class="conteo" id="conteo" data-meta="2027-04-21T08:00:00-06:00" aria-live="polite">
+        <div><b data-u="d">--</b><span class="rotulo tenue">Días</span></div>
+        <div><b data-u="h">--</b><span class="rotulo tenue">Horas</span></div>
+        <div><b data-u="m">--</b><span class="rotulo tenue">Minutos</span></div>
+        <div><b data-u="s">--</b><span class="rotulo tenue">Segundos</span></div>
+      </div>
+      <p class="rotulo tenue" style="margin:16px 0 0">21 de abril de 2027 · 08:00 hora del centro de México</p>
+    </div>
+  </div>
+  <div class="celdas c3" style="border-top:1px solid var(--linea)">
+    <div class="plataforma aparece">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.5 4.5v7H3zM11.5 4.3 21 3v8.5h-9.5zM3 12.5h7.5v7L3 18.5zM11.5 12.5H21V21l-9.5-1.3z"/></svg>
+      <h4>Windows</h4><p>Windows 10 y 11 de 64 bits. Instalador .exe con todo incluido.</p>
+      <button class="btn bloqueado" disabled>Disponible al lanzamiento</button>
+    </div>
+    <div class="plataforma aparece d1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3c-2 0-3 1.8-3 4.2 0 1.5-.6 2.6-1.6 4C6 13 5 15 5.5 17c.4 1.6 2 2.6 3.6 2.4M12 3c2 0 3 1.8 3 4.2 0 1.5.6 2.6 1.6 4C18 13 19 15 18.5 17c-.4 1.6-2 2.6-3.6 2.4M9.1 19.4c1.9.8 3.9.8 5.8 0"/><circle cx="10.5" cy="7.5" r=".6" fill="currentColor"/><circle cx="13.5" cy="7.5" r=".6" fill="currentColor"/></svg>
+      <h4>Linux</h4><p>Distribuciones de 64 bits recientes. Paquete con lanzador propio.</p>
+      <button class="btn bloqueado" disabled>Disponible al lanzamiento</button>
+    </div>
+    <div class="plataforma aparece d2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 10h12v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zM6 9a6 6 0 0 1 12 0zM8 4l1.5 2M16 4l-1.5 2M4 11v5M20 11v5M9.5 18v3M14.5 18v3"/></svg>
+      <h4>Android</h4><p>Tabletas y teléfonos. Pensada para revisar proyectos y seguir máquinas desde el taller.</p>
+      <button class="btn bloqueado" disabled>Disponible al lanzamiento</button>
+    </div>
+  </div>
+  <div class="celdas c2" style="border-top:1px solid var(--linea)">
+    <div class="relleno-celda aparece"><span class="rotulo tenue">¿Quieres probarla antes?</span><h3 class="subtitulo" style="margin-top:12px">Beta para universidades y talleres</h3></div>
+    <div class="relleno-celda aparece d1"><p class="parrafo" style="margin-top:0">Abrimos lugares para escuelas de ingeniería, laboratorios y talleres que quieran usar la beta y reportar lo que encuentren.</p><a class="btn lleno" href="mailto:mr.winterford@gmail.com?subject=Beta%20de%20SolidMaker">Solicitar acceso</a></div>
+  </div>
+  <table class="versiones">
+    <thead><tr><th>Versión</th><th>Fecha</th><th>Estado</th><th>Notas</th></tr></thead>
+    <tbody>
+      <tr><td>1.0</td><td>Abril 2027</td><td>Planeada</td><td>Lanzamiento público para Windows, Linux y Android.</td></tr>
+      <tr><td>Beta</td><td>Noviembre 2026</td><td><span class="vivo"></span>En pruebas</td><td>Los cinco módulos completos, la biblioteca normalizada y seis máquinas Stonward.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 04 INSTALACIÓN -->
+<section class="franja" id="instalar">
+  <div class="franja-cab"><span class="rotulo">04 / Instalación</span><span class="rotulo tenue">Paso a paso</span></div>
+  <details class="despliegue">
+    <summary>Instalar en Windows</summary>
+    <div class="contenido">
+      <ol class="pasos">
+        <li>Descarga <b>SolidMaker-Setup.exe</b> desde esta página.</li>
+        <li>Ábrelo. Si Windows muestra «Windows protegió su PC», elige <i>Más información</i> y luego <i>Ejecutar de todas formas</i>.</li>
+        <li>Acepta la carpeta propuesta, o elige otra, y pulsa <i>Instalar</i>. Los módulos de cálculo en C++ y la biblioteca vienen incluidos.</li>
+        <li>Abre SolidMaker desde el menú Inicio. La primera vez prepara la biblioteca de componentes, lo cual tarda unos minutos y ocurre solo una vez.</li>
+        <li>Elige idioma y tema en la configuración. Para empezar a dibujar, sigue el <a class="enlace" href="manual.html#polarcad">recorrido de PolarCAD</a>.</li>
+      </ol>
+    </div>
+  </details>
+  <details class="despliegue">
+    <summary>Instalar en Linux</summary>
+    <div class="contenido">
+      <ol class="pasos">
+        <li>Descarga el paquete para Linux.</li>
+        <li>Descomprímelo en tu carpeta de programas.</li>
+        <li>Ejecuta el lanzador <b>solidmaker</b>. La primera vez prepara la biblioteca de componentes.</li>
+        <li>Para conectar una máquina por USB, agrega tu usuario al grupo <b>dialout</b> y vuelve a iniciar sesión.</li>
+      </ol>
+    </div>
+  </details>
+  <details class="despliegue">
+    <summary>Instalar en Android</summary>
+    <div class="contenido">
+      <ol class="pasos">
+        <li>Descarga el archivo .apk desde esta página, en el teléfono o la tableta.</li>
+        <li>Permite la instalación desde tu navegador cuando Android lo pida.</li>
+        <li>Abre SolidMaker y carga tus proyectos desde el almacenamiento del equipo.</li>
+      </ol>
+    </div>
+  </details>
+  <details class="despliegue">
+    <summary>Instalar una máquina Stonward</summary>
+    <div class="contenido">
+      <ol class="pasos">
+        <li>Abre la ficha de la máquina en <a class="enlace" href="index.html#maquinas">Máquinas</a> y descarga su paquete .zip.</li>
+        <li>En SolidMaker abre Machin y luego Máquina → Adquirir nueva máquina.</li>
+        <li>Elige el .zip y reinicia SolidMaker. La máquina aparece en el menú con su modelo, su cinemática y su controlador.</li>
+      </ol>
+    </div>
+  </details>
+  <p class="nota-inst">Las instrucciones definitivas de cada plataforma se publican junto con cada versión.</p>
+</section>
+
+<!-- 05 APRENDE -->
+<section class="franja" id="aprende">
+  <div class="franja-cab"><span class="rotulo">05 / Aprende</span><span class="rotulo tenue">Desde cero</span></div>
+  <div class="celdas c2">
+    <a class="sm-aprende aparece" href="manual.html"><span class="rotulo tenue">Referencia</span><h3>Manual de usuario</h3><p>Cada pantalla, menú y herramienta, con capturas reales y enlaces directos.</p><span class="rotulo">Abrir manual →</span></a>
+    <a class="sm-aprende aparece d1" href="educacion.html"><span class="rotulo tenue">Tutoriales</span><h3>Educación</h3><p>Cursos paso a paso: del primer croquis a piezas clásicas, ensambles y proyectos completos.</p><span class="rotulo">Ver tutoriales →</span></a>
+  </div>
+</section>
+
+<footer class="pie"><span>© <span id="anio">2026</span> Stonward Dynamics</span><span>Hacia el futuro, sin mirar atrás</span></footer>
+</main>
+
 <script src="js/sitio.js"></script>
+<script>
+// Cuenta regresiva al lanzamiento público
+(() => {
+  const c = document.getElementById("conteo"), meta = new Date(c.dataset.meta).getTime();
+  const u = (k) => c.querySelector(`[data-u="${k}"]`), dos = (n) => String(n).padStart(2, "0");
+  const paso = () => {
+    let s = Math.max(0, Math.floor((meta - Date.now()) / 1000));
+    u("d").textContent = Math.floor(s / 86400); s %= 86400;
+    u("h").textContent = dos(Math.floor(s / 3600)); s %= 3600;
+    u("m").textContent = dos(Math.floor(s / 60)); u("s").textContent = dos(s % 60);
+  };
+  paso(); setInterval(paso, 1000);
+})();
+</script>
 </body>
 </html>

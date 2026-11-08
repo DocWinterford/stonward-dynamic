@@ -1,0 +1,65 @@
+/* Página de SolidMaker */
+.pagina { margin-top: var(--nav); margin-right: var(--margen); }
+.enlace { color: var(--acento); border-bottom: 1px solid currentColor; }
+.sm-logo { width: 84px; height: 84px; border-radius: 18px; margin-bottom: 28px; }
+.sm-titulo { font-size: clamp(56px, 7vw, 112px); line-height: .95; letter-spacing: -.04em; margin: 0; font-weight: 700; }
+.sm-portada .captura img { max-height: 70vh; object-fit: cover; object-position: top; }
+
+.sm-mod { display: grid; grid-template-columns: 5fr 7fr; border-bottom: 1px solid var(--linea); }
+.sm-mod:last-child { border-bottom: 0; }
+.sm-mod.inverso { grid-template-columns: 7fr 5fr; }
+.sm-mod.inverso .sm-mod-texto { order: 2; border-left: 1px solid var(--linea); border-right: 0; }
+.sm-mod-texto { padding: 44px 48px; border-right: 1px solid var(--linea); }
+.sm-mod-texto h3 { font-size: clamp(30px, 3vw, 44px); margin: 14px 0 12px; letter-spacing: -.02em; }
+.sm-mod-texto .btn { margin-top: 22px; }
+.sm-mod-foto { background: var(--oscuro); display: block; overflow: hidden; }
+.sm-mod-foto img { width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform .6s; }
+.sm-mod-foto:hover img { transform: scale(1.02); }
+.sm-lista { list-style: none; padding: 0; margin: 18px 0 0; border-top: 1px solid var(--linea); }
+.sm-lista li { padding: 9px 0 9px 22px; border-bottom: 1px solid var(--linea); font-size: 14.5px; color: var(--tinta-2); position: relative; }
+.sm-lista li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 9px; height: 1px; background: var(--acento); }
+
+.sm-dato { padding: 34px 40px 38px; }
+.sm-dato h4 { font-size: 19px; margin: 0 0 10px; }
+.sm-dato p { margin: 0; color: var(--tinta-2); font-size: 15px; }
+.c3 > .sm-dato:nth-child(n+4) { border-top: 1px solid var(--linea); }
+
+.conteo { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--linea-2); }
+.conteo > div { padding: 22px 10px 18px; text-align: center; border-right: 1px solid var(--linea); }
+.conteo > div:last-child { border-right: 0; }
+.conteo b { display: block; font-size: clamp(34px, 4vw, 60px); font-weight: 600; letter-spacing: -.03em; line-height: 1; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+
+.plataforma { padding: 34px 40px 38px; display: flex; flex-direction: column; gap: 10px; }
+.plataforma svg { width: 34px; height: 34px; color: var(--marino); }
+.plataforma h4 { font-size: 22px; margin: 6px 0 0; }
+.plataforma p { margin: 0 0 12px; color: var(--tinta-2); font-size: 15px; flex: 1; }
+.btn.bloqueado { opacity: .5; cursor: not-allowed; justify-content: center; }
+.btn.bloqueado:hover { background: transparent; color: var(--tinta); }
+
+.versiones { width: 100%; border-collapse: collapse; border-top: 1px solid var(--linea); }
+.versiones th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; color: var(--tinta-3); padding: 14px 48px 10px; border-bottom: 1px solid var(--linea); }
+.versiones td { padding: 14px 48px; border-bottom: 1px solid var(--linea); font-size: 15px; color: var(--tinta-2); }
+.versiones td:first-child { font-family: var(--mono); color: var(--tinta); }
+.versiones tr:last-child td { border-bottom: 0; }
+.vivo { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--acento); margin-right: 8px; vertical-align: 1px; }
+
+.pasos { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 70ch; }
+.nota-inst { margin: 0; padding: 16px 48px 22px; border-top: 1px solid var(--linea); font-size: 13px; color: var(--tinta-3); }
+
+.sm-aprende { display: block; padding: 40px 48px 44px; transition: background .25s; }
+.sm-aprende:hover { background: var(--blanco); }
+.sm-aprende h3 { font-size: clamp(28px, 2.8vw, 40px); margin: 14px 0 10px; letter-spacing: -.02em; }
+.sm-aprende p { color: var(--tinta-2); margin: 0 0 22px; max-width: 46ch; }
+
+@media (max-width: 900px) {
+  .pagina { margin-right: 0; }
+  .sm-mod, .sm-mod.inverso { grid-template-columns: 1fr; }
+  .sm-mod.inverso .sm-mod-texto { order: 0; border-left: 0; }
+  .sm-mod-texto { border-right: 0; padding: 32px 16px; }
+  .sm-mod-foto { border-top: 1px solid var(--linea); }
+  .sm-dato, .plataforma, .sm-aprende { padding: 28px 16px; }
+  .c3 > .sm-dato:nth-child(n+2), .c3 > .plataforma:nth-child(n+2) { border-top: 1px solid var(--linea); }
+  .versiones th, .versiones td, .nota-inst { padding-left: 16px; padding-right: 16px; }
+  .versiones td:last-child, .versiones th:last-child { display: none; }
+}
+.c3 > .sm-dato:nth-child(3n) { border-right: 0; }
