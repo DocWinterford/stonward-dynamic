@@ -102,6 +102,38 @@ $("#m-reproducir").addEventListener("click", () => {
   reproduciendo = setInterval(() => { if (paso >= doc.grupos.length) parar(); else irA(paso + 1); }, 900);
 });
 
+// Manual de montaje imprimible: una foto del visor por paso, con la pieza nueva en cobre.
+$("#m-manual").addEventListener("click", async (e) => {
+  if (!listo || !doc) return;
+  const b = e.currentTarget, antes = paso, cuadro = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  parar(); V().encuadrar(); V().controls.autoRotate = false;
+  const fotos = [];
+  for (let i = 1; i <= doc.grupos.length; i++) {
+    b.textContent = `Preparando ${i} de ${doc.grupos.length}…`;
+    irA(i); await cuadro();
+    const src = V().renderer.domElement, c = document.createElement("canvas");
+    c.width = 640; c.height = Math.round(640 * src.height / src.width);
+    const x = c.getContext("2d"); x.fillStyle = "#f2f1ed"; x.fillRect(0, 0, c.width, c.height); x.drawImage(src, 0, 0, c.width, c.height);
+    fotos.push(c.toDataURL("image/jpeg", 0.85));
+  }
+  irA(antes); b.textContent = "Manual de montaje (PDF)";
+  const filas = doc.grupos.map((g, i) => `
+    ${i === 0 || doc.grupos[i - 1].eslabon !== g.eslabon ? `<h2>${esc(subconjunto(g.eslabon))}</h2>` : ""}
+    <section class="paso"><img src="${fotos[i]}" alt=""><div><b>Paso ${i + 1}</b><h3>Montar ${esc(visible(g))}${g.cantidad > 1 ? ` × ${g.cantidad}` : ""}</h3>
+    <p>${esc(material(g))}</p><p class="m">Medida mayor ${mm(g.mayor)} mm</p></div></section>`).join("");
+  const w = open("", "_blank");
+  if (!w) { alert("Permite ventanas emergentes para generar el manual."); return; }
+  w.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(maq.nombre)} · Manual de montaje</title>
+  <style>body{font:14px Montserrat,Segoe UI,sans-serif;color:#0b1626;margin:24px}h1{font-size:30px;margin:0}h1+p{color:#4a4d52;margin:4px 0 18px}
+  h2{font:600 12px monospace;letter-spacing:.16em;text-transform:uppercase;color:#3d5372;border-bottom:1px solid #ccc;padding:14px 0 6px;margin:10px 0 0}
+  .paso{display:grid;grid-template-columns:260px 1fr;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid #e3e3e3;break-inside:avoid}
+  .paso img{width:260px;border:1px solid #ddd;background:#f2f1ed}.paso b{font:600 11px monospace;letter-spacing:.14em;color:#b57a4f;text-transform:uppercase}
+  .paso h3{margin:4px 0;font-size:17px}.paso p{margin:2px 0;color:#4a4d52}.m{font:12px monospace}@page{margin:14mm}</style></head>
+  <body><h1>${esc(maq.nombre)} · Manual de montaje</h1><p>${esc(maq.modelo)} · ${doc.grupos.length} pasos · Stonward Dynamics</p>${filas}
+  <script>addEventListener("load",()=>setTimeout(()=>print(),400))<\/script></body></html>`);
+  w.document.close();
+});
+
 // ---- estado del visor según la pestaña ----
 function aplicar() {
   const aviso = $("#aviso");
