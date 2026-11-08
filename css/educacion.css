@@ -23,3 +23,17 @@
   .leccion.pronto { padding: 16px; }
   .leccion summary { gap: 12px; }
 }
+/* dibujos técnicos */
+.figura { margin: 0 0 20px; max-width: 560px; background: var(--blanco); border: 1px solid var(--linea); padding: 8px; }
+.fig { display: block; width: 100%; height: auto; }
+.fig .p { fill: none; stroke: var(--tinta); stroke-width: 1.6; stroke-linejoin: round; }
+.fig .cara { fill: #e7e6e1; } .fig .cara2 { fill: #d6d5cf; } .fig .cara3 { fill: #c7c6c0; }
+.fig .nervio { fill: rgba(181, 122, 79, .12); }
+.fig .sel { stroke: var(--acento); stroke-width: 3; }
+.fig .e { fill: none; stroke: var(--pizarra); stroke-width: .8; stroke-dasharray: 10 3 2 3; }
+.fig .d, .fig .r { stroke: var(--acento); stroke-width: .9; }
+.fig .r { stroke-width: .6; }
+.fig .f { fill: var(--acento); }
+.fig .c { font: 500 12px var(--mono); fill: var(--acento); }
+.fig .c.dentro { fill: var(--tinta); }
+.fig .t { font: 500 10px var(--mono); letter-spacing: .14em; fill: var(--tinta-3); }

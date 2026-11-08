@@ -5,6 +5,8 @@
   const ZONAS = { barra: "Barra de herramientas", lateral: "Menú lateral", visor: "Visor 3D", gestor: "Gestor de proyectos", estado: "Barra de estado" };
   const ACENTOS = { linea: "línea", circulo: "círculo", rectangulo: "rectángulo", poligono: "polígono", revolucion: "revolución", simetria: "simetría", operacion: "operación", ultima: "última", chaflan: "chaflán", concavo: "cóncavo", extruido: "extruido", revolucionar: "revolucionar", grados: "grados" };
   const nombreHerr = (a) => ZONAS[a] || (a.split("--")[1] || a).split("-").map((w) => ACENTOS[w] || w).join(" ").replace(/^./, (c) => c.toUpperCase());
+  // dibujo técnico de cada lección (js/figuras-edu.js)
+  const FIG = { f2: "ele", f3: "ranura", f4: "ele", f5: "recortar", s1: "placa", s2: "eje", s3: "placa", s5: "brida", c1: "soporte", c2: "brida", c3: "engranes", c5: "hex", c6: "chapa" };
   let hechas = {};
   try { hechas = JSON.parse(localStorage.getItem("sm-educacion") || "{}"); } catch (e) {}
   const guardar = () => { try { localStorage.setItem("sm-educacion", JSON.stringify(hechas)); } catch (e) {} };
@@ -23,6 +25,7 @@
           <summary><span><i>${String(j + 1).padStart(2, "0")}</i>${esc(l.titulo)}</span><span class="rotulo tenue">${dur(l.minutos)}</span></summary>
           <div class="contenido">
             <p class="objetivo"><b>Lo que vas a lograr.</b> ${esc(l.objetivo)}</p>
+            ${FIG[l.id] && window.SM_FIGURAS ? `<figure class="figura">${window.SM_FIGURAS[FIG[l.id]]()}</figure>` : ""}
             <ol class="pasos">${l.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
             ${l.herr.length ? `<p class="rotulo tenue" style="margin:22px 0 8px">Herramientas de esta lección</p>
             <div class="herr-chips">${l.herr.map((a) => `<a href="manual.html#${a}">${esc(nombreHerr(a))}</a>`).join("")}</div>` : ""}
