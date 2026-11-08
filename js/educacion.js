@@ -24,8 +24,8 @@
           <div class="contenido">
             <p class="objetivo"><b>Lo que vas a lograr.</b> ${esc(l.objetivo)}</p>
             <ol class="pasos">${l.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
-            <p class="rotulo tenue" style="margin:22px 0 8px">Herramientas de esta lección</p>
-            <div class="herr-chips">${l.herr.map((a) => `<a href="manual.html#${a}">${esc(nombreHerr(a))}</a>`).join("")}</div>
+            ${l.herr.length ? `<p class="rotulo tenue" style="margin:22px 0 8px">Herramientas de esta lección</p>
+            <div class="herr-chips">${l.herr.map((a) => `<a href="manual.html#${a}">${esc(nombreHerr(a))}</a>`).join("")}</div>` : ""}
             <p class="reto"><b>Reto.</b> ${esc(l.reto)}</p>
             <label class="hecha"><input type="checkbox" data-l="${l.id}"${hechas[l.id] ? " checked" : ""}> Lección completada</label>
           </div>

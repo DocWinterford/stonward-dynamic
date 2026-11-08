@@ -292,10 +292,53 @@ window.SM_CURSOS = [
     id: "proyectos", titulo: "Proyectos completos", nivel: "Avanzado",
     resumen: "Diseños de principio a fin que reúnen todo lo aprendido.",
     lecciones: [
-      { id: "p1", titulo: "Motor bóxer del Volkswagen Sedán", minutos: 180, listo: false },
-      { id: "p2", titulo: "Impresora 3D CoreXY", minutos: 240, listo: false },
+      {
+        id: "p1", titulo: "Motor bóxer del Volkswagen Sedán", minutos: 180, listo: true,
+        objetivo: "Modelar y animar el motor de cuatro cilindros opuestos del Vocho 1600: 85,5 mm de diámetro por 69 mm de carrera.",
+        pasos: [
+          "Planea antes de dibujar: monoblock en dos mitades, cigüeñal, cuatro bielas, cuatro pistones, cilindros, dos cabezas y árbol de levas. Crea un proyecto con una pieza por componente.",
+          "Cigüeñal: en la vista Frontal dibuja el perfil de los muñones de bancada y revoluciónalo. Agrega los cuatro codos a 34,5 mm del eje (media carrera) y orienta los muñones de biela para cilindros opuestos.",
+          "Pistón: revoluciona un perfil de Ø85,5 con ranuras para anillos. Corta el barreno del perno con Corte extruido.",
+          "Biela: dibuja el contorno en la vista Superior con dos círculos (ojo pequeño y cabeza), únelos con líneas tangentes, extruye y vacía el alma.",
+          "Cilindro: revoluciona un tubo de Ø85,5 interior con aletas de enfriamiento; usa Matriz lineal para repetir las aletas.",
+          "Monoblock: extruye cada mitad desde su croquis, corta los alojamientos de bancada con Corte por revolución y usa Simetría para la segunda mitad.",
+          "Ensambla: fija el monoblock, une el cigüeñal con una relación Rotacional y cada biela al cigüeñal y a su pistón con otras Rotacionales. Cada pistón va Deslizante dentro de su cilindro.",
+          "Pon un motor en el cigüeñal y pruébalo. Para el lazo cerrado biela-pistón, lleva el ensamble a Laboratory y usa «Resolver mecanismo».",
+          "Revisa interferencias en el punto muerto superior e inferior de cada pistón."
+        ],
+        herr: ["operaciones--revolucion-usa-el-perfil", "corte--corte-por-revolucion", "patrones--matriz-lineal", "patrones--simetria", "ensamble--insertar-pieza", "ensamble--actuadores-motores"],
+        reto: "Comprueba que el orden de encendido 1-4-3-2 coincide con la posición de los codos del cigüeñal."
+      },
+      {
+        id: "p2", titulo: "Impresora 3D CoreXY", minutos: 240, listo: true,
+        objetivo: "Diseñar una impresora CoreXY completa como la SD-C1 y dejarla lista para controlarse desde Machin.",
+        pasos: [
+          "Define el volumen de impresión (por ejemplo 250 × 250 × 250 mm) y deduce el tamaño del marco sumando el recorrido del cabezal y los carros.",
+          "Marco: inserta perfiles 2020 desde la Biblioteca, colócalos y sóldalos con Ctrl+A para que trabajen como una pieza.",
+          "Ejes XY: inserta guías MGN12, carros, dos motores NEMA 17 y poleas GT2 de 20 dientes. Une los carros con Deslizantes y tiende las bandas con la relación Banda.",
+          "Eje Z: tres husillos Tr8 con su tuerca, unidos con Rosca. Tres motores, uno por husillo, permiten nivelar la cama.",
+          "Prueba cada motor con Probar y revisa los topes: el cabezal debe recorrer los 250 mm sin chocar.",
+          "Corre Interferencias en todo el ensamble.",
+          "Revisa el paquete de la SD-C1 en su ficha de Máquinas para ver cómo se describe una máquina para Machin: eslabones, juntas y driver."
+        ],
+        herr: ["ensamble--nuevo-ensamble", "ensamble--fijar-liberar", "ensamble--actuadores-motores"],
+        reto: "Cambia el volumen a 300 × 300 × 300 mm y ajusta solo las cotas del marco."
+      },
       { id: "p3", titulo: "Brazo robótico de seis ejes", minutos: 240, listo: false },
-      { id: "p4", titulo: "Banco de pruebas con PLC en Laboratory", minutos: 120, listo: false }
+      {
+        id: "p4", titulo: "Banco de pruebas con PLC en Laboratory", minutos: 120, listo: true,
+        objetivo: "Cablear un PLC con botones, sensores y una carga, programarlo en escalera y comprobar el circuito.",
+        pasos: [
+          "Abre Laboratory y la pestaña de Dispositivos. Agrega una fuente de 24 V, un PLC, un botón de arranque, uno de paro, un sensor inductivo y un piloto.",
+          "Conecta cada borne. Los cables se ordenan solos con «Ordenar cables» y llevan el nombre de origen y destino.",
+          "En la pestaña Circuito revisa voltajes y corrientes: el cálculo se hace con ngspice. Atiende las alertas de corto, sobrecarga o cargas sin tensión.",
+          "En el editor de escalera escribe un arranque-paro con enclavamiento: arranque en paralelo con la salida, paro en serie.",
+          "Pasa a RUN y oprime los botones: la escalera en vivo muestra qué contactos conducen.",
+          "Activa «Entradas por cableado» para que el PLC lea la tensión real de cada entrada."
+        ],
+        herr: [],
+        reto: "Agrega un temporizador que apague el piloto 5 s después de que el sensor deje de detectar."
+      }
     ]
   }
 ];
