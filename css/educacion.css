@@ -1,0 +1,25 @@
+/* Educación: rutas y lecciones */
+.rutas { border-top: 1px solid var(--linea); }
+.ruta { display: flex; flex-direction: column; padding: 30px 26px 32px; transition: background .25s; }
+.ruta:hover { background: var(--blanco); }
+.ruta h3 { font-size: 24px; margin: 28px 0 8px; }
+.ruta p { margin: 0 0 18px; color: var(--tinta-2); font-size: 14.5px; flex: 1; }
+.ruta .avance { color: var(--acento); }
+.leccion summary { align-items: center; }
+.leccion summary > span:first-child, .leccion.pronto > span:first-child { font-family: var(--fuente); font-size: 17px; letter-spacing: 0; text-transform: none; font-weight: 500; }
+.leccion i { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--tinta-3); margin-right: 18px; }
+.leccion summary::after { margin-left: 18px; }
+.leccion.pronto { display: flex; justify-content: space-between; align-items: center; padding: 18px 48px; border-top: 1px solid var(--linea); color: var(--tinta-3); }
+.leccion.pronto > span:first-child { color: var(--tinta-3); }
+.objetivo { margin: 0 0 16px; color: var(--tinta); max-width: 70ch; }
+.herr-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.herr-chips a { border: 1px solid var(--linea-2); padding: 6px 12px; font-size: 13px; color: var(--tinta); transition: background .2s, color .2s; }
+.herr-chips a:hover { background: var(--tinta); color: var(--papel); }
+.reto { margin: 22px 0 0; padding: 14px 18px; border-left: 3px solid var(--acento); background: var(--blanco); max-width: 70ch; }
+.hecha { display: inline-flex; gap: 10px; align-items: center; margin-top: 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.hecha input { accent-color: var(--acento); width: 16px; height: 16px; }
+@media (max-width: 900px) {
+  .ruta { padding: 26px 16px; border-bottom: 1px solid var(--linea); }
+  .leccion.pronto { padding: 16px; }
+  .leccion summary { gap: 12px; }
+}

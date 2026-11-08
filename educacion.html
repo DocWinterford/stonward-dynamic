@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Educación · Stonward Dynamics</title>
+<meta name="description" content="Tutoriales de SolidMaker desde cero: croquis 2D, sólidos, piezas clásicas, ensambles y proyectos completos.">
+<meta name="theme-color" content="#0b1626">
+<link rel="icon" href="img/icono.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/claro.css">
+<link rel="stylesheet" href="css/solidmaker.css">
+<link rel="stylesheet" href="css/educacion.css">
+</head>
+<body>
+<nav class="barra" id="nav">
+  <a class="logo" href="index.html" aria-label="Stonward Dynamics">
+    <svg viewBox="50 30 522 556" fill="currentColor"><path d="M292.844 35.784V356.122L237.139 440.552L133.702 481.219L206.638 304.845L237.139 35.784Z"/><path d="M325.627 35.784H373.69L406.133 304.845L486.64 481.219L385.706 440.552L325.627 356.122Z"/><path d="M56.471 536.252L251.128 464.157L271.555 499.003H338.844L364.078 464.157L565.945 536.252V580.711H385.706L364.078 559.082H251.128L213.273 580.711H56.471Z"/><path d="M306 386.624L349.301 411.624V461.624L306 486.624L262.699 461.624V411.624Z"/></svg>
+  </a>
+  <span class="marca-txt">STONWARD DYNAMICS</span>
+  <div class="menu">
+    <a href="index.html#software">Software</a>
+    <a href="index.html#maquinas">Máquinas</a>
+    <a href="index.html#prototipos">Prototipos</a>
+    <a href="index.html#investigacion">Investigación</a>
+    <a href="manual.html">Manual</a>
+    <a href="educacion.html" class="activo">Educación</a>
+    <a href="index.html#contacto">Contacto</a>
+  </div>
+  <span class="relleno"></span>
+  <a class="contacto-mini" href="mailto:mr.winterford@gmail.com">Escríbenos</a>
+  <a class="cta" href="solidmaker.html#descargas">Descargar SolidMaker</a>
+  <button class="hamb" id="nav-menu" aria-label="Menú">≡</button>
+</nav>
+
+<main class="lienzo pagina">
+<header class="franja">
+  <div class="franja-cab"><span class="rotulo">Educación</span><span class="rotulo tenue">Tutoriales de SolidMaker</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda"><h1 class="sm-titulo" style="font-size:clamp(48px,6vw,92px)">Aprende a fabricar desde cero.</h1></div>
+    <div class="relleno-celda">
+      <p class="parrafo grande" style="margin-top:0">Rutas en orden, del primer trazo a proyectos completos. Cada lección dice qué vas a lograr, los pasos exactos, las herramientas que usa (con enlace a su explicación en el manual) y un reto para practicar.</p>
+      <p class="parrafo">No necesitas experiencia previa. Si nunca has usado un CAD, empieza por Fundamentos y avanza en orden. Tu avance se guarda en este navegador.</p>
+      <div class="acciones" style="margin-top:22px"><a class="btn lleno" href="#fundamentos">Empezar por Fundamentos</a><a class="btn" href="manual.html">Manual de usuario</a></div>
+    </div>
+  </div>
+  <div class="celdas c5 rutas" id="rutas"></div>
+</header>
+<div id="cursos"></div>
+<footer class="pie"><span>© <span id="anio">2026</span> Stonward Dynamics</span><span>Hacia el futuro, sin mirar atrás</span></footer>
+</main>
+
+<script src="data/cursos.js"></script>
+<script src="js/sitio.js"></script>
+<script src="js/educacion.js"></script>
+</body>
+</html>
