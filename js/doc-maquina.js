@@ -3,6 +3,15 @@
 import * as THREE from "three";
 
 const $ = (s) => document.querySelector(s);
+const EN = document.documentElement.lang === "en", T = (es, en) => (EN ? en : es);
+const MAT_EN = { "Acero": "Steel", "Acero pavonado": "Blued steel", "Acero pulido": "Polished steel", "Acrílico": "Acrylic", "Acrílico brillante": "Glossy acrylic", "Acrílico de color": "Coloured acrylic",
+  "Aluminio": "Aluminium", "Aluminio anodizado negro": "Black anodized aluminium", "Aluminio fundido": "Cast aluminium", "Azul": "Blue", "Bandeja": "Tray", "Bloque": "Block", "Brida de acero": "Steel flange",
+  "Bronce": "Bronze", "Cabina": "Enclosure", "Carrete de filamento": "Filament spool", "Caucho": "Rubber", "Condensador": "Capacitor", "Conector": "Connector", "Correa GT2 (caucho con fibra)": "GT2 belt (fibre-reinforced rubber)",
+  "Disco": "Disc", "Fibra de carbono": "Carbon fibre", "Filamento": "Filament", "Fuente": "Power supply", "Fundicion": "Casting", "Gabinete": "Cabinet", "Hierro fundido": "Cast iron", "Husillo": "Lead screw",
+  "Impresión 3D (PETG)": "3D print (PETG)", "Inox": "Stainless steel", "Inserto": "Insert", "Latón": "Brass", "Lámina PEI": "PEI sheet", "Lámina de acero pintada": "Painted steel sheet", "Mesa": "Table",
+  "Nylon (PA)": "Nylon (PA)", "Pieza": "Part", "Perfil de aluminio 2020": "2020 aluminium extrusion", "Perfil de aluminio 2040": "2040 aluminium extrusion", "Placa de aluminio": "Aluminium plate",
+  "Plástico amarillo": "Yellow plastic", "Plástico blanco": "White plastic", "Plástico gris": "Grey plastic", "Plástico negro": "Black plastic", "Plástico rojo": "Red plastic", "Policarbonato ahumado": "Smoked polycarbonate",
+  "Reductor (fundición)": "Gear reducer (casting)", "Riel": "Rail", "Sello": "Seal", "Silicona": "Silicone", "Tapa": "Cover", "Texto": "Text", "Verde": "Green", "Vidrio de pantalla": "Screen glass", "Vidrio templado": "Tempered glass" };
 const id = new URLSearchParams(location.search).get("m") || "polarone";
 const maq = (window.STONWARD_MAQUINAS || []).find((m) => m.id === id) || window.STONWARD_MAQUINAS[0];
 const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -24,12 +33,12 @@ document.querySelectorAll(".pestanas button").forEach((b) => b.addEventListener(
 // nombre legible de cada subconjunto (eslabón)
 function subconjunto(e) {
   const j = doc.eslabones[e] || {};
-  if (e === "base") return "Estructura fija";
-  const tipo = j.tipo === "lineal" ? "eje lineal" : j.tipo === "rotativo" ? "eje rotativo" : "subconjunto";
+  if (e === "base") return T("Estructura fija", "Fixed structure");
+  const tipo = j.tipo === "lineal" ? T("eje lineal", "linear axis") : j.tipo === "rotativo" ? T("eje rotativo", "rotary axis") : T("subconjunto", "subassembly");
   return `${j.nombre || e} · ${tipo}`;
 }
 const visible = (g) => g.visible || g.nombre;
-const material = (g) => g.materiales.join(" · ");
+const material = (g) => g.materiales.map((m) => (EN && MAT_EN[m]) || m).join(" · ");
 
 fetch(`data/doc-maquinas/${maq.id}.json`).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((d) => {
   doc = d;
@@ -37,7 +46,7 @@ fetch(`data/doc-maquinas/${maq.id}.json`).then((r) => { if (!r.ok) throw new Err
   doc.grupos.forEach((g, i) => { g.paso = i + 1; });
   pintarBom(); pintarMontaje(); pintarPlanos(); aplicar();
 }).catch(() => {
-  $("#bom-total").textContent = "La documentación de esta máquina todavía no está publicada.";
+  $("#bom-total").textContent = T("La documentación de esta máquina todavía no está publicada.", "Documentation for this machine is not published yet.");
 });
 
 // ---- lista de materiales ----
@@ -51,8 +60,8 @@ function pintarBom() {
     n++;
     filas += `<tr data-g="${esc(g.nombre)}" class="${aislado === g.nombre ? "sel" : ""}"><td>${String(g.paso).padStart(3, "0")}</td><td>${esc(visible(g))}<small>${esc(material(g))}</small></td><td>${g.cantidad}</td><td>${mm(g.mayor)}</td></tr>`;
   });
-  $("#bom-filas").innerHTML = filas || `<tr><td colspan="4">Nada coincide con «${esc(f)}».</td></tr>`;
-  $("#bom-total").textContent = `${doc.total.grupos} conceptos · ${doc.total.piezas} piezas · ${doc.total.cuerpos} cuerpos sólidos${f ? ` · ${n} a la vista` : ""}`;
+  $("#bom-filas").innerHTML = filas || `<tr><td colspan="4">${T("Nada coincide con", "Nothing matches")} «${esc(f)}».</td></tr>`;
+  $("#bom-total").textContent = T(`${doc.total.grupos} conceptos · ${doc.total.piezas} piezas · ${doc.total.cuerpos} cuerpos sólidos${f ? ` · ${n} a la vista` : ""}`, `${doc.total.grupos} items · ${doc.total.piezas} parts · ${doc.total.cuerpos} solid bodies${f ? ` · ${n} shown` : ""}`);
 }
 $("#bom-filtro").addEventListener("input", () => doc && pintarBom());
 $("#bom-filas").addEventListener("click", (e) => {
@@ -64,9 +73,9 @@ $("#bom-filas").addEventListener("click", (e) => {
 $("#bom-csv").addEventListener("click", () => {
   if (!doc) return;
   const c = (t) => `"${String(t).replace(/"/g, '""')}"`;
-  const filas = [["No", "Pieza", "Cantidad", "Material", "Medida mayor (mm)", "Subconjunto", "Archivos STL"]]
+  const filas = [EN ? ["No", "Part", "Quantity", "Material", "Largest size (mm)", "Subassembly", "STL files"] : ["No", "Pieza", "Cantidad", "Material", "Medida mayor (mm)", "Subconjunto", "Archivos STL"]]
     .concat(doc.grupos.map((g) => [g.paso, visible(g), g.cantidad, material(g), mm(g.mayor), subconjunto(g.eslabon), g.archivos.join(" ")]));
-  bajar(new Blob(["﻿" + filas.map((r) => r.map(c).join(",")).join("\r\n")], { type: "text/csv" }), `${maq.nombre}-lista-de-materiales.csv`);
+  bajar(new Blob(["﻿" + filas.map((r) => r.map(c).join(",")).join("\r\n")], { type: "text/csv" }), `${maq.nombre}-${T("lista-de-materiales", "bill-of-materials")}.csv`);
 });
 
 // ---- montaje ----
@@ -84,8 +93,8 @@ function irA(n) {
   paso = Math.max(0, Math.min(doc.grupos.length, n));
   $("#m-barra").value = paso;
   const g = doc.grupos[paso - 1];
-  $("#m-num").textContent = `Paso ${paso} de ${doc.grupos.length}`;
-  $("#m-titulo").textContent = g ? `Montar ${visible(g)}${g.cantidad > 1 ? ` (× ${g.cantidad})` : ""}` : "Banco vacío: empieza por la estructura fija";
+  $("#m-num").textContent = T(`Paso ${paso} de ${doc.grupos.length}`, `Step ${paso} of ${doc.grupos.length}`);
+  $("#m-titulo").textContent = g ? `${T("Montar", "Fit")} ${visible(g)}${g.cantidad > 1 ? ` (× ${g.cantidad})` : ""}` : T("Banco vacío: empieza por la estructura fija", "Empty bench: start with the fixed structure");
   document.querySelectorAll("#m-lista li[data-i]").forEach((li) => { const i = +li.dataset.i; li.className = i < paso ? "hecho" : i === paso ? "actual" : "futuro"; });
   aplicar();
 }
@@ -94,11 +103,11 @@ $("#m-sig").addEventListener("click", () => { parar(); irA(paso + 1); });
 $("#m-barra").addEventListener("input", (e) => { parar(); irA(+e.target.value); });
 $("#m-todo").addEventListener("click", () => { parar(); irA(doc.grupos.length); });
 $("#m-lista").addEventListener("click", (e) => { const li = e.target.closest("li[data-i]"); if (li) { parar(); irA(+li.dataset.i); } });
-function parar() { clearInterval(reproduciendo); reproduciendo = null; $("#m-reproducir").textContent = "Reproducir"; }
+function parar() { clearInterval(reproduciendo); reproduciendo = null; $("#m-reproducir").textContent = T("Reproducir", "Play"); }
 $("#m-reproducir").addEventListener("click", () => {
   if (reproduciendo) return parar();
   if (paso >= doc.grupos.length) irA(0);
-  $("#m-reproducir").textContent = "Pausa";
+  $("#m-reproducir").textContent = T("Pausa", "Pause");
   reproduciendo = setInterval(() => { if (paso >= doc.grupos.length) parar(); else irA(paso + 1); }, 900);
 });
 
@@ -109,27 +118,27 @@ $("#m-manual").addEventListener("click", async (e) => {
   parar(); V().encuadrar(); V().controls.autoRotate = false;
   const fotos = [];
   for (let i = 1; i <= doc.grupos.length; i++) {
-    b.textContent = `Preparando ${i} de ${doc.grupos.length}…`;
+    b.textContent = T(`Preparando ${i} de ${doc.grupos.length}…`, `Preparing ${i} of ${doc.grupos.length}…`);
     irA(i); await cuadro();
     const src = V().renderer.domElement, c = document.createElement("canvas");
     c.width = 640; c.height = Math.round(640 * src.height / src.width);
     const x = c.getContext("2d"); x.fillStyle = "#f2f1ed"; x.fillRect(0, 0, c.width, c.height); x.drawImage(src, 0, 0, c.width, c.height);
     fotos.push(c.toDataURL("image/jpeg", 0.85));
   }
-  irA(antes); b.textContent = "Manual de montaje (PDF)";
+  irA(antes); b.textContent = T("Manual de montaje (PDF)", "Assembly manual (PDF)");
   const filas = doc.grupos.map((g, i) => `
     ${i === 0 || doc.grupos[i - 1].eslabon !== g.eslabon ? `<h2>${esc(subconjunto(g.eslabon))}</h2>` : ""}
-    <section class="paso"><img src="${fotos[i]}" alt=""><div><b>Paso ${i + 1}</b><h3>Montar ${esc(visible(g))}${g.cantidad > 1 ? ` × ${g.cantidad}` : ""}</h3>
-    <p>${esc(material(g))}</p><p class="m">Medida mayor ${mm(g.mayor)} mm</p></div></section>`).join("");
+    <section class="paso"><img src="${fotos[i]}" alt=""><div><b>${T("Paso", "Step")} ${i + 1}</b><h3>${T("Montar", "Fit")} ${esc(visible(g))}${g.cantidad > 1 ? ` × ${g.cantidad}` : ""}</h3>
+    <p>${esc(material(g))}</p><p class="m">${T("Medida mayor", "Largest size")} ${mm(g.mayor)} mm</p></div></section>`).join("");
   const w = open("", "_blank");
-  if (!w) { alert("Permite ventanas emergentes para generar el manual."); return; }
-  w.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(maq.nombre)} · Manual de montaje</title>
+  if (!w) { alert(T("Permite ventanas emergentes para generar el manual.", "Allow pop-up windows to generate the manual.")); return; }
+  w.document.write(`<!doctype html><html lang="${EN ? "en" : "es"}"><head><meta charset="utf-8"><title>${esc(maq.nombre)} · ${T("Manual de montaje", "Assembly manual")}</title>
   <style>body{font:14px Montserrat,Segoe UI,sans-serif;color:#0b1626;margin:24px}h1{font-size:30px;margin:0}h1+p{color:#4a4d52;margin:4px 0 18px}
   h2{font:600 12px monospace;letter-spacing:.16em;text-transform:uppercase;color:#3d5372;border-bottom:1px solid #ccc;padding:14px 0 6px;margin:10px 0 0}
   .paso{display:grid;grid-template-columns:260px 1fr;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid #e3e3e3;break-inside:avoid}
   .paso img{width:260px;border:1px solid #ddd;background:#f2f1ed}.paso b{font:600 11px monospace;letter-spacing:.14em;color:#b57a4f;text-transform:uppercase}
   .paso h3{margin:4px 0;font-size:17px}.paso p{margin:2px 0;color:#4a4d52}.m{font:12px monospace}@page{margin:14mm}</style></head>
-  <body><h1>${esc(maq.nombre)} · Manual de montaje</h1><p>${esc(maq.modelo)} · ${doc.grupos.length} pasos · Stonward Dynamics</p>${filas}
+  <body><h1>${esc(maq.nombre)} · ${T("Manual de montaje", "Assembly manual")}</h1><p>${esc(maq.modelo)} · ${doc.grupos.length} ${T("pasos", "steps")} · Stonward Dynamics</p>${filas}
   <script>addEventListener("load",()=>setTimeout(()=>print(),400))<\/script></body></html>`);
   w.document.close();
 });
@@ -142,11 +151,11 @@ function aplicar() {
     const hasta = new Map(doc.grupos.map((g) => [g.nombre, g.paso]));
     V().modos((n) => { const p = hasta.get(n) ?? 0; return p > paso ? "oculto" : p === paso ? "foco" : "normal"; });
     const g = doc.grupos[paso - 1];
-    aviso.innerHTML = g ? `<b>Paso ${paso}</b> · ${esc(visible(g))}` : "";
+    aviso.innerHTML = g ? `<b>${T("Paso", "Step")} ${paso}</b> · ${esc(visible(g))}` : "";
   } else if (pestana === "bom" && aislado) {
     V().modos((n) => (n === aislado ? "foco" : "fantasma"));
     const g = doc.grupos.find((x) => x.nombre === aislado);
-    aviso.innerHTML = `<b>${esc(visible(g))}</b> · ${g.cantidad} pz · ${esc(material(g))}`;
+    aviso.innerHTML = `<b>${esc(visible(g))}</b> · ${g.cantidad} ${T("pz", "pcs")} · ${esc(material(g))}`;
   } else { V().modos(null); aviso.innerHTML = ""; }
 }
 
@@ -155,13 +164,13 @@ function pintarPlanos() {
   let ult = null, html = "";
   doc.grupos.forEach((g, i) => {
     if (g.eslabon !== ult) { ult = g.eslabon; html += `<li><span class="sub">${esc(subconjunto(g.eslabon))}</span></li>`; }
-    html += `<li><span>${esc(visible(g))}<small>${mm(g.mayor)} mm · ${g.archivos.length} STL</small></span><button class="btn chico" data-plano="${i}">Plano</button><button class="btn chico" data-stl="${i}">STL</button></li>`;
+    html += `<li><span>${esc(visible(g))}<small>${mm(g.mayor)} mm · ${g.archivos.length} STL</small></span><button class="btn chico" data-plano="${i}">${T("Plano", "Drawing")}</button><button class="btn chico" data-stl="${i}">STL</button></li>`;
   });
   $("#pl-lista").innerHTML = html;
 }
 $("#pl-lista").addEventListener("click", async (e) => {
   const b = e.target.closest("button"); if (!b) return;
-  if (!listo) { b.textContent = "Cargando…"; await new Promise((r) => addEventListener("visor-listo", r, { once: true })); }
+  if (!listo) { b.textContent = T("Cargando…", "Loading…"); await new Promise((r) => addEventListener("visor-listo", r, { once: true })); }
   if (b.dataset.plano) plano(doc.grupos[+b.dataset.plano]);
   if (b.dataset.stl) {
     const g = doc.grupos[+b.dataset.stl], zip = V().zip, base = `${maq.nombre}-${visible(g)}`.replace(/[^\w.-]+/g, "_");
@@ -193,9 +202,9 @@ function plano(g) {
   const caja = new THREE.Box3().setFromObject(pieza), tam = caja.getSize(new THREE.Vector3()), cen = caja.getCenter(new THREE.Vector3());
   // vistas (dir = lado donde está el observador): frontal desde -Y, superior desde +Z, lateral izquierda desde -X
   const vistas = [
-    { t: "Vista frontal", dir: [0, -1, 0], up: [0, 0, 1], w: tam.x, h: tam.z, cw: "X", ch: "Z" },
-    { t: "Vista superior", dir: [0, 0, 1], up: [0, 1, 0], w: tam.x, h: tam.y, cw: "X", ch: "Y" },
-    { t: "Vista lateral izquierda", dir: [-1, 0, 0], up: [0, 0, 1], w: tam.y, h: tam.z, cw: "Y", ch: "Z" },
+    { t: T("Vista frontal", "Front view"), dir: [0, -1, 0], up: [0, 0, 1], w: tam.x, h: tam.z, cw: "X", ch: "Z" },
+    { t: T("Vista superior", "Top view"), dir: [0, 0, 1], up: [0, 1, 0], w: tam.x, h: tam.y, cw: "X", ch: "Y" },
+    { t: T("Vista lateral izquierda", "Left side view"), dir: [-1, 0, 0], up: [0, 0, 1], w: tam.y, h: tam.z, cw: "Y", ch: "Z" },
   ];
   // escala normalizada común a las tres vistas
   const areaW = (W - 2 * M - 120) / 2, areaH = (H - 2 * M - 300) / 2;
@@ -233,17 +242,17 @@ function plano(g) {
   txt("STONWARD DYNAMICS", 20, 46, "700 30px Montserrat, sans-serif");
   txt(visible(g), 20, 116, ajusta(x, visible(g), 420, 600, 24));
   txt(`${maq.nombre} · ${subconjunto(g.eslabon)}`, 470, 116, ajusta(x, `${maq.nombre} · ${subconjunto(g.eslabon)}`, 410, 400, 20));
-  x.fillStyle = "#8a8d92"; txt("MATERIAL", 20, 166, "500 15px 'JetBrains Mono', monospace"); txt("CANT.", 470, 166, "500 15px 'JetBrains Mono', monospace"); txt("ESCALA", 695, 166, "500 15px 'JetBrains Mono', monospace");
+  x.fillStyle = "#8a8d92"; txt("MATERIAL", 20, 166, "500 15px 'JetBrains Mono', monospace"); txt(T("CANT.", "QTY"), 470, 166, "500 15px 'JetBrains Mono', monospace"); txt(T("ESCALA", "SCALE"), 695, 166, "500 15px 'JetBrains Mono', monospace");
   x.fillStyle = "#0b1626";
   txt(material(g), 20, 200, ajusta(x, material(g), 430, 400, 19));
   txt(String(g.cantidad), 470, 200, "600 22px Montserrat, sans-serif");
   txt(factor >= 1 ? `${factor}:1` : `1:${Math.round(1 / factor)}`, 695, 200, "600 22px Montserrat, sans-serif");
   x.fillStyle = "#8a8d92"; x.font = "400 16px 'JetBrains Mono', monospace";
-  x.fillText(`Cotas en mm · primer diedro · medidas generales del conjunto · ${new Date().toISOString().slice(0, 10)}`, M + 24, H - M - 24);
+  x.fillText(`${T("Cotas en mm · primer diedro · medidas generales del conjunto", "Dimensions in mm · first-angle projection · overall dimensions")} · ${new Date().toISOString().slice(0, 10)}`, M + 24, H - M - 24);
 
   $("#plano-titulo").textContent = `${maq.nombre} · ${visible(g)}`;
   $("#plano").hidden = false;
-  $("#plano-png").onclick = () => cv.toBlob((b) => bajar(b, `${maq.nombre}-${visible(g)}-plano.png`.replace(/[^\w.-]+/g, "_")));
+  $("#plano-png").onclick = () => cv.toBlob((b) => bajar(b, `${maq.nombre}-${visible(g)}-${T("plano", "drawing")}.png`.replace(/[^\w.-]+/g, "_")));
 }
 const redondo = (v) => (v >= 100 ? Math.round(v) : Math.round(v * 10) / 10);
 // tamaño de letra que hace caber el texto en su celda del cajetín

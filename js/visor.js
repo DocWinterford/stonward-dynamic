@@ -6,11 +6,13 @@ import { STLLoader } from "three/addons/STLLoader.js";
 import { RoomEnvironment } from "three/addons/RoomEnvironment.js";
 
 const $ = (s) => document.querySelector(s);
+const EN = document.documentElement.lang === "en", PAG = EN ? "maquina-en.html" : "maquina.html";
 const id = new URLSearchParams(location.search).get("m") || "polarone";
 const maq = (window.STONWARD_MAQUINAS || []).find((m) => m.id === id) || window.STONWARD_MAQUINAS[0];
 
 // ---- ficha ----
 document.title = `${maq.nombre} · Stonward Dynamics`;
+document.querySelectorAll(".idioma").forEach((l) => { l.href = l.getAttribute("href").split("?")[0] + location.search; });
 $("#f-nombre").textContent = maq.nombre; $("#f-miga").textContent = maq.nombre;
 $("#f-modelo").textContent = maq.modelo;
 $("#f-resumen").textContent = maq.resumen;
@@ -19,7 +21,7 @@ $("#f-datos").innerHTML = maq.datos.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`
 $("#f-driver").textContent = maq.driver || "";
 const desc = $("#f-descargar");
 if (maq.paquete) desc.href = maq.paquete; else desc.style.display = "none";
-$("#f-otras").innerHTML = window.STONWARD_MAQUINAS.filter((m) => m.id !== maq.id && m.estado === "disponible").map((m) => `<a class="btn chico" href="maquina.html?m=${m.id}">${m.nombre}</a>`).join("");
+$("#f-otras").innerHTML = window.STONWARD_MAQUINAS.filter((m) => m.id !== maq.id && m.estado === "disponible").map((m) => `<a class="btn chico" href="${PAG}?m=${m.id}">${m.nombre}</a>`).join("");
 
 // ---- escena ----
 const caja = $("#visor");
@@ -45,11 +47,11 @@ addEventListener("resize", tam); tam();
 // ---- carga del paquete con barra de progreso ----
 const barra = $("#barra"), estado = $("#estado");
 async function bajar(url) {
-  const r = await fetch(url); if (!r.ok) throw new Error(`no se pudo bajar ${url} (${r.status})`);
+  const r = await fetch(url); if (!r.ok) throw new Error(`${EN ? "could not download" : "no se pudo bajar"} ${url} (${r.status})`);
   const total = +r.headers.get("content-length") || 0;
   if (!r.body || !total) return r.arrayBuffer();
   const lector = r.body.getReader(), trozos = []; let n = 0;
-  for (;;) { const { done, value } = await lector.read(); if (done) break; trozos.push(value); n += value.length; barra.style.width = `${(60 * n) / total}%`; estado.textContent = `Bajando ${maq.nombre}… ${(n / 1048576).toFixed(1)} / ${(total / 1048576).toFixed(1)} MB`; }
+  for (;;) { const { done, value } = await lector.read(); if (done) break; trozos.push(value); n += value.length; barra.style.width = `${(60 * n) / total}%`; estado.textContent = `${EN ? "Downloading" : "Bajando"} ${maq.nombre}… ${(n / 1048576).toFixed(1)} / ${(total / 1048576).toFixed(1)} MB`; }
   const out = new Uint8Array(n); let o = 0; for (const t of trozos) { out.set(t, o); o += t.length; } return out.buffer;
 }
 function piezasDe(json) {
@@ -92,10 +94,10 @@ function tenderCables(json, P) {
   });
 }
 async function cargar() {
-  if (!maq.paquete) { estado.textContent = "Esta máquina todavía está en desarrollo."; barra.parentElement.style.display = "none"; return; }
+  if (!maq.paquete) { estado.textContent = (EN ? "This machine is still in development." : "Esta máquina todavía está en desarrollo."); barra.parentElement.style.display = "none"; return; }
   const zip = await JSZip.loadAsync(await bajar(maq.paquete));
   const f = zip.file("maquina.json") || zip.file("calibracion.json");
-  if (!f) throw new Error("el paquete no trae maquina.json ni calibracion.json");
+  if (!f) throw new Error(EN ? "the package has no maquina.json or calibracion.json" : "el paquete no trae maquina.json ni calibracion.json");
   const json = JSON.parse(await f.async("string")), piezas = piezasDe(json).filter((p) => p.archivo && zip.file(p.archivo));
   const P = await posesDe(json, zip);
   const loader = new STLLoader();
@@ -109,7 +111,7 @@ async function cargar() {
     if (p.eslabon && P[p.eslabon]) P[p.eslabon].decompose(m.position, m.quaternion, m.scale);
     m.renderOrder = op < 1 ? 2 : 0; m.userData.nombre = p.nombre;
     maquina.add(m); mallas.push(m);
-    barra.style.width = `${60 + (40 * (i + 1)) / piezas.length}%`; estado.textContent = `Armando ${maq.nombre}… pieza ${i + 1} de ${piezas.length}`;
+    barra.style.width = `${60 + (40 * (i + 1)) / piezas.length}%`; estado.textContent = EN ? `Assembling ${maq.nombre}… part ${i + 1} of ${piezas.length}` : `Armando ${maq.nombre}… pieza ${i + 1} de ${piezas.length}`;
   }
   tenderCables(json, P);
   encuadrar();
@@ -154,13 +156,13 @@ function encuadrarA(nombres) {
   controls.target.copy(c); camera.position.copy(c).addScaledVector(dir, s * 1.9);
   controls.autoRotate = false; $("#b-girar").classList.remove("lleno");
 }
-cargar().catch((e) => { estado.textContent = "No se pudo abrir el paquete: " + e.message; });
+cargar().catch((e) => { estado.textContent = (EN ? "Could not open the package: " : "No se pudo abrir el paquete: ") + e.message; });
 
 // ---- herramientas ----
 $("#b-girar").addEventListener("click", (e) => { controls.autoRotate = !controls.autoRotate; e.currentTarget.classList.toggle("lleno", controls.autoRotate); });
 let abierta = 0, anim = null;
 $("#b-explotar").addEventListener("click", (e) => {
-  const meta = abierta ? 0 : 1; e.currentTarget.textContent = meta ? "Armar" : "Explosionar";
+  const meta = abierta ? 0 : 1; e.currentTarget.textContent = meta ? (EN ? "Assemble" : "Armar") : (EN ? "Explode" : "Explosionar");
   const desde = abierta, t0 = performance.now(); cancelAnimationFrame(anim);
   const paso = (t) => {
     const k = Math.min(1, (t - t0) / 900), f = desde + (meta - desde) * (1 - Math.pow(1 - k, 3)); abierta = f;

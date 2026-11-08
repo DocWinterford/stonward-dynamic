@@ -1,6 +1,7 @@
 // Stonward Dynamics — comportamiento del sitio (sin dependencias)
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
+  const EN = document.documentElement.lang === "en";
   const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---- navegación: fondo al bajar y menú en celular ----
@@ -23,7 +24,7 @@
       el.className = `tarjeta aparece d${(i % 3) + 1}`;
       el.innerHTML = `
         <div class="medio">
-          <span class="sello ${disp ? "vivo" : "pronto"}">${disp ? (m.porDefecto ? "Por defecto" : "Disponible") : "En desarrollo"}</span>
+          <span class="sello ${disp ? "vivo" : "pronto"}">${disp ? (m.porDefecto ? (EN ? "Default" : "Por defecto") : (EN ? "Available" : "Disponible")) : (EN ? "In development" : "En desarrollo")}</span>
           ${m.imagen ? `<img src="${m.imagen}" alt="${m.nombre}" loading="lazy">` : `<div style="position:absolute;inset:0;display:grid;place-items:center;color:var(--texto-3);font-family:var(--mono);font-size:13px">${dibujoDelta()}</div>`}
         </div>
         <div class="cuerpo">
@@ -33,7 +34,7 @@
           <p>${m.resumen}</p>
           <dl class="datos">${m.datos.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
           <div class="pie">
-            ${disp ? `<a class="btn chico primario" href="maquina.html?m=${m.id}">Ver en 3D</a><a class="btn chico" href="${m.paquete}" download>Descargar paquete</a>` : `<span class="enlace">Pronto en 3D</span>`}
+            ${disp ? `<a class="btn chico primario" href="${EN ? "maquina-en.html" : "maquina.html"}?m=${m.id}">${EN ? "View in 3D" : "Ver en 3D"}</a><a class="btn chico" href="${m.paquete}" download>${EN ? "Download package" : "Descargar paquete"}</a>` : `<span class="enlace">${EN ? "3D coming soon" : "Pronto en 3D"}</span>`}
           </div>
         </div>`;
       lista.appendChild(el);
@@ -53,7 +54,6 @@
   // ---- repositorio de artículos ----
   const listaArt = $("#lista-articulos"), filtros = $("#filtros");
   if (listaArt && window.STONWARD_ARTICULOS) {
-    const EN = document.documentElement.lang === "en";
     const NOMBRE = EN ? { todos: "All", robotica: "Robotics", microbiologia: "Microbiology", bionica: "Bionics", ia: "AI", fabricacion: "Manufacturing", software: "Software" }
       : { todos: "Todos", robotica: "Robótica", microbiologia: "Microbiología", bionica: "Biónica", ia: "IA", fabricacion: "Fabricación", software: "Software" };
     let area = "todos", texto = "";

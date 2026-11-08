@@ -21,7 +21,7 @@
           <p>${m.resumen}</p>
           <p class="uso"><span class="rotulo tenue" style="display:block;margin-bottom:6px">${EN ? "Application" : "Aplicación"}</span>${m.uso || ""}</p>
           <dl class="especif">${m.datos.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
-          ${m.estado === "disponible" ? `<div class="acciones"><a class="btn lleno" href="maquina.html?m=${m.id}">${EN ? "View in 3D" : "Ver en 3D"}</a><a class="btn" href="${m.paquete}" download>${EN ? "Technical package" : "Paquete técnico"}</a></div>` : ""}
+          ${m.estado === "disponible" ? `<div class="acciones"><a class="btn lleno" href="${EN ? "maquina-en.html" : "maquina.html"}?m=${m.id}">${EN ? "View in 3D" : "Ver en 3D"}</a><a class="btn" href="${m.paquete}" download>${EN ? "Technical package" : "Paquete técnico"}</a></div>` : ""}
         </div>
       </article>`).join("");
     if ("IntersectionObserver" in window && !quieto) {

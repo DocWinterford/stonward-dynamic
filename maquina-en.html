@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Machine · Stonward Dynamics</title>
+<meta name="description" content="Stonward Dynamics: manufacturing software and machines designed in Mexico.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Stonward Dynamics">
+<meta property="og:title" content="Machine · Stonward Dynamics">
+<meta property="og:description" content="Stonward Dynamics: manufacturing software and machines designed in Mexico.">
+<meta property="og:image" content="https://docwinterford.github.io/stonward-dynamic/img/polarone.jpg">
+<meta property="og:url" content="https://docwinterford.github.io/stonward-dynamic/maquina-en.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1626">
+<link rel="icon" href="img/icono.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/claro.css">
+<link rel="stylesheet" href="css/maquina.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
+</head>
+<body>
+<nav class="barra" id="nav">
+  <a class="logo" href="index-en.html" aria-label="Stonward Dynamics">
+    <svg viewBox="50 30 522 556" fill="currentColor"><path d="M292.844 35.784V356.122L237.139 440.552L133.702 481.219L206.638 304.845L237.139 35.784Z"/><path d="M325.627 35.784H373.69L406.133 304.845L486.64 481.219L385.706 440.552L325.627 356.122Z"/><path d="M56.471 536.252L251.128 464.157L271.555 499.003H338.844L364.078 464.157L565.945 536.252V580.711H385.706L364.078 559.082H251.128L213.273 580.711H56.471Z"/><path d="M306 386.624L349.301 411.624V461.624L306 486.624L262.699 461.624V411.624Z"/></svg>
+  </a>
+  <span class="marca-txt">STONWARD DYNAMICS</span>
+  <div class="menu">
+    <a href="index-en.html#software">Software</a>
+    <a href="index-en.html#maquinas" class="activo">Machines</a>
+    <a href="index-en.html#prototipos">Prototypes</a>
+    <a href="index-en.html#investigacion">Research</a>
+    <a href="manual.html">Manual</a>
+    <a href="educacion.html">Education</a>
+    <a href="index-en.html#contacto">Contact</a>
+  </div>
+  <span class="relleno"></span>
+  <a class="idioma" href="maquina.html" hreflang="es" lang="es">ES</a>
+  <a class="contacto-mini" href="mailto:mr.winterford@gmail.com">Write to us</a>
+  <a class="cta" href="solidmaker-en.html#descargas">Download SolidMaker</a>
+  <button class="hamb" id="nav-menu" aria-label="Menu">≡</button>
+</nav>
+
+<main class="maq">
+  <div class="visor" id="visor">
+    <div class="carga" id="carga"><div><div id="estado">Preparing the viewer…</div><div class="progreso"><i id="barra"></i></div></div></div>
+    <div class="aviso" id="aviso"></div>
+    <div class="ayuda">Drag to orbit · wheel to zoom · right-click to pan</div>
+    <div class="herramientas">
+      <button class="btn chico lleno" id="b-girar">Rotate</button>
+      <button class="btn chico" id="b-explotar">Explode</button>
+      <button class="btn chico" id="b-vista">Fit view</button>
+    </div>
+  </div>
+
+  <div class="columna">
+    <section class="ficha">
+      <div class="migas"><a href="index-en.html#maquinas">Machines</a> / <span id="f-miga">Stonward</span></div>
+      <h1 id="f-nombre">Machine</h1>
+      <p class="modelo" id="f-modelo"></p>
+      <p class="resumen" id="f-resumen"></p>
+      <p class="resumen" id="f-uso"></p>
+      <div class="acciones"><a class="btn lleno" id="f-descargar" download>SolidMaker package</a><a class="btn" href="#documentacion">Documentation</a></div>
+      <h4>Specifications</h4>
+      <dl class="datos" id="f-datos"></dl>
+      <h4>Control</h4>
+      <p class="resumen" id="f-driver"></p>
+      <h4>Installing in SolidMaker</h4>
+      <ol class="pasos-inst">
+        <li>Download the .zip package.</li>
+        <li>In SolidMaker open MACHIN → Máquina → Adquirir nueva máquina (Acquire new machine).</li>
+        <li>Pick the .zip and restart SolidMaker.</li>
+      </ol>
+    </section>
+
+    <section class="doc" id="documentacion">
+      <p class="rotulo">Technical documentation</p>
+      <div class="pestanas" role="tablist">
+        <button class="activa" data-p="bom" role="tab">Bill of materials</button>
+        <button data-p="montaje" role="tab">Assembly</button>
+        <button data-p="planos" role="tab">Drawings and files</button>
+      </div>
+
+      <div class="panel activo" id="p-bom">
+        <div class="herr-doc">
+          <input type="search" id="bom-filtro" placeholder="Search part or material">
+          <button class="btn chico" id="bom-csv">Download CSV</button>
+        </div>
+        <p class="nota" id="bom-total">Reading the package…</p>
+        <table class="bom">
+          <thead><tr><th>No.</th><th>Part</th><th>Qty</th><th>Largest size (mm)</th></tr></thead>
+          <tbody id="bom-filas"></tbody>
+        </table>
+        <p class="nota">Click a row to isolate the part in the viewer; click again to release it. Quantities and sizes come from the model geometry; check them against the drawing before buying.</p>
+      </div>
+
+      <div class="panel" id="p-montaje">
+        <div class="control-paso">
+          <button class="btn chico" id="m-ant" aria-label="Previous step">‹</button>
+          <div><b id="m-num">Step 0</b><span id="m-titulo">No parts</span></div>
+          <button class="btn chico lleno" id="m-sig" aria-label="Next step">›</button>
+        </div>
+        <input type="range" id="m-barra" min="0" value="0" aria-label="Assembly step">
+        <div class="acciones"><button class="btn chico" id="m-todo">Show full machine</button><button class="btn chico" id="m-reproducir">Play</button><button class="btn chico" id="m-manual">Assembly manual (PDF)</button></div>
+        <ol class="secuencia" id="m-lista"></ol>
+        <p class="nota">Sequence generated from the model: the fixed structure first, then each axis in kinematic-chain order, and within each one from the bottom up. The part fitted at each step is shown in copper.</p>
+      </div>
+
+      <div class="panel" id="p-planos">
+        <p class="nota">Each drawing is generated here with the three orthographic views (front, top and side) and overall dimensions in millimetres. The STL files are the same ones in the package.</p>
+        <ul class="archivos" id="pl-lista"></ul>
+      </div>
+    </section>
+
+    <section class="otras">
+      <h4>Other machines</h4>
+      <div class="acciones" id="f-otras"></div>
+    </section>
+  </div>
+</main>
+
+<div class="modal" id="plano" hidden>
+  <div class="hoja">
+    <div class="hoja-barra"><b id="plano-titulo">Drawing</b><span class="relleno"></span><button class="btn chico lleno" id="plano-png">Download PNG</button><button class="btn chico" id="plano-cerrar">Close</button></div>
+    <canvas id="plano-lienzo" width="2339" height="1654"></canvas>
+  </div>
+</div>
+
+<script src="data/maquinas.en.js"></script>
+<script src="vendor/jszip.min.js"></script>
+<script src="js/sitio.js"></script>
+<script type="module" src="js/visor.js"></script>
+<script type="module" src="js/doc-maquina.js"></script>
+</body>
+</html>
