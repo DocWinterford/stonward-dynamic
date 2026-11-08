@@ -324,7 +324,22 @@ window.SM_CURSOS = [
         herr: ["ensamble--nuevo-ensamble", "ensamble--fijar-liberar", "ensamble--actuadores-motores"],
         reto: "Cambia el volumen a 300 × 300 × 300 mm y ajusta solo las cotas del marco."
       },
-      { id: "p3", titulo: "Brazo robótico de seis ejes", minutos: 240, listo: false },
+      {
+        id: "p3", titulo: "Brazo robótico de seis ejes", minutos: 240, listo: true,
+        objetivo: "Diseñar un brazo articulado de seis ejes, como el SD-R7, con sus reductores y su cadena de juntas lista para moverse.",
+        pasos: [
+          "Define el alcance y la carga (por ejemplo 600 mm y 2 kg). Reparte el alcance entre el brazo (J2-J3) y el antebrazo (J3-J5).",
+          "Base y J1: un pedestal fijo y una corona giratoria sobre un eje vertical. Únelos con una relación Rotacional y pon un motor NEMA 23 en J1.",
+          "Hombro J2 y codo J3: modela cada eslabón como una pieza vaciada con Vaciado para aligerarla. En cada articulación coloca un reductor y un motor.",
+          "Muñeca J4, J5 y J6: tres ejes que se cruzan en un punto. Así se separa la posición de la orientación de la herramienta.",
+          "Une cada eslabón con el anterior mediante una Rotacional. El orden importa: cada junta mueve todo lo que está después de ella.",
+          "Prueba cada motor por separado con Probar y luego varios a la vez: los eslabones siguen la cadena.",
+          "Revisa interferencias en las posiciones extremas de cada junta y ajusta los topes.",
+          "Compara tu diseño con el paquete del SD-R7 en Máquinas: ahí los eslabones y juntas se describen para que Machin calcule la cinemática inversa."
+        ],
+        herr: ["corte--vaciado", "ensamble--insertar-pieza", "ensamble--actuadores-motores", "ensamble--fijar-liberar"],
+        reto: "Agrega una mesa giratoria como séptimo eje y pruébala junto con J1."
+      },
       {
         id: "p4", titulo: "Banco de pruebas con PLC en Laboratory", minutos: 120, listo: true,
         objetivo: "Cablear un PLC con botones, sensores y una carga, programarlo en escalera y comprobar el circuito.",
