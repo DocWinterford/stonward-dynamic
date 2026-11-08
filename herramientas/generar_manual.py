@@ -129,6 +129,30 @@ MODULOS = [("machin", "Machin", "Módulo 02"), ("polarslicer", "PolarSlicer", "M
 def celdas(f):
     return [c.strip() for c in f.strip().strip("|").split("|")]
 
+# Primeros pasos de cada módulo: el camino mínimo para lograr algo en la primera sesión.
+PRIMEROS = {
+    "machin": ["En el menú lateral entra a Maquinado: se abre Machin con la máquina por defecto, PolarONE.",
+               "En el menú Máquina elige otra máquina Stonward o usa «Adquirir nueva máquina» para instalar un paquete .zip.",
+               "Desde PolarSlicer pulsa «Enviar a Machin», o abre un archivo de G-code o S-code.",
+               "Pulsa reproducir para simular la trayectoria con la cinemática real. El semáforo avisa si algún punto queda fuera de alcance.",
+               "Para mover la máquina real, conecta el controlador por USB y abre la comunicación en el panel izquierdo."],
+    "polarslicer": ["En el menú lateral entra a Laminador: se abre PolarSlicer.",
+                    "Elige la máquina en el selector junto a «Enviar a Machin». La salida cambia sola entre G-code y S-code según su cinemática.",
+                    "Importa la pieza en STL y acomódala en el disco o la cama.",
+                    "Ajusta boquilla, extrusor, relleno, soportes y modo de rebanado (plano, diagonal o elíptico).",
+                    "Rebana, revisa capa por capa con el deslizador y envía el resultado a Machin."],
+    "laboratory": ["En el menú lateral entra a Laboratorio: se abre el banco de pruebas.",
+                   "Importa el ensamble de PolarCAD. Sus piezas conservan su nombre y su posición.",
+                   "En Cinemática revisa las juntas y usa «Resolver mecanismo» para mecanismos de lazo cerrado.",
+                   "En Electrónica agrega fuentes, PLC, sensores y actuadores, y cabléalos.",
+                   "En Control programa la escalera, pasa a RUN y observa la máquina y el circuito responder."],
+    "analizer": ["En el menú lateral entra a Análisis: se abre Analizer.",
+                 "Carga la pieza y genera la malla en la pestaña Malla. Revisa el diagnóstico antes de seguir.",
+                 "En FEA asigna material, apoyos y cargas, y calcula esfuerzos y deformaciones.",
+                 "En CFD elige viento o flujo, define la velocidad y corre la simulación.",
+                 "En Resultados recorre los campos con la escala de color y exporta las imágenes que necesites."],
+}
+
 def modulo_html(clave, nombre, num):
     texto = (RAIZ / f"docs/manual/{clave}-lista.md").read_text(encoding="utf-8")
     cab, *secs = re.split(r"\n## ", texto)
@@ -136,6 +160,8 @@ def modulo_html(clave, nombre, num):
     partes = [f'''<section class="franja mod-sec" id="{clave}">
   <div class="franja-cab"><span class="rotulo">{num} / {nombre}</span><a class="rotulo tenue" href="#modulos">Volver a los módulos ↑</a></div>
   <div class="relleno-celda" style="border-bottom:1px solid var(--linea)"><h2 class="titulo">{nombre}.</h2>{"".join(f'<p class="parrafo{" grande" if i == 0 else ""}">{p}</p>' for i, p in enumerate(intro))}</div>''']
+    if clave in PRIMEROS:
+        partes.append('<div class="relleno-celda primeros" style="border-bottom:1px solid var(--linea)"><span class="rotulo">Primeros pasos</span><ol>' + "".join(f"<li>{html.escape(x)}</li>" for x in PRIMEROS[clave]) + "</ol></div>")
     indice = []
     for s in secs:
         lin = s.split("\n")

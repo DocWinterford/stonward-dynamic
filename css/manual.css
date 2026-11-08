@@ -75,3 +75,5 @@ kbd { font-family: var(--mono); font-size: 12px; border: 1px solid var(--linea-2
   .cap.ancha-mod, .otros { padding-left: 16px; padding-right: 16px; }
   .menu-cuerpo > .cap:nth-child(n+3) { grid-column: auto; }
 }
+.primeros ol { margin: 14px 0 0; padding-left: 22px; display: grid; gap: 8px; max-width: 76ch; color: var(--tinta-2); counter-reset: none; }
+.primeros li::marker { font-family: var(--mono); color: var(--acento); }
