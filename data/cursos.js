@@ -138,23 +138,154 @@ window.SM_CURSOS = [
     id: "clasicas", titulo: "Piezas clásicas", nivel: "Intermedio",
     resumen: "Las piezas que todo ingeniero dibuja alguna vez, paso a paso.",
     lecciones: [
-      { id: "c1", titulo: "Soporte en L con nervio", minutos: 25, listo: false },
-      { id: "c2", titulo: "Brida con agujeros en patrón", minutos: 20, listo: false },
-      { id: "c3", titulo: "Engrane recto desde la biblioteca", minutos: 15, listo: false },
-      { id: "c4", titulo: "Polea GT2 de 20 dientes", minutos: 15, listo: false },
-      { id: "c5", titulo: "Tornillo y tuerca hexagonal con rosca", minutos: 25, listo: false },
-      { id: "c6", titulo: "Gabinete de lámina doblada", minutos: 30, listo: false }
+      {
+        id: "c1", titulo: "Soporte en L con nervio", minutos: 25, listo: true,
+        objetivo: "Modelar un soporte de esquina resistente: dos placas, un nervio de refuerzo y taladros de montaje.",
+        pasos: [
+          "En la vista Frontal dibuja una «L»: brazo horizontal de 60 mm, brazo vertical de 50 mm, espesor de 6 mm. Acótala por completo.",
+          "Extruye el contorno 40 mm. Ya tienes las dos placas en una sola pieza.",
+          "Sobre la cara lateral dibuja un triángulo rectángulo de 30 × 30 mm apoyado en la esquina interior.",
+          "Extrúyelo 6 mm centrado: ese es el nervio que evita que la «L» se abra con la carga.",
+          "Haz dos Taladros de Ø6,5 en cada brazo, a 15 mm de los bordes, para tornillos M6.",
+          "Redondea la esquina interior con Fillet cóncavo de 4 mm y las exteriores con Fillet convexo de 2 mm."
+        ],
+        herr: ["operaciones--extruir-contorno-recto", "anotacion--cota", "mecanizado--taladro", "acabado--fillet-concavo", "acabado--fillet-convexo"],
+        reto: "Agrega un segundo nervio y cambia el espesor a 8 mm editando la primera operación."
+      },
+      {
+        id: "c2", titulo: "Brida con agujeros en patrón", minutos: 20, listo: true,
+        objetivo: "Hacer una brida de tubería con barreno central y pernos repartidos en círculo.",
+        pasos: [
+          "En la vista Frontal dibuja medio perfil: disco de Ø150 × 18 mm con cuello de Ø80 × 30 mm.",
+          "Usa Revolución a 360° alrededor del eje central.",
+          "Corta el barreno central de Ø60 con Corte extruido pasante.",
+          "Haz un Taladro de Ø18 a 60 mm del centro, sobre la cara del disco.",
+          "Repítelo con Matriz circular: 8 copias a 360°.",
+          "Pon Chaflán de 2 mm en el borde del barreno y Fillet de 3 mm entre disco y cuello."
+        ],
+        herr: ["operaciones--revolucion-usa-el-perfil", "corte--corte-extruido", "mecanizado--taladro", "patrones--matriz-circular", "acabado--chaflan"],
+        reto: "Convierte la brida en ciega: quita el barreno central y deja solo los pernos."
+      },
+      {
+        id: "c3", titulo: "Engrane recto desde la biblioteca", minutos: 15, listo: true,
+        objetivo: "Insertar un engrane normalizado, ajustar módulo y dientes, y adaptarlo a un eje.",
+        pasos: [
+          "Abre la Biblioteca en el panel derecho y busca «engrane».",
+          "Elige engrane recto y escribe módulo 1,5 y 30 dientes. El diámetro primitivo resulta de 45 mm (m × z).",
+          "Insértalo. Es un sólido exacto, no una malla: se puede cortar y taladrar.",
+          "Corta el barreno de Ø10 en el centro y un chavetero de 3 × 1,5 mm.",
+          "Inserta un segundo engrane de 15 dientes con el mismo módulo: la distancia entre centros es (30 + 15) × 1,5 / 2 = 33,75 mm."
+        ],
+        herr: ["corte--corte-extruido", "anotacion--medir", "material--propiedades"],
+        reto: "Arma un tren de 3 engranes con relación total 4:1 usando módulo 1."
+      },
+      {
+        id: "c4", titulo: "Polea GT2 de 20 dientes", minutos: 15, listo: true,
+        objetivo: "Usar la polea GT2 de la biblioteca y entender su perfil para que la banda asiente bien.",
+        pasos: [
+          "Busca «polea GT2» en la Biblioteca y elige 20 dientes y banda de 6 mm.",
+          "El paso es de 2 mm: 20 dientes dan una circunferencia primitiva de 40 mm, o sea 40 mm de avance por vuelta.",
+          "Revisa el barreno de 5 mm para eje de motor NEMA 17 y el tornillo prisionero.",
+          "Mide el diámetro exterior con Medir y compáralo con el primitivo: la diferencia es la altura del diente."
+        ],
+        herr: ["anotacion--medir", "anotacion--propiedades-fisicas"],
+        reto: "Calcula cuántos pasos por milímetro necesita un motor de 200 pasos con 16 micropasos y esta polea."
+      },
+      {
+        id: "c5", titulo: "Tornillo y tuerca hexagonal con rosca", minutos: 25, listo: true,
+        objetivo: "Modelar un tornillo M8 y su tuerca con rosca real, y comprobar que encajan.",
+        pasos: [
+          "Dibuja un hexágono de 13 mm entre caras y extrúyelo 5,3 mm: es la cabeza del M8.",
+          "Sobre la cabeza dibuja un círculo de Ø8 y extrúyelo 30 mm: el vástago.",
+          "Aplica Rosca de tornillo al vástago con paso 1,25 mm (rosca métrica gruesa).",
+          "En una pieza nueva dibuja otro hexágono de 13 mm y extrúyelo 6,5 mm: la tuerca.",
+          "Aplica Taladro roscado M8 al centro de la tuerca.",
+          "Pon Chaflán de 0,8 mm en las aristas de la cabeza y de la tuerca, como en una pieza comercial."
+        ],
+        herr: ["mecanizado--rosca-de-tornillo", "mecanizado--taladro-roscado", "herramientas-de-dibujo-croquis--poligono", "acabado--chaflan"],
+        reto: "Repite con M5 (8 mm entre caras, paso 0,8) y compáralo con el de la Biblioteca."
+      },
+      {
+        id: "c6", titulo: "Gabinete de lámina doblada", minutos: 30, listo: true,
+        objetivo: "Diseñar una caja de lámina de 1,5 mm y obtener su desarrollo plano para corte.",
+        pasos: [
+          "Dibuja un rectángulo de 200 × 150 mm y crea una Brida base de 1,5 mm.",
+          "Selecciona las cuatro aristas y aplica Brida de arista de 80 mm hacia arriba: ya tienes la caja.",
+          "Agrega pestañas de 15 mm en dos lados para atornillar la tapa.",
+          "Corta ventilas rectangulares en un costado y repítelas con Matriz lineal.",
+          "Usa Desplegar para ver la lámina plana con las líneas de doblez; con Doblar regresa al estado armado."
+        ],
+        herr: ["chapa--brida-base", "chapa--brida-de-arista", "chapa--desplegar", "chapa--doblar", "patrones--matriz-lineal"],
+        reto: "Agrega un Nervio en el fondo para rigidizarlo y exporta el desarrollo como plano 2D."
+      }
     ]
   },
   {
     id: "ensambles", titulo: "Ensambles y movimiento", nivel: "Intermedio",
     resumen: "Une piezas con relaciones mecánicas y ponlas a moverse con motores.",
     lecciones: [
-      { id: "e1", titulo: "Insertar piezas y fijar la base", minutos: 15, listo: false },
-      { id: "e2", titulo: "Bisagras, deslizantes y roscas", minutos: 25, listo: false },
-      { id: "e3", titulo: "Engranes y bandas GT2", minutos: 25, listo: false },
-      { id: "e4", titulo: "Motores y servos: probar el mecanismo", minutos: 20, listo: false },
-      { id: "e5", titulo: "Interferencias y holguras", minutos: 20, listo: false }
+      {
+        id: "e1", titulo: "Insertar piezas y fijar la base", minutos: 15, listo: true,
+        objetivo: "Crear un ensamble, traer piezas y dejar fija la que no se mueve.",
+        pasos: [
+          "En el menú Ensamble elige Nuevo ensamble.",
+          "Con Insertar pieza trae la base y luego las demás piezas desde tus proyectos o la Biblioteca.",
+          "Selecciona la base y usa Fijar/Liberar: ya no se moverá aunque arrastres lo demás.",
+          "Coloca cada pieza a mano donde va. SolidMaker respeta tu posición al crear las relaciones.",
+          "Guarda con Guardar ensamble."
+        ],
+        herr: ["ensamble--nuevo-ensamble", "ensamble--insertar-pieza", "ensamble--fijar-liberar", "ensamble--guardar-ensamble"],
+        reto: "Ensambla el soporte en L sobre una placa y fíjala."
+      },
+      {
+        id: "e2", titulo: "Bisagras, deslizantes y roscas", minutos: 25, listo: true,
+        objetivo: "Dar a cada pieza el movimiento que tendría en la realidad.",
+        pasos: [
+          "Abre la consola de Uniones. Elige Rotacional y señala el eje común de dos piezas: es una bisagra.",
+          "Elige Deslizante entre un carro y su guía: solo se moverá a lo largo de ella.",
+          "Elige Rosca entre una tuerca y un husillo. Revisa que el diámetro coincida; el paso se toma de la Biblioteca.",
+          "En la sección Relaciones, pulsa Probar en cada tarjeta para verla moverse. Los topes se calculan donde la pieza choca.",
+          "Para unir piezas como si estuvieran soldadas, mantén Ctrl+A y toca cada pieza; al soltar quedan unidas."
+        ],
+        herr: ["ensamble--actuadores-motores"],
+        reto: "Haz un carro sobre guía movido por husillo y fija sus topes con «Clic»."
+      },
+      {
+        id: "e3", titulo: "Engranes y bandas GT2", minutos: 25, listo: true,
+        objetivo: "Transmitir giro entre ejes con engranes y con banda dentada.",
+        pasos: [
+          "Inserta dos engranes del mismo módulo, montados en ejes paralelos a la distancia correcta.",
+          "Usa Unir entre los dos: queda una relación de engranaje con el sentido de giro invertido.",
+          "Para la banda, inserta dos poleas GT2 y elige Banda en Uniones. La banda se dibuja asentada en los dientes y te da su longitud.",
+          "Prueba el motor de un eje: los engranes y la banda siguen la relación de dientes."
+        ],
+        herr: ["ensamble--actuadores-motores"],
+        reto: "Arma una reducción 3:1 por banda y verifica la longitud comercial más cercana."
+      },
+      {
+        id: "e4", titulo: "Motores y servos: probar el mecanismo", minutos: 20, listo: true,
+        objetivo: "Poner el ensamble a moverse con actuadores antes de fabricarlo.",
+        pasos: [
+          "Inserta un motor NEMA 17 de la Biblioteca. En Actuadores define su rotor.",
+          "Pulsa Probar: el motor gira y arrastra las piezas montadas en él, en cadena con engranes, bandas y husillos.",
+          "Inserta un servo. Ajusta el rango y la velocidad en su tarjeta; al chocar con algo invierte el sentido.",
+          "Pulsa Detener: todas las piezas regresan a su posición original."
+        ],
+        herr: ["ensamble--actuadores-motores"],
+        reto: "Haz una compuerta abatible movida por servo de 0 a 90°."
+      },
+      {
+        id: "e5", titulo: "Interferencias y holguras", minutos: 20, listo: true,
+        objetivo: "Encontrar piezas que se enciman antes de que lo descubra la máquina.",
+        pasos: [
+          "Abre la consola de Interferencias. Analiza todo el ensamble y muestra una barra de avance.",
+          "Cada pareja que se toca aparece con su mapa de holguras por cara, de −100 a 100.",
+          "Ajusta la tolerancia: las piezas se inflan ese valor para mostrar si quedan demasiado justas.",
+          "Resolver propone mover la pieza encimada el mínimo necesario, una por una, con Aceptar o Rechazar. Las piezas soldadas o relacionadas no se mueven."
+        ],
+        herr: ["ensamble--fijar-liberar"],
+        reto: "Mete un tornillo un milímetro de más en una placa y encuentra el choque con la consola."
+      }
     ]
   },
   {
