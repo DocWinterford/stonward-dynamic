@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User manual · SolidMaker</title>
+<meta name="description" content="SolidMaker user manual: modules, the PolarCAD screen and every tool explained with real screenshots.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Stonward Dynamics">
+<meta property="og:title" content="User manual · SolidMaker">
+<meta property="og:description" content="SolidMaker user manual: modules, the PolarCAD screen and every tool explained with real screenshots.">
+<meta property="og:image" content="https://docwinterford.github.io/stonward-dynamic/img/manual/polarcad-v2/01-pantalla-completa.jpg">
+<meta property="og:url" content="https://docwinterford.github.io/stonward-dynamic/manual-en.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1626">
+<link rel="icon" href="img/icono.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/claro.css">
+<link rel="stylesheet" href="css/manual.css">
+</head>
+<body class="manual">
+
+<!--NAV-->
+
+<main class="lienzo" style="margin-top:var(--nav)">
+
+<!-- BIENVENIDA -->
+<section class="franja" id="bienvenida">
+  <div class="franja-cab"><span class="rotulo">User manual</span><span class="rotulo tenue">SolidMaker · Beta</span></div>
+  <div class="celdas c2">
+    <div class="relleno-celda">
+      <img src="img/solidmaker-logo.png" alt="SolidMaker logo" style="width:64px;height:64px;border-radius:14px;margin-bottom:24px">
+      <h1 class="titulo">Welcome to SolidMaker.</h1>
+    </div>
+    <div class="relleno-celda">
+      <p class="parrafo grande" style="margin-top:0">Thank you for choosing SolidMaker. This manual goes with you from the first time you open the program to your first manufactured part.</p>
+      <p class="parrafo">Every screen, menu and tool appears here with a real screenshot of the program and an explanation of its fields: what each one means, which unit it takes and its default value. If at any point you are not sure what a button does, look it up in the tool index: every tool has its own link. The screenshots show the Spanish interface; SolidMaker can switch its language in Settings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="franja" id="modulos">
+  <div class="franja-cab"><span class="rotulo">01 / Your software</span><span class="rotulo tenue">Five modules, one file</span></div>
+  <div class="relleno-celda" style="border-bottom:1px solid var(--linea)"><p class="parrafo grande" style="margin:0">Your software has the following modules. They all work on the same project: the part you draw in PolarCAD is the same one you test in Laboratory, slice in PolarSlicer and make with Machin. You choose the module in the column on the left of the screen.</p></div>
+  <div class="celdas c5">
+    <a class="modulo" href="#polarcad"><span class="rotulo tenue">Module 01</span><h3>PolarCAD</h3><p>Part and assembly design. This is where you start.</p><span class="rotulo" style="display:block;margin:18px 0 0;color:var(--acento)">Documented</span></a>
+    <a class="modulo" href="#machin"><span class="rotulo tenue">Module 02</span><h3>Machin</h3><p>Machine control and simulation with its 3D twin.</p><span class="rotulo" style="display:block;margin:18px 0 0;color:var(--acento)">Documented</span></a>
+    <a class="modulo" href="#polarslicer"><span class="rotulo tenue">Module 03</span><h3>PolarSlicer</h3><p>Cartesian and polar print paths.</p><span class="rotulo" style="display:block;margin:18px 0 0;color:var(--acento)">Documented</span></a>
+    <a class="modulo" href="#laboratory"><span class="rotulo tenue">Module 04</span><h3>Laboratory</h3><p>Test bench: electronics, PLC and interferences.</p><span class="rotulo" style="display:block;margin:18px 0 0;color:var(--acento)">Documented</span></a>
+    <a class="modulo" href="#analizer"><span class="rotulo tenue">Module 05</span><h3>Analizer</h3><p>Engineering analysis and fluid simulation.</p><span class="rotulo" style="display:block;margin:18px 0 0;color:var(--acento)">Documented</span></a>
+  </div>
+</section>
+
+<!-- POLARCAD: LA PANTALLA -->
+<section class="franja" id="polarcad">
+  <div class="franja-cab"><span class="rotulo">02 / PolarCAD</span><span class="rotulo tenue">Get to know your screen</span></div>
+  <div class="relleno-celda" style="border-bottom:1px solid var(--linea)">
+    <h2 class="titulo">The PolarCAD screen.</h2>
+    <p class="parrafo grande">When you open PolarCAD you will see this screen. It has five areas, and it is worth knowing them before you draw the first line.</p>
+  </div>
+  <figure class="cap ancha"><a href="img/manual/polarcad-v2/01-pantalla-completa.jpg" class="ampliar"><img src="img/manual/polarcad-v2/01-pantalla-completa.jpg" alt="PolarCAD full screen"></a><figcaption>PolarCAD just opened, with no part.</figcaption></figure>
+  <div class="celdas c5 zonas">
+    <a class="modulo" href="#barra"><span class="rotulo tenue">Area 1</span><h3>Tool ribbon</h3><p>At the top. Four tabs hold every drawing, modelling, assembly and inspection tool.</p></a>
+    <a class="modulo" href="#lateral"><span class="rotulo tenue">Area 2</span><h3>Module column and console</h3><p>On the left. It switches modules and opens the settings of each tool and of the object.</p></a>
+    <a class="modulo" href="#visor"><span class="rotulo tenue">Area 3</span><h3>3D viewer</h3><p>The centre. Views, orientation cube and the working grid.</p></a>
+    <a class="modulo" href="#gestor"><span class="rotulo tenue">Area 4</span><h3>Project manager</h3><p>On the right. Your projects, files and the parts library.</p></a>
+    <a class="modulo" href="#estado"><span class="rotulo tenue">Area 5</span><h3>Status bar</h3><p>At the bottom. Active plane, cursor position, selection and open file.</p></a>
+  </div>
+
+  <div class="zona apilada" id="barra">
+    <div class="relleno-celda"><span class="rotulo tenue">Area 1</span><h3 class="subtitulo" style="margin:10px 0 14px">The tool ribbon</h3>
+      <p class="parrafo">The ribbon groups the tools into four tabs, in the order you normally work. When you press a tab, the row below changes its tools.</p>
+      <p class="parrafo"><b>Sketch:</b> drawing, curves, dimensions and relations, and stroke editing. <b>Model:</b> features, cut, finish, transformations, patterns, reference, sheet metal and machining.</p>
+      <p class="parrafo"><b>Assemble:</b> joints and actuators. <b>Inspect:</b> measure and material. Document, Undo and Redo always stay on the left; Settings, Grid settings and Help on the right.</p>
+      <p class="parrafo">Buttons with a ▾ arrow open a menu. Below you will find the full index: each name takes you to the explanation of that tool.</p></div>
+    <figure class="cap"><a href="img/manual/polarcad-v2/05-pestana-croquis.jpg" class="ampliar"><img src="img/manual/polarcad-v2/05-pestana-croquis.jpg" alt="Tool ribbon" loading="lazy"></a><figcaption>Area 1: the tool ribbon with the Sketch tab · click to enlarge</figcaption></figure>
+  </div>
+
+  <div class="zona apilada" id="lateral">
+    <div class="relleno-celda"><span class="rotulo tenue">Area 2</span><h3 class="subtitulo" style="margin:10px 0 14px">Module column and tool console</h3>
+      <p class="parrafo">The vertical column on the left edge switches modules: CAD, Laboratory, Machining, Systems, Polar slicer and Analysis.</p>
+      <p class="parrafo">Next to it the <b>Tool console</b> opens. There you will find the settings of each tool and of the selected object. Its sections are: Properties, Joints, Interferences, Relations, Material, Variables, References, Measurement and 2D drawing.</p>
+      <p class="parrafo">When you choose a feature from the ribbon, its fields appear here with the <b>Apply</b> and <b>Cancel</b> buttons.</p></div>
+    <figure class="cap"><a href="img/manual/polarcad-v2/03-menu-lateral.jpg" class="ampliar"><img src="img/manual/polarcad-v2/03-menu-lateral.jpg" alt="Tool console open" loading="lazy"></a><figcaption>Area 2: module column and Tool console open.</figcaption></figure>
+  </div>
+
+  <div class="zona apilada" id="visor">
+    <div class="relleno-celda"><span class="rotulo tenue">Area 3</span><h3 class="subtitulo" style="margin:10px 0 14px">The 3D viewer</h3>
+      <p class="parrafo">At the top left are the <b>Iso 3D</b>, <b>Top</b>, <b>Side</b> and <b>Front</b> views; the eye shows or hides elements and <b>P</b> switches the projection. Below, three buttons: select, lock and layers.</p>
+      <p class="parrafo">The cube in the top right corner shows the orientation and lets you turn the view by clicking its faces. The background grid is 5 mm per square (change it in Grid settings).</p></div>
+    <figure class="cap"><a href="img/manual/polarcad-v2/01-pantalla-completa.jpg" class="ampliar"><img src="img/manual/polarcad-v2/01-pantalla-completa.jpg" alt="3D viewer" loading="lazy"></a><figcaption>Area 3: the viewer with its views and the orientation cube.</figcaption></figure>
+  </div>
+
+  <div class="zona apilada" id="gestor">
+    <div class="relleno-celda"><span class="rotulo tenue">Area 4</span><h3 class="subtitulo" style="margin:10px 0 14px">The Manager and the Project tab</h3>
+      <p class="parrafo">The right panel opens with the vertical <b>Project</b> tab. It has three tabs: <b>Files</b>, <b>Project</b> and <b>Library</b>.</p>
+      <p class="parrafo">The Project tab shows all your projects as a tree, like Windows Explorer: each folder opens with [+] and holds its parts, assemblies, exports and versions. <b>+ import</b> brings in files from your computer and <b>+ project</b> creates a new one. Hovering over a project shows the buttons to create a folder, rename and delete.</p>
+      <p class="parrafo">The <b>Library</b> tab holds 1,535 standard parts in 81 families (screws, nuts, bearings, extrusions, motors) ready to insert.</p></div>
+    <figure class="cap"><a href="img/manual/polarcad-v2/04-pestana-proyectos.jpg" class="ampliar"><img src="img/manual/polarcad-v2/04-pestana-proyectos.jpg" alt="Manager with the Project tab" loading="lazy"></a><figcaption>Area 4: the Manager with the Project tab open.</figcaption></figure>
+  </div>
+
+  <div class="relleno-celda zona" id="estado" style="border-bottom:1px solid var(--linea)"><span class="rotulo tenue">Area 5</span><h3 class="subtitulo" style="margin:10px 0 14px">The status bar</h3>
+    <p class="parrafo">The bottom line of the viewer tells you where you are at all times: active <b>Plane</b>, <b>Pos</b> (X, Y, Z cursor coordinates in mm), <b>Sel</b> (what is selected), open <b>File</b>, status of the exact-geometry <b>Kernel</b> and the <b>Grid</b> size. Below, the work mode (Design) and the current section.</p></div>
+</section>
+
+<!-- ÍNDICE DE HERRAMIENTAS -->
+<section class="franja" id="indice-herr">
+  <div class="franja-cab"><span class="rotulo">03 / Tool index</span><span class="rotulo tenue">Each name links to its explanation</span></div>
+  <div class="indice-herr">
+<!--INDICE-->
+  </div>
+  <p class="relleno-celda tenue" style="margin:0;font-size:14px;border-top:1px solid var(--linea)">Tools marked <span class="sello">Coming soon</span> already appear in the ribbon but are not active yet in this version.</p>
+</section>
+
+<!-- CADA MENÚ -->
+<!--SECCIONES-->
+
+<!-- MÓDULOS 02-05 -->
+<!--MODULOS-->
+
+<!-- ATAJOS -->
+<section class="franja" id="atajos">
+  <div class="franja-cab"><span class="rotulo">04 / Keyboard shortcuts</span><span class="rotulo tenue">PolarCAD</span></div>
+  <div class="celdas c4 atajos">
+    <div><kbd>Ctrl</kbd> + <kbd>S</kbd><span>Save part or assembly</span></div>
+    <div><kbd>Ctrl</kbd> + <kbd>Z</kbd><span>Undo</span></div>
+    <div><kbd>Ctrl</kbd> + <kbd>Y</kbd><span>Redo</span></div>
+    <div><kbd>Esc</kbd><span>Finish the current tool</span></div>
+    <div><kbd>V</kbd><span>Select</span></div>
+    <div><kbd>L</kbd><span>Line</span></div>
+    <div><kbd>C</kbd><span>Circle</span></div>
+    <div><kbd>F</kbd><span>Fit the view to everything</span></div>
+    <div><kbd>Enter</kbd><span>Close a spline</span></div>
+    <div><kbd>Double-click</kbd><span>Close a spline or polyline</span></div>
+  </div>
+</section>
+
+<footer class="pie"><span>© <span id="anio">2026</span> Stonward Dynamics · SolidMaker manual</span><span>Toward the future, never looking back</span></footer>
+</main>
+
+<div class="visor-img" id="visor-img" hidden><img alt=""><span class="rotulo">Click to close</span></div>
+<script src="js/inicio.js"></script>
+<script>
+// ampliar capturas
+(() => {
+  const v = document.getElementById("visor-img"), im = v.querySelector("img");
+  document.querySelectorAll("a.ampliar").forEach((a) => a.addEventListener("click", (e) => { e.preventDefault(); im.src = a.href; im.alt = a.querySelector("img").alt; v.hidden = false; }));
+  v.addEventListener("click", () => (v.hidden = true));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") v.hidden = true; });
+})();
+</script>
+</body>
+</html>

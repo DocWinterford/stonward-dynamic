@@ -6,6 +6,20 @@ y se convierte en secciones con su captura real. Uso: python herramientas/genera
 import html, re, pathlib
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
+import json, sys
+TR = json.loads((RAIZ / "docs/manual/en.json").read_text(encoding="utf-8")) if (RAIZ / "docs/manual/en.json").exists() else {}
+FALTAN = set()
+EN = "--en" in sys.argv
+def tr(t):
+    if not EN or not t: return t
+    if t in TR: return TR[t]
+    if re.fullmatch(r"-?[\d.]+ a -?[\d.]+", t): return t.replace(" a ", " to ")
+    if not re.search(r"[A-Za-zÁÉÍÓÚáéíóúñÑ]{3,}", t): return t
+    FALTAN.add(t); return t
+def tr_ops(t):
+    """Opciones «a / b / c» y valores como «desactivado»: se traduce cada una."""
+    return " / ".join(tr(x.strip()) for x in t.split(" / ")) if EN else t
+
 LISTA = (RAIZ / "docs/manual/polarcad-v2-lista.md").read_text(encoding="utf-8").split("\n## Anexo")[1]   # campos de los paneles
 IMG = "img/manual/polarcad/"
 
@@ -117,7 +131,7 @@ def articulo(n, r, p, a):
     al = ALIAS.get(a, [])
     v = next((clip(x) for x in [a] + al if clip(x)), "")
     return (f'<article class="herr{" pend" if p else ""}" id="{a}">' + "".join(f'<span id="{x}"></span>' for x in al) +
-            f'<h4>{n}{" <span class=sello>Próximamente</span>" if p else ""}</h4><p>{r or "Se ejecuta con un clic, sin ventana de opciones."}</p>{v}</article>')
+            f'<h4>{tr(n)}{" <span class=sello>" + tr("Próximamente") + "</span>" if p else ""}</h4><p>{tr(r) or tr("Se ejecuta con un clic, sin ventana de opciones.")}</p>{v}</article>')
 INTRO2 = {
     "Croquis": "Todo lo que se dibuja en 2D sobre el plano activo: líneas, círculos, arcos, rectángulos, polígonos y splines, más las curvas especiales, las cotas, las relaciones y la edición de trazos.",
     "Modelo": "Convierte el croquis en sólido y lo trabaja: operaciones, cortes, acabados, transformaciones, patrones, referencias, chapa y mecanizado.",
@@ -147,7 +161,7 @@ def filas_tabla(txt):
         out.append((c[0], c[2] if len(c) > 2 else ""))
     return out
 def captura2(nombre, pie):
-    return f'<figure class="cap"><a href="{IMG2}{nombre}" class="ampliar"><img src="{IMG2}{nombre}" alt="{html.escape(pie)}" loading="lazy"></a><figcaption>{html.escape(pie)} · clic para ampliar</figcaption></figure>'
+    return f'<figure class="cap"><a href="{IMG2}{nombre}" class="ampliar"><img src="{IMG2}{nombre}" alt="{html.escape(pie)}" loading="lazy"></a><figcaption>{html.escape(pie)} · {tr("clic para ampliar")}</figcaption></figure>'
 pestanas = []
 for bloque in re.split(r"\n## Pestaña ", PRINCIPAL)[1:]:
     nombre = bloque.split("\n")[0].strip()
@@ -185,29 +199,34 @@ for bloque in re.split(r"\n## Pestaña ", PRINCIPAL)[1:]:
 
 indice, cuerpo = [], []
 for t in pestanas:
-    grupos = "".join(f'<div class="grupo"><a class="g" href="#{m["id"]}">{m["titulo"]}</a><div class="hs">' + "".join(f'<a href="#{a}"{" class=pend" if p else ""}>{n}</a>' for n, _, p, a in m["items"]) + "</div></div>" for m in t["menus"])
-    indice.append(f'<div class="grupo"><a class="g" href="#{t["id"]}">Pestaña {t["nombre"]}</a></div>{grupos}')
-    botones = " · ".join(f"<b>{n}</b>" for n, _ in t["botones"])
+    grupos = "".join(f'<div class="grupo"><a class="g" href="#{m["id"]}">{tr(m["titulo"])}</a><div class="hs">' + "".join(f'<a href="#{a}"{" class=pend" if p else ""}>{tr(n)}</a>' for n, _, p, a in m["items"]) + "</div></div>" for m in t["menus"])
+    PT = tr(f"Pestaña {t['nombre']}")
+    indice.append(f'<div class="grupo"><a class="g" href="#{t["id"]}">{PT}</a></div>{grupos}')
+    botones = " · ".join(f"<b>{tr(n)}</b>" for n, _ in t["botones"])
     cuerpo.append(f'''<section class="menu-sec" id="{t["id"]}">
-  <div class="franja-cab"><span class="rotulo">PolarCAD / Cinta de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
-  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Pestaña {t["nombre"]}</h3><p class="parrafo">{INTRO2.get(t["nombre"], "")}</p><p class="nota">Botones de esta pestaña: {botones}</p></div>{captura2(t["cap"], f"Pestaña {t['nombre']} de la cinta") if t["cap"] else ""}</div>
+  <div class="franja-cab"><span class="rotulo">PolarCAD / {tr("Cinta de herramientas")}</span><a class="rotulo tenue" href="#barra">{tr("Volver al índice ↑")}</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">{PT}</h3><p class="parrafo">{tr(INTRO2.get(t["nombre"], ""))}</p><p class="nota">{tr("Botones de esta pestaña")}: {botones}</p></div>{captura2(t["cap"], PT) if t["cap"] else ""}</div>
 </section>''')
     for m in t["menus"]:
         filas = "".join(articulo(*it) for it in m["items"])
         cuerpo.append(f'''<section class="menu-sec" id="{m["id"]}">
-  <div class="franja-cab"><span class="rotulo">PolarCAD / {t["nombre"]}</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
-  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">{m["titulo"]}</h3><p class="parrafo">{INTRO2.get(m["titulo"], "")}</p></div>{captura2(m["cap"], f"Menú {m['titulo']} abierto en PolarCAD") if m["cap"] else ""}</div>
+  <div class="franja-cab"><span class="rotulo">PolarCAD / {tr(t["nombre"])}</span><a class="rotulo tenue" href="#barra">{tr("Volver al índice ↑")}</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">{tr(m["titulo"])}</h3><p class="parrafo">{tr(INTRO2.get(m["titulo"], ""))}</p></div>{captura2(m["cap"], f"{tr(m['titulo'])} menu open in PolarCAD" if EN else f"Menú {m['titulo']} abierto en PolarCAD") if m["cap"] else ""}</div>
   <div class="herrs">{filas}</div>
 </section>''')
 secciones_v2 = [m for t in pestanas for m in t["menus"]]
 
-PLANTILLA = (RAIZ / "herramientas/manual-plantilla.html").read_text(encoding="utf-8")
-INDEX = (RAIZ / "index.html").read_text(encoding="utf-8")
+SAL = "manual-en.html" if EN else "manual.html"
+PLANTILLA = (RAIZ / ("herramientas/manual-plantilla-en.html" if EN else "herramientas/manual-plantilla.html")).read_text(encoding="utf-8")
+INICIO = "index-en.html" if EN else "index.html"
+INDEX = (RAIZ / INICIO).read_text(encoding="utf-8")
 nav = re.search(r'<nav class="barra".*?</nav>', INDEX, re.S).group(0)
-nav = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', nav).replace('<a href="manual.html">', '<a href="manual.html" class="activo">')
+nav = re.sub(r'href="#(\w+)"', rf'href="{INICIO}#\1"', nav).replace('<a href="manual.html">', f'<a href="{SAL}" class="activo">')
+if EN: nav = nav.replace('class="idioma" href="index.html"', 'class="idioma" href="manual.html"')
+else: nav = nav.replace('class="idioma" href="index-en.html"', 'class="idioma" href="manual-en.html"')
 salida = PLANTILLA.replace("<!--NAV-->", nav).replace("<!--INDICE-->", "\n".join(indice)).replace("<!--SECCIONES-->", "\n".join(cuerpo))
-(RAIZ / "manual.html").write_text(salida, encoding="utf-8")
-print("manual.html:", len(secciones_v2), "menús,", sum(len(m["items"]) for m in secciones_v2), "herramientas")
+(RAIZ / SAL).write_text(salida, encoding="utf-8")
+print(SAL + ":", len(secciones_v2), "menús,", sum(len(m["items"]) for m in secciones_v2), "herramientas")
 
 
 # ---------- módulos 02-05 (listas con «## sección», «Captura:» y tablas de botones y campos) ----------
@@ -242,20 +261,6 @@ PRIMEROS = {
 }
 
 # ---- traducción al inglés (manual-en.html): docs/manual/en.json, texto español -> inglés ----
-import json, sys
-TR = json.loads((RAIZ / "docs/manual/en.json").read_text(encoding="utf-8")) if (RAIZ / "docs/manual/en.json").exists() else {}
-FALTAN = set()
-EN = False
-def tr(t):
-    if not EN or not t: return t
-    if t in TR: return TR[t]
-    if re.fullmatch(r"-?[\d.]+ a -?[\d.]+", t): return t.replace(" a ", " to ")
-    if re.fullmatch(r"[\d\s.,:;°%×+\-–—/≥()<>a-zA-Z_]{0,6}|[\d\s.,°%×+\-–—/≥]+", t): return t
-    FALTAN.add(t); return t
-def tr_ops(t):
-    """Opciones «a / b / c» y valores como «desactivado»: se traduce cada una."""
-    return " / ".join(tr(x.strip()) for x in t.split(" / ")) if EN else t
-
 def modulo_html(clave, nombre, num):
     texto = (RAIZ / f"docs/manual/{clave}-lista.md").read_text(encoding="utf-8")
     cab, *secs = re.split(r"\n## ", texto)
@@ -303,13 +308,9 @@ def modulo_html(clave, nombre, num):
     return "\n".join(partes)
 
 salida = salida.replace("<!--MODULOS-->", "\n".join(modulo_html(*m) for m in MODULOS))
-(RAIZ / "manual.html").write_text(salida, encoding="utf-8")
+(RAIZ / SAL).write_text(salida, encoding="utf-8")
 print("módulos:", ", ".join(m[1] for m in MODULOS))
 
-# ---------- versión en inglés de los módulos 02-05 (python generar_manual.py --en lista las frases sin traducir) ----------
-if "--en" in sys.argv:
-    EN = True
-    mods = "\n".join(modulo_html(*m) for m in MODULOS)
-    (RAIZ / "herramientas/.manual-en-modulos.html").write_text(mods, encoding="utf-8")
+if EN:
     (RAIZ / "herramientas/.faltan-en.txt").write_text("\n".join(sorted(FALTAN)), encoding="utf-8")
-    print("EN: faltan", len(FALTAN), "frases")
+    print("EN: faltan", len(FALTAN), "frases (herramientas/.faltan-en.txt)")

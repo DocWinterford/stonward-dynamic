@@ -45,7 +45,7 @@
             ${FIG[l.id] && window.SM_FIGURAS ? `<figure class="figura">${figura(FIG[l.id])}</figure>` : ""}
             <ol class="pasos">${l.pasos.map((p) => `<li>${esc(p)}</li>`).join("")}</ol>
             ${l.herr.length ? `<p class="rotulo tenue" style="margin:22px 0 8px">${T("Herramientas de esta lección", "Tools in this lesson")}</p>
-            <div class="herr-chips">${l.herr.map((a) => `<a href="manual.html#${a}">${esc(nombreHerr(a))}</a>`).join("")}</div>` : ""}
+            <div class="herr-chips">${l.herr.map((a) => `<a href="${EN ? "manual-en.html" : "manual.html"}#${a}">${esc(nombreHerr(a))}</a>`).join("")}</div>` : ""}
             <p class="reto"><b>${T("Reto.", "Challenge.")}</b> ${esc(l.reto)}</p>
             <label class="hecha"><input type="checkbox" data-l="${l.id}"${hechas[l.id] ? " checked" : ""}> ${T("Lección completada", "Lesson completed")}</label>
           </div>
