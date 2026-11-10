@@ -6,7 +6,7 @@ y se convierte en secciones con su captura real. Uso: python herramientas/genera
 import html, re, pathlib
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-LISTA = (RAIZ / "docs/manual/polarcad-lista.md").read_text(encoding="utf-8")
+LISTA = (RAIZ / "docs/manual/polarcad-v2-lista.md").read_text(encoding="utf-8").split("\n## Anexo")[1]   # campos de los paneles
 IMG = "img/manual/polarcad/"
 
 # captura de cada menú (por el inicio del título de la sección)
@@ -96,22 +96,110 @@ def captura(nombre, pie):
     return f'<figure class="cap"><a href="{IMG}{nombre}" class="ampliar"><img src="{IMG}zoom/{nombre}" alt="{html.escape(pie)}" loading="lazy"></a><figcaption>{html.escape(pie)} · clic para ver la pantalla completa</figcaption></figure>'
 
 # ---- índice de herramientas (cada una con su hipervínculo) ----
-indice = []
+# ---- PolarCAD con la cinta nueva (docs/manual/polarcad-v2-lista.md, capturas img/manual/polarcad-v2/) ----
+V2 = (RAIZ / "docs/manual/polarcad-v2-lista.md").read_text(encoding="utf-8")
+IMG2 = "img/manual/polarcad-v2/"
+PRINCIPAL = V2.split("\n## Anexo")[0]
+# detalle de los paneles (anexo = lista anterior): nombre de la herramienta -> (ancla antigua, campos)
+DETALLE = {}
 for s in secciones:
-    links = "".join(f'<a href="#{s["id"]}--{slug(n)}"{" class=pend" if p else ""}>{n}</a>' for n, _, p in s["items"])
-    indice.append(f'<div class="grupo"><a class="g" href="#{s["id"]}">{s["titulo"]}</a><div class="hs">{links}</div></div>')
+    for n, r, p in s["items"]:
+        DETALLE.setdefault(slug(n), (f'{s["id"]}--{slug(n)}', r, p))
+# menús que antes estaban bajo otro nombre: se conserva su ancla para no romper enlaces ni clips
+ANTES = {"variantes-de-linea": "herramientas-de-dibujo-croquis", "variantes-de-circulo": "herramientas-de-dibujo-croquis",
+         "variantes-de-arco": "herramientas-de-dibujo-croquis", "variantes-de-rectangulo": "herramientas-de-dibujo-croquis",
+         "variantes-de-spline": "herramientas-de-dibujo-croquis", "uniones": "ensamble"}
+# anclas de la versión anterior que ahora son otra herramienta (enlaces de Educación y clips grabados)
+ALIAS = {"anotacion--horizontal": ["anotacion--relaciones"], "documento--nuevo-ensamble": ["ensamble--nuevo-ensamble"],
+         "documento--insertar-pieza": ["ensamble--insertar-pieza"], "documento--guardar-ensamble": ["ensamble--guardar-ensamble"],
+         "actuadores--motor-a-pasos": ["ensamble--actuadores-motores"]}
+def articulo(n, r, p, a):
+    al = ALIAS.get(a, [])
+    v = next((clip(x) for x in [a] + al if clip(x)), "")
+    return (f'<article class="herr{" pend" if p else ""}" id="{a}">' + "".join(f'<span id="{x}"></span>' for x in al) +
+            f'<h4>{n}{" <span class=sello>Próximamente</span>" if p else ""}</h4><p>{r or "Se ejecuta con un clic, sin ventana de opciones."}</p>{v}</article>')
+INTRO2 = {
+    "Croquis": "Todo lo que se dibuja en 2D sobre el plano activo: líneas, círculos, arcos, rectángulos, polígonos y splines, más las curvas especiales, las cotas, las relaciones y la edición de trazos.",
+    "Modelo": "Convierte el croquis en sólido y lo trabaja: operaciones, cortes, acabados, transformaciones, patrones, referencias, chapa y mecanizado.",
+    "Ensamblar": "Une piezas y les da movimiento: uniones (soldar, deslizante, rotacional), prueba de uniones, interferencias y actuadores.",
+    "Inspeccionar": "Mide distancias, centros y propiedades físicas, acomoda piezas entre sí y define su material.",
+    "Documento": "Todo lo que tiene que ver con el archivo: guardar la pieza en su proyecto, abrir, exportar, sacar el plano 2D y la lista de materiales, y trabajar con ensambles.",
+    "Configuración": "Idioma de la interfaz.", "Configuración de grilla": "Tamaño de cada cuadro de la grilla en milímetros.",
+    "Ayuda": "Tutorial guiado, guía de menús y atajos de teclado dentro del programa.",
+    "Variantes de Línea": "Cada botón de dibujo tiene una flecha ▾ a su derecha con variantes de la misma herramienta.",
+    "Uniones": "Cómo se relacionan y se mueven las piezas de un ensamble. Las uniones nunca reacomodan sus piezas: se integran tal como usted las colocó.",
+    "Actuadores": "Lo único que mueve el mecanismo: motores a pasos, DC, servos y BLDC, con su prueba y su estudio de movimiento.",
+    "Medir": "Distancias, ángulos, centros y propiedades físicas, más herramientas para acomodar una pieza respecto de otra.",
+    "Material": "Apariencia y propiedades del material de la pieza; con él se calcula la masa.",
+}
+for k, v in INTRO.items(): INTRO2.setdefault(k, v)
+usados = set()
+def ancla(base):
+    a, i = base, 2
+    while a in usados: a, i = f"{base}-{i}", i + 1
+    usados.add(a); return a
+def filas_tabla(txt):
+    out = []
+    for l in txt.split("\n"):
+        if not l.startswith("|") or re.fullmatch(r"\|[-| ]+\|", l.strip()): continue
+        c = [x.strip() for x in l.strip().strip("|").split("|")]
+        if c[0] in ("Botón", "Ítem"): continue
+        out.append((c[0], c[2] if len(c) > 2 else ""))
+    return out
+def captura2(nombre, pie):
+    return f'<figure class="cap"><a href="{IMG2}{nombre}" class="ampliar"><img src="{IMG2}{nombre}" alt="{html.escape(pie)}" loading="lazy"></a><figcaption>{html.escape(pie)} · clic para ampliar</figcaption></figure>'
+pestanas = []
+for bloque in re.split(r"\n## Pestaña ", PRINCIPAL)[1:]:
+    nombre = bloque.split("\n")[0].strip()
+    partes = re.split(r"\n### ", bloque)
+    cap = re.search(r"Captura:\s*`([^`]+)`", partes[0])
+    menus = []
+    for m in partes[1:]:
+        tit = re.split(r" ▾| — ", m.split("\n")[0])[0].strip()
+        mid = ANTES.get(slug(tit), slug(tit))
+        c = re.search(r"Captura:\s*`([^`]+)`", m)
+        items = []
+        for n, que in filas_tabla(m):
+            n0 = limpio(n); n0 = re.sub(r"\s*\((icono|campo)\)$", "", n0) or n0
+            if n0 in ("(campo)", ""): n0 = tit
+            det = DETALLE.get(slug(n0)) or DETALLE.get(slug(re.sub(r"\s*\(.*?\)|…", "", n0)))
+            q = limpio(que); extra = det[1] if det else ""
+            if extra and slug(q) and slug(q) in slug(extra): q = ""
+            texto = " ".join(x for x in [q + ("." if q and not q.endswith((".", ")")) else ""), extra] if x)
+            pend = ("próximamente" in que.lower()) or (det[2] if det else False)
+            a = ancla(det[0] if det and det[0].startswith(mid + "--") else f"{mid}--{slug(n0)}")
+            items.append((n0, texto, pend, a))
+        menus.append({"titulo": tit, "id": ancla(mid), "cap": c.group(1) if c else None, "items": items})
+    menus_slugs = {slug(m["titulo"]) for m in menus}
+    propias = []
+    for n, que in filas_tabla(partes[0]):
+        n0 = re.sub(r"\s*\((icono|campo|variantes)\)$", "", limpio(n)).strip()
+        q = limpio(que)
+        if not n0 or n0 == "▾" or slug(n0) in menus_slugs or slug(n0) in ("documento", "deshacer-ctrl-z", "rehacer-ctrl-y", "configuracion", "configuracion-de-grilla", "ayuda", "curvas", "anotacion", "editar", "arista", "ajustar", "1-1"): continue
+        base = "herramientas-de-dibujo-croquis" if nombre == "Croquis" else "cinta-" + slug(nombre)
+        if f"{base}--{slug(n0)}" in usados: continue
+        propias.append((n0, q + ("." if q and not q.endswith(".") else ""), False, ancla(f"{base}--{slug(n0)}")))
+    if propias: menus.insert(0, {"titulo": "Botones directos de la pestaña", "id": ancla("cinta-" + slug(nombre) + "-directos"), "cap": None, "items": propias})
+    pestanas.append({"nombre": nombre, "id": ancla("cinta-" + slug(nombre)), "cap": cap.group(1) if cap else None,
+                     "botones": [(limpio(n), limpio(q)) for n, q in filas_tabla(partes[0])], "menus": menus})
 
-cuerpo = []
-for s in secciones:
-    caps = "".join(captura(c, f"Menú {s['titulo']} abierto en PolarCAD") for c in CAPTURAS.get(s["titulo"], []))
-    filas = "".join(
-        f'<article class="herr{" pend" if p else ""}" id="{s["id"]}--{slug(n)}"><h4>{n}{" <span class=sello>Próximamente</span>" if p else ""}</h4><p>{r or "Se ejecuta con un clic, sin ventana de opciones."}</p>{clip(s["id"] + "--" + slug(n))}</article>'
-        for n, r, p in s["items"])
-    cuerpo.append(f'''<section class="menu-sec" id="{s["id"]}">
-  <div class="franja-cab"><span class="rotulo">PolarCAD / Barra de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
-  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">{s["titulo"]}</h3><p class="parrafo">{INTRO.get(s["titulo"], "")}</p>{f'<p class="nota">{s["nota"]}</p>' if s["nota"] else ""}</div>{caps}</div>
+indice, cuerpo = [], []
+for t in pestanas:
+    grupos = "".join(f'<div class="grupo"><a class="g" href="#{m["id"]}">{m["titulo"]}</a><div class="hs">' + "".join(f'<a href="#{a}"{" class=pend" if p else ""}>{n}</a>' for n, _, p, a in m["items"]) + "</div></div>" for m in t["menus"])
+    indice.append(f'<div class="grupo"><a class="g" href="#{t["id"]}">Pestaña {t["nombre"]}</a></div>{grupos}')
+    botones = " · ".join(f"<b>{n}</b>" for n, _ in t["botones"])
+    cuerpo.append(f'''<section class="menu-sec" id="{t["id"]}">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / Cinta de herramientas</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">Pestaña {t["nombre"]}</h3><p class="parrafo">{INTRO2.get(t["nombre"], "")}</p><p class="nota">Botones de esta pestaña: {botones}</p></div>{captura2(t["cap"], f"Pestaña {t['nombre']} de la cinta") if t["cap"] else ""}</div>
+</section>''')
+    for m in t["menus"]:
+        filas = "".join(articulo(*it) for it in m["items"])
+        cuerpo.append(f'''<section class="menu-sec" id="{m["id"]}">
+  <div class="franja-cab"><span class="rotulo">PolarCAD / {t["nombre"]}</span><a class="rotulo tenue" href="#barra">Volver al índice ↑</a></div>
+  <div class="menu-cuerpo"><div class="texto-sec"><h3 class="subtitulo">{m["titulo"]}</h3><p class="parrafo">{INTRO2.get(m["titulo"], "")}</p></div>{captura2(m["cap"], f"Menú {m['titulo']} abierto en PolarCAD") if m["cap"] else ""}</div>
   <div class="herrs">{filas}</div>
 </section>''')
+secciones_v2 = [m for t in pestanas for m in t["menus"]]
 
 PLANTILLA = (RAIZ / "herramientas/manual-plantilla.html").read_text(encoding="utf-8")
 INDEX = (RAIZ / "index.html").read_text(encoding="utf-8")
@@ -119,7 +207,7 @@ nav = re.search(r'<nav class="barra".*?</nav>', INDEX, re.S).group(0)
 nav = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', nav).replace('<a href="manual.html">', '<a href="manual.html" class="activo">')
 salida = PLANTILLA.replace("<!--NAV-->", nav).replace("<!--INDICE-->", "\n".join(indice)).replace("<!--SECCIONES-->", "\n".join(cuerpo))
 (RAIZ / "manual.html").write_text(salida, encoding="utf-8")
-print("manual.html:", len(secciones), "secciones,", sum(len(s["items"]) for s in secciones), "herramientas")
+print("manual.html:", len(secciones_v2), "menús,", sum(len(m["items"]) for m in secciones_v2), "herramientas")
 
 
 # ---------- módulos 02-05 (listas con «## sección», «Captura:» y tablas de botones y campos) ----------
