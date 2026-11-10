@@ -153,24 +153,40 @@ PRIMEROS = {
                  "En Resultados recorre los campos con la escala de color y exporta las imágenes que necesites."],
 }
 
+# ---- traducción al inglés (manual-en.html): docs/manual/en.json, texto español -> inglés ----
+import json, sys
+TR = json.loads((RAIZ / "docs/manual/en.json").read_text(encoding="utf-8")) if (RAIZ / "docs/manual/en.json").exists() else {}
+FALTAN = set()
+EN = False
+def tr(t):
+    if not EN or not t: return t
+    if t in TR: return TR[t]
+    if re.fullmatch(r"-?[\d.]+ a -?[\d.]+", t): return t.replace(" a ", " to ")
+    if re.fullmatch(r"[\d\s.,:;°%×+\-–—/≥()<>a-zA-Z_]{0,6}|[\d\s.,°%×+\-–—/≥]+", t): return t
+    FALTAN.add(t); return t
+def tr_ops(t):
+    """Opciones «a / b / c» y valores como «desactivado»: se traduce cada una."""
+    return " / ".join(tr(x.strip()) for x in t.split(" / ")) if EN else t
+
 def modulo_html(clave, nombre, num):
     texto = (RAIZ / f"docs/manual/{clave}-lista.md").read_text(encoding="utf-8")
     cab, *secs = re.split(r"\n## ", texto)
-    intro = [limpio(p) for p in cab.split("\n\n")[1:] if p.strip() and not p.startswith(("Código", "Cada sección", "Fuente", "#"))]
+    intro = [tr(limpio(p)) for p in cab.split("\n\n")[1:] if p.strip() and not p.startswith(("Código", "Cada sección", "Fuente", "#"))]
     partes = [f'''<section class="franja mod-sec" id="{clave}">
-  <div class="franja-cab"><span class="rotulo">{num} / {nombre}</span><a class="rotulo tenue" href="#modulos">Volver a los módulos ↑</a></div>
+  <div class="franja-cab"><span class="rotulo">{tr(num)} / {nombre}</span><a class="rotulo tenue" href="#modulos">{tr("Volver a los módulos ↑")}</a></div>
   <div class="relleno-celda" style="border-bottom:1px solid var(--linea)"><h2 class="titulo">{nombre}.</h2>{"".join(f'<p class="parrafo{" grande" if i == 0 else ""}">{p}</p>' for i, p in enumerate(intro))}</div>''']
     if clave in PRIMEROS:
-        partes.append('<div class="relleno-celda primeros" style="border-bottom:1px solid var(--linea)"><span class="rotulo">Primeros pasos</span><ol>' + "".join(f"<li>{html.escape(x)}</li>" for x in PRIMEROS[clave]) + "</ol></div>")
+        partes.append('<div class="relleno-celda primeros" style="border-bottom:1px solid var(--linea)"><span class="rotulo">' + tr("Primeros pasos") + '</span><ol>' + "".join(f"<li>{html.escape(tr(x))}</li>" for x in PRIMEROS[clave]) + "</ol></div>")
     indice = []
     for s in secs:
         lin = s.split("\n")
         titulo = re.sub(r"^(Sección|Pestaña|Panel)\s+", "", lin[0].strip()).strip()
         titulo = titulo[:1].upper() + titulo[1:].lower() if titulo.isupper() else titulo
+        titulo = tr(titulo)
         sid = f"{clave}--{slug(titulo)}"
         indice.append(f'<a href="#{sid}">{html.escape(titulo)}</a>')
         cap = re.search(r"Captura:\s*`([^`]+)`", s)
-        notas = [limpio(l) for l in lin[1:] if l.strip() and not l.startswith(("|", "Captura"))]
+        notas = [tr(limpio(l)) for l in lin[1:] if l.strip() and not l.startswith(("|", "Captura"))]
         campos, botones, sueltos = [], [], []
         hdr = None
         for l in lin:
@@ -180,15 +196,15 @@ def modulo_html(clave, nombre, num):
             if c[0] in ("Botón", "Campo"): hdr = c[0]; continue
             if hdr == "Campo":
                 nom, _, tipo, uni, defe, rango = (c + [""] * 6)[:6]
-                det = " · ".join(x for x in [f"Unidad: {uni}" if uni else "", f"De fábrica: <b>{html.escape(defe)}</b>" if defe else "", f"Rango u opciones: {html.escape(rango)}" if rango else ""] if x)
-                campos.append((limpio(nom), det, "Próximamente" in l))
+                det = " · ".join(x for x in [f"{tr('Unidad')}: {uni}" if uni else "", f"{tr('De fábrica')}: <b>{html.escape(tr_ops(defe))}</b>" if defe else "", f"{tr('Rango u opciones')}: {html.escape(tr_ops(rango))}" if rango else ""] if x)
+                campos.append((tr(limpio(nom)), det, "Próximamente" in l))
             elif hdr == "Botón":
                 nom, _, que = (c + [""] * 3)[:3]
-                if que: botones.append((limpio(nom), limpio(que), "Próximamente" in que))
-                elif nom and nom != "(icono)": sueltos.append(limpio(nom))
-        tarj = "".join(f'<article class="herr{" pend" if p else ""}"><h4>{n}{" <span class=sello>Próximamente</span>" if p else ""}</h4><p>{d or "Sin opciones adicionales."}</p></article>' for n, d, p in campos + botones)
-        otros = f'<p class="otros"><span class="rotulo tenue">Otros botones de esta vista</span> {" · ".join(sueltos)}</p>' if sueltos else ""
-        fig = f'<figure class="cap ancha-mod"><a href="img/manual/{clave}/{cap.group(1)}" class="ampliar"><img src="img/manual/{clave}/{cap.group(1)}" alt="{html.escape(nombre + ": " + titulo)}" loading="lazy"></a><figcaption>{html.escape(nombre)} · {html.escape(titulo)} · clic para ampliar</figcaption></figure>' if cap else ""
+                if que: botones.append((tr(limpio(nom)), tr(limpio(que)), "Próximamente" in que))
+                elif nom and nom != "(icono)": sueltos.append(tr(limpio(nom)))
+        tarj = "".join(f'<article class="herr{" pend" if p else ""}"><h4>{n}{" <span class=sello>" + tr("Próximamente") + "</span>" if p else ""}</h4><p>{d or tr("Sin opciones adicionales.")}</p></article>' for n, d, p in campos + botones)
+        otros = f'<p class="otros"><span class="rotulo tenue">{tr("Otros botones de esta vista")}</span> {" · ".join(sueltos)}</p>' if sueltos else ""
+        fig = f'<figure class="cap ancha-mod"><a href="img/manual/{clave}/{cap.group(1)}" class="ampliar"><img src="img/manual/{clave}/{cap.group(1)}" alt="{html.escape(nombre + ": " + titulo)}" loading="lazy"></a><figcaption>{html.escape(nombre)} · {html.escape(titulo)} · {tr("clic para ampliar")}</figcaption></figure>' if cap else ""
         partes.append(f'''  <div class="vista" id="{sid}">
     <div class="relleno-celda"><span class="rotulo tenue">{html.escape(nombre)}</span><h3 class="subtitulo" style="margin:10px 0 0">{html.escape(titulo)}</h3>{"".join(f'<p class="nota">{n}</p>' for n in notas)}</div>
     {fig}
@@ -201,3 +217,11 @@ def modulo_html(clave, nombre, num):
 salida = salida.replace("<!--MODULOS-->", "\n".join(modulo_html(*m) for m in MODULOS))
 (RAIZ / "manual.html").write_text(salida, encoding="utf-8")
 print("módulos:", ", ".join(m[1] for m in MODULOS))
+
+# ---------- versión en inglés de los módulos 02-05 (python generar_manual.py --en lista las frases sin traducir) ----------
+if "--en" in sys.argv:
+    EN = True
+    mods = "\n".join(modulo_html(*m) for m in MODULOS)
+    (RAIZ / "herramientas/.manual-en-modulos.html").write_text(mods, encoding="utf-8")
+    (RAIZ / "herramientas/.faltan-en.txt").write_text("\n".join(sorted(FALTAN)), encoding="utf-8")
+    print("EN: faltan", len(FALTAN), "frases")
