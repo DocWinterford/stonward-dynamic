@@ -7,7 +7,7 @@ window.STONWARD_ARTICULOS = [
     autores: "R. E. Kalman",
     fuente: "Journal of Basic Engineering, 1960",
     area: "robotica",
-    usa: "Basis of the closed loop planned for the PolarONE plate (encoder + PID + Kalman).",
+    usa: "Basis of the closed loop planned for the PolarONE disc (AS5600 encoder + PI + Kalman).",
     enlace: ""
   },
   {

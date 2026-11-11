@@ -5,21 +5,26 @@ window.STONWARD_MAQUINAS = [
   {
     id: "polarone",
     nombre: "PolarONE",
-    modelo: "Sistema de fabricación aditiva de coordenadas polares",
+    modelo: "Impresora 3D cerrada en coordenadas polares",
     estado: "disponible",
     porDefecto: true,
     imagen: "img/polarone.jpg",
     paquete: "descargas/maquinas/PolarONE.zip",
-    resumen: "Impresora 3D por extrusión de material (FFF) cuya cinemática opera en coordenadas cilíndricas: un plato de Ø400 mm gira de forma continua (eje θ) mientras el cabezal se desplaza en radio (R) y en altura (Z).",
-    uso: "Fabricación de piezas de revolución y geometrías axisimétricas, como carcasas, toberas, rodetes y recipientes. Sus trayectorias continuas eliminan las inversiones de movimiento de una cinemática cartesiana, lo que reduce vibración y tiempo de ciclo.",
+    resumen: "Impresora 3D por extrusión de material (FFF) en gabinete cerrado cuya cinemática opera en coordenadas cilíndricas: un disco de Ø350 mm gira de forma continua (eje θ) a través de un reductor planetario 6:1, mientras el cabezal se desplaza en radio (R) y en altura (Z).",
+    uso: "Fabricación de piezas de revolución y geometrías axisimétricas, como carcasas, toberas, rodetes y recipientes. Sus trayectorias continuas eliminan las inversiones de movimiento de una cinemática cartesiana, lo que reduce vibración y tiempo de ciclo. Se programa con PMS (Polar Manufactury System) mediante S-code con contornos de Fourier.",
     datos: [
-      ["Proceso", "Extrusión de material (FFF)"],
+      ["Proceso", "Extrusión de material (FFF), extrusor directo con NEMA 17"],
       ["Cinemática", "θ continuo · R · Z"],
-      ["Volumen", "Ø400 × 300 mm"],
-      ["Accionamiento θ", "Paso a paso 3 A, 3200 micropasos, rampa en S"],
-      ["Control", "ESP32, lazo abierto; lazo cerrado con encoder magnético en desarrollo"]
+      ["Disco θ", "Ø350 mm, reductor planetario 6:1 (sol 12, 3 planetas 24, corona 60), rodamiento de giro Ø250"],
+      ["Resolución θ", "0.01875° por micropaso, 57 µm en el borde"],
+      ["Eje R", "2 guías MGN12 de 350 mm, husillo Tr8×8, 2.47 µm/paso"],
+      ["Eje Z", "4 guías MGN de 400 mm, 2 husillos con 2 NEMA 17, 2.64 µm/paso"],
+      ["Estructura", "Perfil 20×20 con escuadras fundidas, paneles de acrílico, puerta con servo, pantalla táctil de 5 in"],
+      ["Electrónica", "Fuente 24 V, 5 drivers TB6600 (θ, R, Z1, Z2, E), 2 ESP32 enlazados por ESP-NOW"],
+      ["Control", "Firmware v4 con θ continuo (FreeRTOS), lazo abierto; lazo cerrado con encoder AS5600, filtro de Kalman y PI en desarrollo"],
+      ["Modelo CAD", "265 piezas, 44 relaciones, 5 NEMA 17, 11 materiales"]
     ],
-    driver: "Firmware ESP32 «Theta continuo v3». El paquete del driver se publicará aquí."
+    driver: "Firmware ESP32 «Theta continuo v4» (protocolo serie G/S, TI, TS, TD±). El paquete del driver se publicará aquí."
   },
   {
     id: "sd-c1",

@@ -7,7 +7,7 @@ window.STONWARD_ARTICULOS = [
     autores: "R. E. Kalman",
     fuente: "Journal of Basic Engineering, 1960",
     area: "robotica",
-    usa: "Base del lazo cerrado planeado para el plato de PolarONE (encoder + PID + Kalman).",
+    usa: "Base del lazo cerrado planeado para el disco de PolarONE (encoder AS5600 + PI + Kalman).",
     enlace: ""
   },
   {

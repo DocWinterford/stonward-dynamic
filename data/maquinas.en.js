@@ -1,12 +1,12 @@
 // English version of data/maquinas.js (same ids, images and packages).
 window.STONWARD_MAQUINAS = [
   {
-    id: "polarone", nombre: "PolarONE", modelo: "Polar-coordinate additive manufacturing system",
+    id: "polarone", nombre: "PolarONE", modelo: "Enclosed polar-coordinate 3D printer",
     estado: "disponible", porDefecto: true, imagen: "img/polarone.jpg", paquete: "descargas/maquinas/PolarONE.zip",
-    resumen: "A material-extrusion (FFF) 3D printer whose kinematics work in cylindrical coordinates: a Ø400 mm plate rotates continuously (θ axis) while the print head moves in radius (R) and height (Z).",
-    uso: "Production of revolved and axisymmetric parts such as housings, nozzles, impellers and vessels. Its continuous toolpaths remove the direction reversals of Cartesian kinematics, cutting vibration and cycle time.",
-    datos: [["Process", "Material extrusion (FFF)"], ["Kinematics", "Continuous θ · R · Z"], ["Build volume", "Ø400 × 300 mm"], ["θ drive", "Stepper 3 A, 3200 microsteps, S-curve ramp"], ["Control", "ESP32, open loop; closed loop with magnetic encoder in development"]],
-    driver: "ESP32 firmware «Continuous theta v3». The driver package will be published here."
+    resumen: "A material-extrusion (FFF) 3D printer in an enclosed cabinet whose kinematics work in cylindrical coordinates: a Ø350 mm disc rotates continuously (θ axis) through a 6:1 planetary reducer while the print head moves in radius (R) and height (Z).",
+    uso: "Production of revolved and axisymmetric parts such as housings, nozzles, impellers and vessels. Its continuous toolpaths remove the direction reversals of Cartesian kinematics, cutting vibration and cycle time. It is programmed from PMS (Polar Manufactury System) with S-code using Fourier contours.",
+    datos: [["Process", "Material extrusion (FFF), direct extruder with NEMA 17"], ["Kinematics", "Continuous θ · R · Z"], ["θ disc", "Ø350 mm, 6:1 planetary reducer (sun 12, 3 planets 24, ring 60), Ø250 slewing ring"], ["θ resolution", "0.01875° per microstep, 57 µm at the edge"], ["R axis", "2 MGN12 rails 350 mm, Tr8×8 lead screw, 2.47 µm/step"], ["Z axis", "4 MGN rails 400 mm, 2 lead screws with 2 NEMA 17, 2.64 µm/step"], ["Frame", "20×20 profile with cast brackets, acrylic panels, servo door, 5 in touchscreen"], ["Electronics", "24 V PSU, 5 TB6600 drivers (θ, R, Z1, Z2, E), 2 ESP32 linked by ESP-NOW"], ["Control", "Firmware v4 with continuous θ (FreeRTOS), open loop; closed loop with AS5600 encoder, Kalman filter and PI in development"], ["CAD model", "265 parts, 44 relations, 5 NEMA 17, 11 materials"]],
+    driver: "ESP32 firmware «Continuous theta v4» (serial protocol G/S, TI, TS, TD±). The driver package will be published here."
   },
   {
     id: "sd-c1", nombre: "SD-C1", modelo: "Enclosed CoreXY Cartesian 3D printer",
